@@ -1,0 +1,18 @@
+.header-cart-component {
+  &:hover {
+    cursor: pointer;
+  }
+  img {
+    width: 30px;
+    height: 25px;
+    position: relative;
+    top: -5px;
+  }
+  .items-number {
+    color: orange;
+    position: relative;
+    top: -35px;
+    left: 4px;
+    font-size: 11px;
+  }
+}

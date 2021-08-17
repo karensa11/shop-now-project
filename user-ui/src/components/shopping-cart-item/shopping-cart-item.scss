@@ -1,0 +1,49 @@
+.shopping-cart-item-component {
+  width: 80vw;
+  height: 200px;
+  border: 1px solid #999;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  padding: 10px;
+
+  img {
+    width: 150px;
+    height: 200px;
+  }
+  .content {
+    .name {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .description {
+      padding: 10px 0 10px 0;
+    }
+
+    .buttons {
+      width: 100%;
+      margin-top: 80px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+
+      img {
+        width: 25px;
+        height: 25px;
+        margin: 0 5px 0 5px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .quantity {
+        font-weight: bold;
+        position: relative;
+        top: 5px;
+        padding: 0 5px 0 5px;
+      }
+    }
+  }
+}

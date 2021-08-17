@@ -1,0 +1,13 @@
+.category-preview-item-component {
+  padding: 10px;
+  border: 1px solid #666;
+  width: 150px;
+  margin: 10px 10px 0 0;
+  background-color: white;
+
+  &:hover {
+    border: 1px solid #795;
+    cursor: pointer;
+    background-color: yellow;
+  }
+}

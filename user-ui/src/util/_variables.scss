@@ -1,0 +1,22 @@
+$button-border: 1px solid #595;
+$button-background: #001900;
+$main-items-width: 80%;
+$select-items-border-radius: 10px;
+$select-items-box-shadow: 4px 4px 10px #555;
+$select-items-default-border: 2px solid transparent;
+
+@mixin main-page {
+  width: 100%;
+  padding: 0 20px;
+  box-shadow: 5px 5px 20px #222;
+}
+
+@mixin main-section {
+  min-height: 700px;
+  display: flex;
+  justify-content: center;
+  margin: 0 100px;
+  background-color: #151515;
+  border-radius: 10px;
+  color: white;
+}

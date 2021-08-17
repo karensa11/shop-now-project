@@ -1,0 +1,16 @@
+.header-component {
+  padding: 10px;
+  background-color: #07033f;
+  color: white;
+  border-bottom: 1px solid #aaa;
+  font-weight: bold;
+
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+    position: relative;
+    top: -15px;
+  }
+}

@@ -1,0 +1,23 @@
+.shopping-cart-page {
+  display: flex;
+  justify-content: center;
+
+  .shopping-cart {
+    background-color: white;
+    .title {
+      font-weight: bold;
+      padding: 10px 0 10px 0;
+      background-color: #dcd9db;
+    }
+    .total-price {
+      font-weight: bold;
+      padding: 10px 0 10px 0;
+      background-color: #f4ede6;
+    }
+  }
+  .cancel-item {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
