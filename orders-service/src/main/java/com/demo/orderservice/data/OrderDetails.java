@@ -24,6 +24,8 @@ public class OrderDetails {
 	private LocalDateTime creationDate;
 	@Transient
 	private BigDecimal totalPrice;
+	@Transient
+	private int totalItemsNumber;
 	
 	@OneToMany(mappedBy="orderId")
 	private List<OrderItem> orderItems;
@@ -63,5 +65,11 @@ public class OrderDetails {
 	}
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public int getTotalItemsNumber() {
+		return totalItemsNumber;
+	}
+	public void setTotalItemsNumber(int totalItemsNumber) {
+		this.totalItemsNumber = totalItemsNumber;
 	}
 }

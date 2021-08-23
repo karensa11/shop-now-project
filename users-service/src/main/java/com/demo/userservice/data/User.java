@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,9 +16,19 @@ public class User {
 	private Long id;
 	
 	@Size(min=2, message="Name should have aqt least 2 characters")
+	@NotEmpty
 	private String name;
+	
+	@Email
+	private String email;
+
+	@Size(min=4, message="passwordPartial should have aqt least 4 characters")
+	@NotEmpty
+	private String passwordPartial;
+	
 	@Transient
 	private OrderDetails orderDetails;
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,5 +47,16 @@ public class User {
 	public void setOrderDetails(OrderDetails orderDetails) {
 		this.orderDetails = orderDetails;
 	}
-	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPasswordPartial() {
+		return passwordPartial;
+	}
+	public void setPasswordPartial(String passwordPartial) {
+		this.passwordPartial = passwordPartial;
+	}
 }

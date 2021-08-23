@@ -1,0 +1,43 @@
+.search-result-item-component {
+  width: 80vw;
+  height: 200px;
+  border-bottom: 1px solid #999;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  padding: 10px 0;
+
+  img {
+    width: 150px;
+    height: 200px;
+  }
+  .content {
+    .name {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .description {
+      padding: 10px 0 10px 0;
+    }
+    .bottom {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      margin: 10px 0 20px 0;
+      .add-to-cart {
+        margin:0 auto;
+        background-color: #2c8dc4;
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        border: 1px solid #0f5278;
+
+        &:hover {
+          cursor: pointer;
+          color: yellow;
+          border: 1px solid black;
+        }
+      }
+    }
+  }
+}

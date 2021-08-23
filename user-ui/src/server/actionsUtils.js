@@ -1,44 +1,56 @@
 import * as generalActions from "../redux/general/general-actions";
+import serverResponseTypes from "./serverResponseTypes";
 
-export function handleServerUpdate(response, dispatch, onSuccess)
+export function handleServerUpdate({response, dispatch, onSuccess, onConflict})
 {
-    if(response && response.code === "failure"){
-        dispatch(generalActions.serverCallFailed());
+    if(response && response.serverErrorCode === serverResponseTypes.FAILURE){ // response can come empty from update
+        const {serverErrorCode} = response;
+        if (serverErrorCode === serverResponseTypes.CONFLICT && onConflict) { // conflict in creation - details already exists
+            onConflict();
+        } else {
+            dispatch(generalActions.serverCallFailed());
+        }
     }
     else{
         dispatch(generalActions.serverCallFinished());
-        dispatch(generalActions.cancelEdit());
         onSuccess && dispatch(onSuccess(response));
     }
 }
-export function handleServerGet(response, dispatch, actionCreator, onSuccess)
+export function handleServerGet({response, dispatch, actionsCreator, onSuccess, onNotFound})
 {
-    if(!response || response.code === "failure"){
-        dispatch(generalActions.serverCallFailed());
-    }
-    else{
+    if(response.serverErrorCode){ // if no details found, it is expected to get status code 404
+        const {serverErrorCode} = response;
+        if (serverErrorCode === serverResponseTypes.NOT_FOUND && onNotFound) { // details not found (e.g. search user by email)
+            onNotFound();
+        } else {
+            dispatch(generalActions.serverCallFailed());
+        }
+    } else{
         dispatch(generalActions.serverCallFinished());
-        dispatch(actionCreator(response));
+        actionsCreator && dispatch(actionsCreator(response));
         onSuccess && dispatch(onSuccess(response));
     }
 }
 
-export function wrapGet(serverFunc, actionsCreator, pathParams, params, onSuccess) {
-    return (dispatch) => {
-        dispatch(generalActions.serverCallStarted());
-        return serverFunc(pathParams, params)
-            .then(response => {
-                handleServerGet(response, dispatch, actionsCreator, onSuccess);
-            }).catch(() => dispatch(generalActions.serverCallFailed()));
-    }
-}
-
-export function wrapUpdate(serverFunc, pathParams, params, body, onSuccess) {
+export function wrapGet({serverFunc, actionsCreator, pathParams, params, body, onSuccess, onNotFound}) {
     return (dispatch) => {
         dispatch(generalActions.serverCallStarted());
         return serverFunc(pathParams, params, body)
             .then(response => {
-                handleServerUpdate(response, dispatch, onSuccess);
+                handleServerGet({response, dispatch, actionsCreator, onSuccess, onNotFound});
             }).catch(() => dispatch(generalActions.serverCallFailed()));
+    }
+}
+
+export function wrapUpdate({serverFunc, pathParams, params, body, onSuccess, onFailure, onNotFound, onConflict}) {
+    return (dispatch) => {
+        dispatch(generalActions.serverCallStarted());
+        return serverFunc(pathParams, params, body)
+            .then(response => {
+                handleServerUpdate({response, dispatch, onSuccess, onNotFound, onConflict});
+            }).catch((response) => {
+                dispatch(generalActions.serverCallFailed());
+                onFailure && onFailure(response);
+            });
     }
 }

@@ -11,3 +11,13 @@ export const categoryItemsSelector = createSelector(
     [catalogSelector],
     catalogData => catalogData.categoryItems
 );
+
+export const searchResultsSelector = createSelector(
+    [catalogSelector],
+    catalogData => catalogData.searchResults
+);
+
+export const searchStringSelector = createSelector(
+    [catalogSelector],
+    catalogData => catalogData.searchResults
+);

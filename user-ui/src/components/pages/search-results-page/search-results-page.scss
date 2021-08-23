@@ -1,3 +1,18 @@
-.search-results-page {
+@import "../../../util/variables";
 
+.search-results-page {
+  .results-count-header {
+    padding: 10px 0;
+    box-shadow: $select-items-box-shadow-light;
+    margin-bottom: 10px;
+
+    .results-count {
+      font-weight: bold;
+      color: #d77c5a;
+    }
+  }
+  .table {
+    background-color: white;
+    width: 80vw;
+  }
 }

@@ -1,15 +1,15 @@
 import React from "react";
-import CommonLayout from "../../layout/common-layout/common-layout";
+import LayoutWithHeader from "../../layout/layout-with-header/layout-with-header";
 import CategoriesPreview from "../../categories-preview/categories-preview";
 import CatalogItems from "../../catalog-items/catalog-items";
 import "./catalog-page.scss";
 
 export default function CatalogPage() {
     return (
-        <CommonLayout>
+        <LayoutWithHeader>
             <CategoriesPreview />
             <hr />
             <CatalogItems />
-        </CommonLayout>
+        </LayoutWithHeader>
     )
 }

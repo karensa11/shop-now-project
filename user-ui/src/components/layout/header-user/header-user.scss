@@ -1,0 +1,18 @@
+.header-user-component {
+  position: relative;
+  right: 20px;
+  .header {
+    position: relative;
+    top: -15px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    .title {
+      padding: 10px;
+    }
+  }
+  .login-options {
+    position: relative;
+    top: -10px;
+  }
+}

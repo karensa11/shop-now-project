@@ -1,18 +1,24 @@
+@import "../../../util/variables";
+
 .shopping-cart-page {
   display: flex;
   justify-content: center;
 
   .shopping-cart {
     background-color: white;
+
     .title {
       font-weight: bold;
       padding: 10px 0 10px 0;
-      background-color: #dcd9db;
+      box-shadow: $select-items-box-shadow-light;
     }
-    .total-price {
-      font-weight: bold;
+    .bottom {
       padding: 10px 0 10px 0;
       background-color: #f4ede6;
+
+      .price {
+        font-weight: bold;
+      }
     }
   }
   .cancel-item {

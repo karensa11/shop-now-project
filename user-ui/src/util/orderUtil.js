@@ -18,6 +18,7 @@ export function addItem(catalogId) {
         }
     });
     if (orderItem) {
+        orderItem.quantity++;
         return updateItem(orderItem);
     } else {
         orderItem = {

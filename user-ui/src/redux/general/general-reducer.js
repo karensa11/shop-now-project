@@ -1,26 +1,22 @@
 import types from "./general-types";
-import serverStatus from "../../values/ServerUpdateStatus";
+import serverStatus from "./serverUpdateStatus";
 
 const INITIAL_STATE = {
-    serverStatus: serverStatus.NOT_UPDATING
+    serverStatus: serverStatus.NOT_UPDATING,
+    currentUser: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
-        case types.SERVER_CALL_FAILED:
+        case types.SET_SERVER_STATUS:
             return {
                 ...state,
-                serverStatus: serverStatus.FAILED
+                serverStatus: action.payload
             };
-        case types.SERVER_CALL_PENDING:
+        case types.SET_CURRENT_USER:
             return {
                 ...state,
-                serverStatus: serverStatus.UPDATING
-            };
-        case types.SERVER_CALL_FINISHED:
-            return {
-                ...state,
-                serverStatus: serverStatus.NOT_UPDATING
+                currentUser: action.payload
             };
         default: return state;
     }

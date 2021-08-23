@@ -1,0 +1,19 @@
+.button-component {
+  display: flex;
+  justify-content: center;
+
+  .button {
+    background-color: darkorange;
+    font-weight: bold;
+    color: white;
+    width: 150px;
+    border-radius: 5px;
+    padding: 10px;
+
+    &:hover {
+      cursor: pointer;
+      color: yellow;
+      background-color: #2c8dc4;
+    }
+  }
+}

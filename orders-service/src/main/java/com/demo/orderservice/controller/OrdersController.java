@@ -46,11 +46,14 @@ public class OrdersController {
 			@PathVariable Long orderId,
 			@RequestHeader(required = false) Long userId) {
 		OrderDetails result = findOrderAndValidate(orderId, userId);
+		int totalItemsNumber = 0;
 		for (OrderItem orderItem:result.getOrderItems()) {
 			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
 			orderItem.setCatalogItem(catalogItem);
+			totalItemsNumber += orderItem.getQuantity();
 		}
 		result.setTotalPrice(calculateTotal(result));
+		result.setTotalItemsNumber(totalItemsNumber);
 		return result;
 	}
 
@@ -58,7 +61,10 @@ public class OrdersController {
 	public OrderDetails getOpenOrderForUser(
 			@RequestHeader @NotNull Long userId) {
 		Optional<OrderDetails> dbResult = orderRepository.findOpenOrderByUserId(userId);
-		return dbResult.get();
+		if (dbResult.isPresent()) {
+			return dbResult.get();
+		}
+		return null;
 	}
 
 	@PostMapping(path = BASE_PATH)
@@ -134,7 +140,7 @@ public class OrdersController {
 		result.setStatus(OrderStatus.CANCELLED);
 		orderRepository.save(result);
 	}
-	
+
 	private OrderDetails findOrderAndValidate(Long orderId, Long userId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
 		if (!resultFromDb.isPresent()) {
@@ -158,7 +164,7 @@ public class OrdersController {
 		}
 		return result;
 	}
-	
+
 	private BigDecimal calculateTotal(OrderDetails orderDetails) {
 		BigDecimal result = new BigDecimal(0);
 		for(OrderItem item:orderDetails.getOrderItems()){

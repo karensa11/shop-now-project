@@ -7,10 +7,14 @@
 
   .left {
     float: left;
+    position: relative;
+    top: 5px;
   }
   .right {
     float: right;
     position: relative;
-    top: -15px;
+    top: -20px;
+    display: flex;
+    flex-flow: wrap;
   }
 }

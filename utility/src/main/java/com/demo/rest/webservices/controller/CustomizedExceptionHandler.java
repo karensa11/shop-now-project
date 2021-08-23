@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.demo.utility.exception.DetailsAlreadyExistsException;
 import com.demo.utility.exception.DetailsNotFoundException;
 import com.demo.utility.exception.ExceptionResponse;
 
@@ -31,9 +32,15 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(DetailsNotFoundException.class)
-	public final ResponseEntity<Object> handleUserException(Exception ex, WebRequest request) throws Exception {
+	public final ResponseEntity<Object> handleDetailsNotFoundException(Exception ex, WebRequest request) throws Exception {
 		ExceptionResponse response = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<Object>(response, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(DetailsAlreadyExistsException.class)
+	public final ResponseEntity<Object> handleDetailsAlreadyExistsException(Exception ex, WebRequest request) throws Exception {
+		ExceptionResponse response = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		return new ResponseEntity<Object>(response, HttpStatus.CONFLICT);
 	}
 
 	@Override

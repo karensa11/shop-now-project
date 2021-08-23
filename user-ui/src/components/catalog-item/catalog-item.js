@@ -1,8 +1,8 @@
 import React from "react";
 import "./catalog-item.scss";
-import {formatPrice} from "../../util/formatter";
 import {connect} from "react-redux";
 import {addItem} from "../../util/orderUtil";
+import Price from "../common/price/price";
 
 function CatalogItem({item, addItem}) {
     return (
@@ -17,7 +17,7 @@ function CatalogItem({item, addItem}) {
                 {item.description}
             </div>
             <div className="price">
-                {formatPrice(item.price)}
+                <Price price={item.price} />
             </div>
             <div className="bottom" onClick={addItem}>
                 <div className="add-to-cart">Add to cart</div>

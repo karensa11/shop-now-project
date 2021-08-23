@@ -1,25 +1,37 @@
 import types from "./general-types";
+import serverStatus from "./serverUpdateStatus";
 
 export function serverCallStarted(){
     return {
-        type: types.SERVER_CALL_PENDING
+        type: types.SET_SERVER_STATUS,
+        payload: serverStatus.UPDATING
     }
 }
 
 export function serverCallFailed(){
     return {
-        type: types.SERVER_CALL_FAILED
+        type: types.SET_SERVER_STATUS,
+        payload: serverStatus.FAILED
     }
 }
 
 export function serverCallFinished(){
     return {
-        type: types.SERVER_CALL_FINISHED
+        type: types.SET_SERVER_STATUS,
+        payload: serverStatus.NOT_UPDATING
     }
 }
 
-export function cancelEdit() {
+export function login(user) {
     return {
-        type: types.SERVER_CALL_FINISHED
+        type: types.SET_CURRENT_USER,
+        payload: user
+    }
+}
+
+export function logout() {
+    return {
+        type: types.SET_CURRENT_USER,
+        payload: null
     }
 }

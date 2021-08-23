@@ -1,3 +1,4 @@
+const serverResponseTypes = require("./serverResponseTypes").default;
 
 module.exports = {
     createParamsURL: function(baseURL, api, pathParams, params) {
@@ -34,10 +35,9 @@ module.exports = {
             (response) => {
             if(response.timeout) {
                 console.log("timeout");
-                callback({code: "failure"});
+                callback({serverErrorCode: serverResponseTypes.FAILURE});
             } else if (response.status !== 200) {
-                console.log("failure");
-                callback({code: "failure"});
+                return callback({serverErrorCode: response.status});
             } else {
                 const contentType = response.headers.get("content-type");
                 if (contentType && contentType.indexOf("application/json") !== -1) {
