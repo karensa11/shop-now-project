@@ -12,9 +12,9 @@ function HeaderCart({itemsNumber, history}) {
         navigation.navigateToCart(history);
     };
     return (
-        <div className="header-cart-component" onClick={navigateToCart} title="view your cart">
+        <div className="header-cart-component" onClick={navigateToCart} title="view your cart" id="viewShoppingCartBtn">
             <img src={appIcons.cartIcon} alt=""/>
-            <div className="items-number">
+            <div className="items-number" id="cartItemsNumber">
                 {itemsNumber}
             </div>
         </div>

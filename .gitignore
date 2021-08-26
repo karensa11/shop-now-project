@@ -6,3 +6,4 @@
 **/.idea
 **/.mvn
 **/build/static
+/reports

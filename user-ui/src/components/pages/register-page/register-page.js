@@ -46,15 +46,15 @@ function RegisterPage({history, register}) {
         <LayoutLogin>
             <div className="register-page">
                 <LoginTextInput name={INPUT_TYPES.NAME} type={INPUT_TYPES.NAME} title="enter name" forceValidate={forceValidate}
-                                onChange={valueChanged} />
+                                onChange={valueChanged} id="nameInput" />
                 <LoginTextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
-                                onChange={valueChanged} />
+                                onChange={valueChanged} id="emailInput" />
                 <LoginTextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
-                                onChange={valueChanged} />
+                                onChange={valueChanged} id="passwordInput" />
                 <LoginTextInput name={INPUT_TYPES.CONFIRM_PASSWORD} type={INPUT_TYPES.CONFIRM_PASSWORD} title="confirm password" forceValidate={forceValidate}
-                                onChange={valueChanged} comparePassword={password} />
+                                onChange={valueChanged} id="confirmPasswordInput" comparePassword={password} />
             </div>
-            <SubmitBtn title="Register" onClick={submit} validityArray={validity} setForceValidate={setForceValidate}/>
+            <SubmitBtn title="Register" onClick={submit} validityArray={validity} setForceValidate={setForceValidate} id="submitRegisterBtn"/>
             <div>Already have an account ?</div>
             <Button title="Login to account" onClick={navigateToLoginFunc} />
         </LayoutLogin>

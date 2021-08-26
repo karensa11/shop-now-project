@@ -54,12 +54,12 @@ function LoginPage({login, getUserDetails, setUserDetails, getOrderDetails, hist
         <LayoutLogin>
             <div className="login-page">
                 <LoginTextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
-                                onChange={valueChanged} />
+                                onChange={valueChanged} id="emailInput" />
                 <LoginTextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
-                                onChange={valueChanged} />
-                <SubmitBtn title="Login" onClick={submit} validityArray={validity} setForceValidate={setForceValidate}/>
+                                onChange={valueChanged} id="passwordInput" />
+                <SubmitBtn title="Login" onClick={submit} validityArray={validity} setForceValidate={setForceValidate} id="submitLoginBtn" />
                 <div>don't have an account yet ?</div>
-                <Button title="Create an account" onClick={navigateToRegisterFunc} />
+                <Button title="Create an account" onClick={navigateToRegisterFunc} id="navigateToRegister" />
             </div>
         </LayoutLogin>
     )

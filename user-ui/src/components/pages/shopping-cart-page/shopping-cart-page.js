@@ -14,23 +14,23 @@ function ShoppingCartPage({currentOrder}) {
             {
                 currentOrder ?
                     <div className="shopping-cart">
-                        <div className="title">
+                        <div className="title" id="shoppingCartLbl">
                             Your cart
                         </div>
                         <div>
-                        {currentOrder.orderItems.map(item =>
-                            <ShoppingCartItem item={item} key={item.id} />
+                        {currentOrder.orderItems.map((item, index) =>
+                            <ShoppingCartItem item={item} key={item.id} index={index} />
                         )}
                         </div>
                         <div className="bottom">
-                            Subtotal ({currentOrder.totalItemsNumber} items):&nbsp;
+                            Subtotal (<span id="shoppingCartItemsNumberLbl">{currentOrder.totalItemsNumber}</span> items):&nbsp;
                             <span className="price">
                                 <Price price={currentOrder.totalPrice} />
                             </span>
                         </div>
                     </div>
                     :
-                    <div>No items in cart</div>
+                    <div id="noItemsLbl">No items in cart</div>
             }
             </div>
         </LayoutWithHeader>

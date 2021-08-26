@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Report</title>
+        <style>
+            body {
+                background-color: #ddd;
+                font-family: Tahoma;
+            }
+            table {
+                border: 1px solid #ddd;
+                padding: 1px;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            td {
+                border: 1px solid #999;
+                background-color: #eee;
+                padding: 5px;
+            }
+            th {
+                border: 1px solid #999;
+                background-color: #b8b8cd;
+                padding: 5px;
+            }
+            a {
+                text-decoration: none;
+                color: black;
+            }
+            .details {
+                font-size: 12px;
+            }
+            .pageTitle {
+                font-size: 20px;
+                font-weight: bold;
+                background-color: #225;
+                text-align: center;
+                color: white;
+                padding: 5px;
+            }
+            .generalDetailsHeader {
+                font-weight: bold;
+            }
+            .suiteHeader {
+                background-color: #52528d;
+                color: white;
+                font-weight: bold;
+                padding: 5px;
+                text-align: center;
+            }
+            .pass {
+                background-color: #abecab;
+            }
+            .fail {
+                background-color: #ffa1a1;
+            }
+            .testName {
+                font-weight: bold;
+                background-color: #e2d3c1;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="pageTitle">TEST RUN</div>
+        <br/><br/>
+        <table class="details" align="center">
+            <tr>
+                <td class="generalDetailsHeader">Run Start</td><td>2020-04-21 11:13:41</td>
+                <td class="generalDetailsHeader">Run End</td><td>2020-04-21 11:40:00</td>
+                <td class="generalDetailsHeader">Browser</td><td>chrome</td>
+            </tr>
+        </table>
+        <br/><br/>
+        <div class="suiteHeader">
+            Basic Sanity
+        </div>
+        <br/>
+        <table class="details" align="center">
+            <tr>
+                <td class="generalDetailsHeader">Suite Start</td><td>2020-04-21 11:14:00</td>
+                <td class="generalDetailsHeader">Suite End</td><td>2020-04-21 11:20:10</td>
+                <td class="generalDetailsHeader">Passed Tests</td><td>1</td>
+                <td class="generalDetailsHeader">Failed Tests</td><td>1</td>
+            </tr>
+        </table>
+        <br/>
+        <div align="center">
+            <table class="details">
+                <tr>
+                    <th>Test Name</th>
+                    <th>Status</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration</th>
+                </tr>
+                <tr>
+                    <td class="testName"><a href="http://localhost:3000/">Login</a></td>
+                    <td class="pass">PASS</td>
+                    <td>2020-04-21 11:13:45</td>
+                    <td>2020-04-21 11:13:50</td>
+                    <td>22ms</td>
+                </tr>
+                <tr>
+                    <td class="testName"><a href="http://localhost:3000/">Change Description</a></td>
+                    <td class="fail">FAIL</td>
+                    <td>2020-04-21 11:13:55</td>
+                    <td>2020-04-21 11:16:10</td>
+                    <td>22ms</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

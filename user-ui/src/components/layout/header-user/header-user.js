@@ -4,7 +4,7 @@ import {createStructuredSelector} from "reselect";
 import {currentUserSelector} from "../../../redux/general/general-selector";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {navigateToLogin, navigateToRegister} from "../../../util/navigation";
+import {navigateToLogin, navigateToRegister, navigateToAccount} from "../../../util/navigation";
 import HeaderButton from "../../common/header-button/header-button";
 import * as generalActions from "../../../redux/general/general-actions";
 import * as orderActions from "../../../redux/order/order-actions";
@@ -16,6 +16,9 @@ function HeaderUser({currentUser, history, logout, clearOrder}) {
     const navigateToRegisterFunc = () => {
         navigateToRegister(history);
     };
+    const navigateToAccountFunc = () => {
+        navigateToAccount(history);
+    };
     const logoutFunc = () => {
         logout();
         clearOrder();
@@ -23,15 +26,16 @@ function HeaderUser({currentUser, history, logout, clearOrder}) {
     return (
         <div className="header-user-component">
             {currentUser ?
-                <div className="header">
-                    <div className="title">Hello, {currentUser.name}</div>
-                    <HeaderButton title="Logout" onClick={logoutFunc} />
+                <div className="content">
+                    <div className="title">Hello, <span id="nameLbl">{currentUser.name}</span></div>
+                    <HeaderButton title="Logout" onClick={logoutFunc} id="logoutBtn" />
+                    <HeaderButton title="Your Account" onClick={navigateToAccountFunc} id="accountBtn" />
                 </div>
             :
-                <div className="header">
-                    <div className="title">Hello, guest</div>
-                    <HeaderButton title="Login" onClick={navigateToLoginFunc} />
-                    <HeaderButton title="Register" onClick={navigateToRegisterFunc} />
+                <div className="content">
+                    <div className="title">Hello, <span id="nameLbl">guest</span></div>
+                    <HeaderButton title="Login" onClick={navigateToLoginFunc} id="loginBtn" />
+                    <HeaderButton title="Register" onClick={navigateToRegisterFunc} id="registerBtn" />
                 </div>
             }
         </div>

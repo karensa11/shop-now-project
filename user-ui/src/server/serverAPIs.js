@@ -37,3 +37,7 @@ export function getLoginData(pathParams, params) {
 export function register(pathParams, params, userData) {
     return callsHandler.callPOST(config.usersURL, "users", pathParams, params, userData);
 }
+export function deleteUser(pathParams, params) {
+    console.log("pathParams", pathParams);
+    return callsHandler.callDELETE(config.usersURL, "users/{userId}", pathParams, params);
+}

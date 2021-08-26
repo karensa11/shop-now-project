@@ -2,8 +2,8 @@
   padding: 10px;
   position: relative;
   top: -10px;
+  border: 1px solid #0000;
   &:hover {
-    cursor: pointer;
     color: yellow;
     border: 1px solid yellow;
   }

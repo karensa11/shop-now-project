@@ -115,3 +115,11 @@ export function register(userData, onConflict) {
         body: userData
     })
 }
+
+export function deleteUser(userId) {
+    return actionUtils.wrapUpdate({
+        serverFunc: serverAPIs.deleteUser,
+        pathParams: {userId: userId},
+        onSuccess: [orderActions.clearOrder, generalActions.logout]
+    })
+}

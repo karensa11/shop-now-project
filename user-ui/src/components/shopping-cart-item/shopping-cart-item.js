@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import appIcons from "../../util/applicationIcons";
 import * as orderUtil from "../../util/orderUtil";
 
-function ShoppingCartItem({item, cancelItem, increaseItem, decreaseItem}) {
+function ShoppingCartItem({item, cancelItem, increaseItem, decreaseItem, index}) {
     const {catalogItem} = item;
     const cancelItemFunc = () => {
         cancelItem(item);
@@ -30,10 +30,10 @@ function ShoppingCartItem({item, cancelItem, increaseItem, decreaseItem}) {
                     {formatPrice(catalogItem.price)}
                 </div>
                 <div className="buttons">
-                    <img src={appIcons.plusIcon} onClick={increaseItemFunc} title="increase quantity" alt="" />
+                    <img src={appIcons.plusIcon} onClick={increaseItemFunc} title="increase quantity" alt="" id={`increase${index}Btn`} />
                     <div className="quantity">{item.quantity}</div>
-                    <img src={appIcons.minusIcon} onClick={decreaseItemFunc} title="increase quantity" alt="" />
-                    <img src={appIcons.trashIcon} onClick={cancelItemFunc} title="remove this cart item" alt="" />
+                    <img src={appIcons.minusIcon} onClick={decreaseItemFunc} title="increase quantity" alt="" id={`decrease${index}Btn`} />
+                    <img src={appIcons.trashIcon} onClick={cancelItemFunc} title="remove this cart item" alt=""  id={`remove${index}Btn`} />
                 </div>
             </div>
         </div>

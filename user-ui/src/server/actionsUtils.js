@@ -13,14 +13,22 @@ export function handleServerUpdate({response, dispatch, onSuccess, onConflict})
     }
     else{
         dispatch(generalActions.serverCallFinished());
-        onSuccess && dispatch(onSuccess(response));
+        if (onSuccess) {
+            if (Array.isArray(onSuccess)) {
+                onSuccess.forEach(onSuccessFunc => {
+                    dispatch(onSuccessFunc(response));
+                });
+            } else {
+                dispatch(onSuccess(response));
+            }
+        }
     }
 }
 export function handleServerGet({response, dispatch, actionsCreator, onSuccess, onNotFound})
 {
-    if(response.serverErrorCode){ // if no details found, it is expected to get status code 404
+    if(response.serverErrorCode){
         const {serverErrorCode} = response;
-        if (serverErrorCode === serverResponseTypes.NOT_FOUND && onNotFound) { // details not found (e.g. search user by email)
+        if (serverErrorCode === serverResponseTypes.NOT_FOUND && onNotFound) { // details not found (e.g. search user by email). expected status 404
             onNotFound();
         } else {
             dispatch(generalActions.serverCallFailed());

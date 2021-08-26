@@ -1,7 +1,30 @@
+@import "../../../util/variables";
+
 .layout-with-header-component {
   font-family: Arial;
   background-color: #aeb7c1;
   height: 100vh;
+  .header {
+    padding: 10px;
+    background-color: #07033f;
+    color: white;
+    border-bottom: 1px solid #aaa;
+    font-weight: bold;
+    box-shadow: $select-items-box-shadow;
+
+    .left {
+      float: left;
+      position: relative;
+      top: 5px;
+    }
+    .right {
+      float: right;
+      position: relative;
+      top: -20px;
+      display: flex;
+      flex-flow: wrap;
+    }
+  }
   .body {
     padding-top: 20px;
   }

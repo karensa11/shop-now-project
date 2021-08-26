@@ -2,7 +2,7 @@ import React from "react";
 import "./submit-btn.scss";
 import Button from "../button/button";
 
-export default function SubmitBtn({title, onClick, validityArray, setForceValidate}) {
+export default function SubmitBtn({title, onClick, validityArray, setForceValidate, id}) {
     const validateAndClick = () => {
         let isValid = true;
         Object.keys(validityArray).forEach(key => {
@@ -17,6 +17,6 @@ export default function SubmitBtn({title, onClick, validityArray, setForceValida
         }
     };
     return (
-        <Button customClass="submit-btn-component" onClick={validateAndClick} title={title} />
+        <Button customClass="submit-btn-component" onClick={validateAndClick} title={title} id={id} />
     )
 }

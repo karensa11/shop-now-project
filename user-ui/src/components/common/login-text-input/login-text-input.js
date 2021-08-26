@@ -4,7 +4,7 @@ import "./login-text-types";
 import {INPUT_TYPES_DATA, INPUT_TYPES} from "./login-text-types";
 import appIcons from "../../../util/applicationIcons";
 
-export default function LoginTextInput({onChange, name, title, type, required, forceValidate, comparePassword}) {
+export default function LoginTextInput({onChange, name, title, type, required, forceValidate, comparePassword, id}) {
     const [value, setValue] = useState("");
     const [validationMessage, setValidationMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -54,7 +54,7 @@ export default function LoginTextInput({onChange, name, title, type, required, f
                     <img src={showPassword ? appIcons.hideIcon : appIcons.viewIcon} onClick={switchShowImage} />
                 }
                 <input type={inputType} name={name} onChange={validateAndSave} size={isPassword ? "47" : "50"} onFocus={validateAndSave}
-                       className={validationMessage ? "invalid" : ""}/>
+                       className={validationMessage ? "invalid" : ""} id={id}/>
             </div>
             {validationMessage &&
                 <div className="validation-message">

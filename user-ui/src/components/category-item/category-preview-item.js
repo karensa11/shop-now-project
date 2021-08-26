@@ -1,21 +1,18 @@
 import React from "react";
 import "./category-preview-item.scss";
 import {retrieveItemsForCategory} from "../../server/actions";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 
-function CategoryPreviewItem({item, fetchCategoryItems}) {
-    const itemClick = () => {
-        fetchCategoryItems(item.id);
+function CategoryPreviewItem({item}) {
+    const dispatch = useDispatch();
+    const fetchCategoryItems = () => {
+        dispatch(retrieveItemsForCategory(item.id));
     };
     return (
-        <div className="category-preview-item-component" key={item.id} onClick={itemClick}>
+        <div className="category-preview-item-component" key={item.id} onClick={fetchCategoryItems} id={`category${item.id}Btn`}>
             {item.name}
         </div>
     )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchCategoryItems: (categoryId) => dispatch(retrieveItemsForCategory(categoryId))
-});
-
-export default connect(null, mapDispatchToProps)(CategoryPreviewItem);
+export default CategoryPreviewItem;

@@ -1,0 +1,84 @@
+
+body {
+    background-color: #ddd;
+    font-family: Tahoma;
+}
+table {
+    border: 1px solid #ddd;
+    padding: 1px;
+    border-collapse: collapse;
+    text-align: center;
+}
+td {
+    border: 1px solid #999;
+    background-color: #eee;
+    padding: 5px;
+}
+th {
+    border: 1px solid #999;
+    background-color: #b8b8cd;
+    padding: 5px;
+}
+a {
+    color: #225;
+}
+.tableHeader {
+    background-color: #32334b;
+    color: white;
+}
+.details {
+    font-size: 12px;
+}
+.pageTitle {
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #225;
+    text-align: center;
+    color: white;
+    padding: 5px;
+}
+.detailsHeader {
+    font-weight: bold;
+}
+.suiteHeader {
+    background-color: #52528d;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+.pass {
+    background-color: #abecab;
+}
+.fail {
+    background-color: #ffa1a1;
+}
+.testName {
+    font-weight: bold;
+    background-color: #e2d3c1;
+}
+.testDetails {
+    border: 1px solid #aaa;
+    background-color: #fffdfd;
+    padding: 15px;
+}
+.screenshot {
+    transform: scale(0.9);
+    border: 2px solid #939292;
+}
+.error {
+    color: red
+}
+.linkPrev {
+    color: #cbc090;
+    text-decoration: none;
+    padding-right: 30px;
+}
+.linkNext {
+    color: #cbc090;
+    text-decoration: none;
+    padding-left: 30px;
+}
+.text {
+    background-color: #f1e6db;
+}

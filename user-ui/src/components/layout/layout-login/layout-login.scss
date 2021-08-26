@@ -1,8 +1,16 @@
+@import "../../../util/variables";
+
 .layout-login-component {
   .header {
-
+    background-color: #ffe6ce;
+    padding: 5px;
+    box-shadow: $select-items-box-shadow;
+    .button {
+      position: relative;
+      top: 1px;
+    }
   }
   .body {
-
+    padding-top: 20px;
   }
 }

@@ -36,3 +36,6 @@ export function navigateToLogin(history) {
 export function navigateToRegister(history) {
     history.push("/register");
 }
+export function navigateToAccount(history) {
+    history.push("/account");
+}
