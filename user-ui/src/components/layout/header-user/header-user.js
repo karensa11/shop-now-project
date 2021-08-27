@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import "./header-user.scss";
 import {createStructuredSelector} from "reselect";
 import {currentUserSelector} from "../../../redux/general/general-selector";

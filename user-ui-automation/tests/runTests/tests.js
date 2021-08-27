@@ -22,8 +22,13 @@ function runData(testName){
 }
 
 describe('Basic Sanity', () => {
-    const driver = new Builder().forBrowser("chrome").build();
-    driver.manage().window().maximize();
+    const chromeCapabilities = webdriver.Capabilities.chrome();
+    const chromeOptions = {
+        w3c: false,
+        args: ['--test-type', '--start-maximized', '--disable-web-security']
+    };
+    chromeCapabilities.set('chromeOptions', chromeOptions);
+    const driver = new Builder().withCapabilities(chromeCapabilities).build();
 
     function runTest(testName, testMethod) {
         it(testName, async () => {

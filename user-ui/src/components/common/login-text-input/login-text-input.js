@@ -51,7 +51,7 @@ export default function LoginTextInput({onChange, name, title, type, required, f
             </div>
             <div className="input-field">
                 {isPassword &&
-                    <img src={showPassword ? appIcons.hideIcon : appIcons.viewIcon} onClick={switchShowImage} />
+                    <img src={showPassword ? appIcons.hideIcon : appIcons.viewIcon} onClick={switchShowImage} alt="" />
                 }
                 <input type={inputType} name={name} onChange={validateAndSave} size={isPassword ? "47" : "50"} onFocus={validateAndSave}
                        className={validationMessage ? "invalid" : ""} id={id}/>

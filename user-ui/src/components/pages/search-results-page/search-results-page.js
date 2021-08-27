@@ -16,7 +16,7 @@ function SearchResultsPage({searchResults, location}) {
     };
     useEffect(() => {
         fetchSearchResults(searchString);
-    }, [fetchSearchResults, searchString]);
+    }, [searchString]);
     return (
         <LayoutWithHeader>
             <div className="search-results-page">

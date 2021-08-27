@@ -33,6 +33,7 @@ module.exports = {
             timer
         ]).then(
             (response) => {
+                console.log("fetchWithTimeout", response.headers);
             if(response.timeout) {
                 console.log("timeout");
                 callback({serverErrorCode: serverResponseTypes.FAILURE});
@@ -47,6 +48,6 @@ module.exports = {
                     return callback({});
                 }
             }
-        }, (err) => {callback({code: "failure"});});
+        }, (err) => {callback({code: "failure"});console.log("fetchWithTimeout - err", err);});
     }
 }

@@ -24,7 +24,7 @@ module.exports = {
                     ...standardHeaders(),
                     "Accept": "application/json",
                     "Content-Type": "application/json"
-                }
+                },
             },
             config.timeoutInterval,
             (result) => {return result});

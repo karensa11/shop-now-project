@@ -38,6 +38,5 @@ export function register(pathParams, params, userData) {
     return callsHandler.callPOST(config.usersURL, "", pathParams, params, userData);
 }
 export function deleteUser(pathParams, params) {
-    console.log("pathParams", pathParams);
     return callsHandler.callDELETE(config.usersURL, "{userId}", pathParams, params);
 }

@@ -18,7 +18,7 @@ import com.demo.catalogservice.repository.CategoryRepository;
 import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsNotFoundException;
 
-@CrossOrigin
+@CrossOrigin(origins= "*")
 @RestController
 public class CatalogController {
 	
