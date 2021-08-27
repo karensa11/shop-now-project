@@ -823,7 +823,7 @@ user details</panel_attributes>
       <x>1330</x>
       <y>430</y>
       <w>450</w>
-      <h>420</h>
+      <h>430</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO
@@ -842,15 +842,17 @@ TODO
 - about (UI)
 - eslint (UI)
 - UI common lib
-- common name for ms
 - transaction id from UI
 - GIT readme
 - XSS security (UI)
 - data fencing
-- usesr token
-- useDispatch and useSelector instead of connect (UI)
+- user token
 - create repository of images (don't use arbitary images)
 - align css - there are some duplications and a mess in the header (UI)
+- add more items - more phones and accessories
+- data types validation (UI)
+- better LnF (UI)
+- UI flow diagram
 fg=dark_gray
 bg=light_gray</panel_attributes>
     <additional_attributes/>

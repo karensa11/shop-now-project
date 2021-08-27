@@ -17,12 +17,15 @@ import com.demo.userservice.data.User;
 import com.demo.userservice.data.UserAutheticationRequest;
 import com.demo.userservice.feign.OrdersFeign;
 import com.demo.userservice.repository.UsersRepository;
+import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsAlreadyExistsException;
 import com.demo.utility.exception.DetailsNotFoundException;
 
 @CrossOrigin
 @RestController
 public class UsersController {
+
+	private static final String BASE_PATH = CommonConsts.MS_PREFIX+"/users";
 	
 	@Autowired
 	private UsersRepository usersRepository;
@@ -30,7 +33,7 @@ public class UsersController {
 	@Autowired
 	private OrdersFeign ordersFeign;
 
-	@PostMapping(path = "/users/authenticate")
+	@PostMapping(path = BASE_PATH+"/authenticate")
 	public Long autheticate(@RequestBody UserAutheticationRequest userDetails) {
 		Optional<User> result = usersRepository.findByEmail(userDetails.getEmail());
 		if (!result.isPresent()) {
@@ -43,7 +46,7 @@ public class UsersController {
 		return data.getId();
 	}
 
-	@GetMapping(path = "/users/{userId}")
+	@GetMapping(path = BASE_PATH+"/{userId}")
 	public User getUser(@PathVariable Long userId) {
 		Optional<User> result = usersRepository.findById(userId);
 		if (!result.isPresent()) {
@@ -56,7 +59,7 @@ public class UsersController {
 		return data;
 	}
 
-	@PostMapping(path = "/users") 
+	@PostMapping(path = BASE_PATH) 
 	public Long createUser(@Validated @RequestBody User user) {
 		Optional<User> result = usersRepository.findByEmail(user.getEmail());
 		if (result.isPresent()) {
@@ -73,7 +76,7 @@ public class UsersController {
 		*/
 	}
 	
-	@DeleteMapping(path = "/users/{userId}")
+	@DeleteMapping(path = BASE_PATH+"/{userId}")
 	public void deleteUser(@PathVariable Long userId) {
 		usersRepository.deleteById(userId);
 		OrderDetails order = ordersFeign.getOpenOrderForUser(userId);

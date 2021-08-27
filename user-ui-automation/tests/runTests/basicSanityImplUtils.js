@@ -1,5 +1,4 @@
 const driverUtils = require('../utils/driverUtils');
-const {TestData, Elements} = require('./testData');
 
 module.exports = {
     restId: function(restName) {
@@ -8,5 +7,11 @@ module.exports = {
 
     init: async function (driver, runData){
         await driverUtils.openClient(driver, runData);
-    }
-}
+    },
+    verifyCartCount:  async function (driver, runData, count){
+        await driverUtils.assertTxtValue(driver, runData, 'cartItemsNumber', count+'');
+    },
+    verifyShoppingCartCount:  async function (driver, runData, count){
+        await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', count+'');
+    },
+};

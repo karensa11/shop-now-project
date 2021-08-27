@@ -8,7 +8,8 @@ const TestData = {
     catalogData: {
         selectedCategoryLabel: 'phones',
         selectedCatalogItem1Name: 'iphone 11',
-        selectedCatalogItem2Name: 'iphone 12'
+        selectedCatalogItem2Name: 'iphone 12',
+        searchText: 'iphone'
     }
 };
 const Elements = {

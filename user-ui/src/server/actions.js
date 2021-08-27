@@ -82,7 +82,7 @@ export function searchItems(searchString) {
     return actionUtils.wrapGet({
         serverFunc: serverAPIs.searchItems,
         actionsCreator: catalogActions.setSearchResults,
-        pathParams: {searchString: searchString}
+        params: {searchString: searchString}
     })
 }
 

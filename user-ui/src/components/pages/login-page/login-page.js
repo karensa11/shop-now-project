@@ -6,15 +6,28 @@ import {INPUT_TYPES} from "../../common/login-text-input/login-text-types";
 import SubmitBtn from "../../common/submit-btn/submit-btn";
 import * as actions from "../../../server/actions";
 import * as generalActions from "../../../redux/general/general-actions";
-import {connect} from "react-redux";
+import {useDispatch} from "react-redux";
 import Button from "../../common/button/button";
 import {navigateToRegister} from "../../../util/navigation";
 import {withRouter} from "react-router-dom";
 
-function LoginPage({login, getUserDetails, setUserDetails, getOrderDetails, history}) {
+function LoginPage({history}) {
     const [formValues, setFormValues] = useState({[INPUT_TYPES.EMAIL]: "", [INPUT_TYPES.PASSWORD]: ""});
     const [validity, setValidity] = useState({[INPUT_TYPES.EMAIL]: false, [INPUT_TYPES.PASSWORD]: false});
     const [forceValidate, setForceValidate] = useState(false);
+    const dispatch = useDispatch();
+    const login = (loginData) => {
+        dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
+    };
+    const getUserDetails = (userId) => {
+        dispatch(actions.getLoginData(userId, userDetailsSuccess));
+    };
+    const setUserDetails = (userDetails) => {
+        dispatch(generalActions.login(userDetails));
+    };
+    const getOrderDetails = (orderDetails) => {
+        dispatch(actions.getOrderDetails(orderDetails));
+    };
     const valueChanged = (value, name, isValid) => {
         const formValuesUpdated = {...formValues};
         const validityUpdated = {...validity};
@@ -23,11 +36,6 @@ function LoginPage({login, getUserDetails, setUserDetails, getOrderDetails, hist
         setFormValues(formValuesUpdated);
         setValidity(validityUpdated);
     };
-    useEffect(() => {
-        if (forceValidate) {
-            setForceValidate(false);
-        }
-    }, [forceValidate]);
     const navigateToRegisterFunc = () => {
         navigateToRegister(history);
     };
@@ -50,6 +58,11 @@ function LoginPage({login, getUserDetails, setUserDetails, getOrderDetails, hist
         };
         login(inputData, onLoginFailed, loginSuccess);
     };
+    useEffect(() => {
+        if (forceValidate) {
+            setForceValidate(false);
+        }
+    }, [forceValidate]);
     return (
         <LayoutLogin>
             <div className="login-page">
@@ -65,11 +78,4 @@ function LoginPage({login, getUserDetails, setUserDetails, getOrderDetails, hist
     )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    login: (loginData, onLoginFailed, loginSuccess) => dispatch(actions.login(loginData, onLoginFailed, loginSuccess)),
-    getUserDetails: (userId, userDetailsSuccess) => dispatch(actions.getLoginData(userId, userDetailsSuccess)),
-    setUserDetails: (userDetails) => dispatch(generalActions.login(userDetails)),
-    getOrderDetails: (orderDetails) => dispatch(actions.getOrderDetails(orderDetails))
-});
-
-export default withRouter(connect(null, mapDispatchToProps)(LoginPage));
+export default withRouter(LoginPage);

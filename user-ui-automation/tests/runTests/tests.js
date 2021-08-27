@@ -31,6 +31,7 @@ describe('Basic Sanity', () => {
         });
     }
     runTest('Open', basicSanityImpl.testInit);
+    runTest('Search', basicSanityImpl.testSearch);
     runTest('Register', basicSanityImpl.testRegister);
     runTest('Logout', basicSanityImpl.testLogout);
     runTest('Login', basicSanityImpl.testLogin);
@@ -38,7 +39,7 @@ describe('Basic Sanity', () => {
     runTest('View Shopping Cart', basicSanityImpl.testViewShoppingCart);
     runTest('Change Items Quantity', basicSanityImpl.testChangeQuantity);
     runTest('View Shopping Cart', basicSanityImpl.testRemoveItem);
-    runTest('Delete User', basicSanityImpl.testViewAccount);
+    runTest('View Account', basicSanityImpl.testViewAccount);
     runTest('Delete User', basicSanityImpl.testDeleteUser);
     runTest('Login Failure', basicSanityImpl.testLoginFailure);
 

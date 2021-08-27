@@ -24,13 +24,14 @@ import com.demo.orderservice.data.OrderStatus;
 import com.demo.orderservice.feign.CatalogFeign;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
+import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsNotFoundException;
 
 @CrossOrigin(origins = "*")
 @RestController
 public class OrdersController {
 
-	public static final String BASE_PATH = "/orders";
+	public static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders";
 
 	@Autowired
 	private CatalogFeign catalogService;

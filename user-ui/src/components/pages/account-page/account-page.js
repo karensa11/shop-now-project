@@ -2,15 +2,16 @@ import React from "react";
 import "./account-page.scss";
 import LayoutLogin from "../../layout/layout-login/layout-login";
 import {createStructuredSelector} from "reselect";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {currentUserSelector} from "../../../redux/general/general-selector";
 import LabelSection from "../../common/label-section/label-section";
 import Button from "../../common/button/button";
 import {deleteUser} from "../../../server/actions";
 
-function AccountPage({currentUser, deleteUser}) {
+function AccountPage({currentUser}) {
+    const dispatch = useDispatch();
     const deleteUserFunc = () => {
-        deleteUser(currentUser.id);
+        dispatch(deleteUser(currentUser.id));
     };
     return (
         <LayoutLogin>
@@ -35,8 +36,4 @@ const mapStateToProps = createStructuredSelector({
     currentUser: currentUserSelector
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    deleteUser: (userId) => dispatch(deleteUser(userId))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountPage);
+export default connect(mapStateToProps)(AccountPage);

@@ -2,14 +2,15 @@ import React, {useState} from "react";
 import "./header-user.scss";
 import {createStructuredSelector} from "reselect";
 import {currentUserSelector} from "../../../redux/general/general-selector";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import {withRouter} from "react-router-dom";
 import {navigateToLogin, navigateToRegister, navigateToAccount} from "../../../util/navigation";
 import HeaderButton from "../../common/header-button/header-button";
 import * as generalActions from "../../../redux/general/general-actions";
 import * as orderActions from "../../../redux/order/order-actions";
 
-function HeaderUser({currentUser, history, logout, clearOrder}) {
+function HeaderUser({currentUser, history}) {
+    const dispatch = useDispatch();
     const navigateToLoginFunc = () => {
         navigateToLogin(history);
     };
@@ -20,8 +21,8 @@ function HeaderUser({currentUser, history, logout, clearOrder}) {
         navigateToAccount(history);
     };
     const logoutFunc = () => {
-        logout();
-        clearOrder();
+        dispatch(generalActions.logout());
+        dispatch(orderActions.clearOrder());
     };
     return (
         <div className="header-user-component">
@@ -46,9 +47,4 @@ const mapStateToProps = createStructuredSelector({
     currentUser: currentUserSelector
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    logout: () => dispatch(generalActions.logout()),
-    clearOrder: () => dispatch(orderActions.clearOrder())
-});
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderUser));
+export default withRouter(connect(mapStateToProps)(HeaderUser));

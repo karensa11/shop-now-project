@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.demo.userservice.data.OrderDetails;
+import com.demo.utility.CommonConsts;
 
 @FeignClient(name = "orders-service")
 public interface OrdersFeign {
 	
-	static final String BASE_PATH = "/orders";
+	static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders";
 
 	@GetMapping(path = BASE_PATH + "/user")
 	public OrderDetails getOpenOrderForUser(@RequestHeader @NotNull Long userId);

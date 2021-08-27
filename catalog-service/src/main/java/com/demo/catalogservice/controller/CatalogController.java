@@ -15,13 +15,14 @@ import com.demo.catalogservice.data.CatalogItem;
 import com.demo.catalogservice.data.Category;
 import com.demo.catalogservice.repository.CatalogItemRepository;
 import com.demo.catalogservice.repository.CategoryRepository;
+import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsNotFoundException;
 
 @CrossOrigin
 @RestController
 public class CatalogController {
 	
-	private static final String BASE_URL = "/catalog";
+	private static final String BASE_URL = CommonConsts.MS_PREFIX+"/catalog";
 	
 	@Autowired
 	private CatalogItemRepository catalogItemRepository;
