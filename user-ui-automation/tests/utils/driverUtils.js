@@ -5,6 +5,7 @@ const logger = require('./logUtils');
 const config = require('../../config');
 const uuid = require('uuid-random');
 const reportFileUtils = require('../report/reportFileUtils');
+const reporter = require('../report/listener.js');
 
 function writeScreenshot(data, runData) {
     const imageId = uuid();
@@ -39,6 +40,12 @@ module.exports = {
         logger.log('opening '+config.clientUrl, runData);
         await driver.get(config.clientUrl);
         logger.log('opened ', runData);
+        const sessionId = await driver.executeScript(
+            `return window.sessionStorage.getItem("sessionId");`
+        );
+        console.log(sessionId);
+        console.log("reporter", reporter.setSessionId);
+        reporter.setSessionId(sessionId);
     },
 
     resize: async function(driver, runData, percentage) {

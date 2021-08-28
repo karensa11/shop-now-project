@@ -2,6 +2,8 @@ package com.demo.userservice.controller;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +26,7 @@ import com.demo.utility.exception.DetailsNotFoundException;
 @CrossOrigin
 @RestController
 public class UsersController {
+	private Logger logger = LoggerFactory.getLogger(UsersController.class);
 
 	private static final String BASE_PATH = CommonConsts.MS_PREFIX+"/users";
 	
@@ -35,6 +38,7 @@ public class UsersController {
 
 	@PostMapping(path = BASE_PATH+"/authenticate")
 	public Long autheticate(@RequestBody UserAutheticationRequest userDetails) {
+		logger.info("authenticate");
 		Optional<User> result = usersRepository.findByEmail(userDetails.getEmail());
 		if (!result.isPresent()) {
 			throw new DetailsNotFoundException("User with email " + userDetails.getEmail() + " not found");

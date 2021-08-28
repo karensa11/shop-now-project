@@ -62,7 +62,9 @@ module.exports = {
                         htmlUtils.createTD('Duration (S)', 'detailsHeader'),
                         htmlUtils.createTD(presentationUtils.formatDuration(suite.duration)),
                         htmlUtils.createTD('Passed', 'detailsHeader'),
-                        htmlUtils.createTD(suite.passedTests+'/'+suite.testsNum)
+                        htmlUtils.createTD(suite.passedTests+'/'+suite.testsNum),
+                        htmlUtils.createTD('Session ID', 'detailsHeader'),
+                        htmlUtils.createTD(runInfo.sessionId)
                     ]
                 }
             ]

@@ -753,7 +753,8 @@ bg=light_gray</panel_attributes>
 - view catalog
 - manage orders
 - login / register
-bg=magenta</panel_attributes>
+bg=magenta
+fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -821,9 +822,9 @@ user details</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1330</x>
-      <y>430</y>
+      <y>400</y>
       <w>450</w>
-      <h>430</h>
+      <h>480</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO
@@ -842,7 +843,8 @@ TODO
 - about (UI)
 - eslint (UI)
 - UI common lib
-- transaction id from UI
+- session id and transaction id from UI
+connect it to report, and show all called ms with this
 - GIT readme
 - XSS security (UI)
 - data fencing
@@ -853,8 +855,35 @@ TODO
 - data types validation (UI)
 - better LnF (UI)
 - UI flow diagram
+- elastic search on logs (put logs in FS) by session and transaction id
 fg=dark_gray
 bg=light_gray</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>690</x>
+      <y>10</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*_UI automation_*
+--
+(selenium)
+fg=blue
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>40</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;..</panel_attributes>
+    <additional_attributes>80.0;10.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

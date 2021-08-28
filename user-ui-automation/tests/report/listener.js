@@ -20,6 +20,12 @@ function dateForTests(){
 }
 
 class MyReporter {
+    static sessionId = null;
+
+    static setSessionId (value){
+        console.log("Reporter - set session id", value);
+        MyReporter.sessionId = value;
+    }
     constructor(runner) {
         this.runInfo = {};
 
@@ -50,6 +56,7 @@ class MyReporter {
             .once(RunnerEvents.EVENT_RUN_END, () => {
                 console.log('RUN FINISHED');
                 this.runInfo.endDate = dateForTests();
+                this.runInfo.sessionId = MyReporter.sessionId;
                 reportGenerator.createReport(this.runInfo);
             });
     }
@@ -79,7 +86,6 @@ class MyReporter {
             suite.duration = suite.endDate.getTime()-suite.startDate.getTime();
         }
     }
-
     pushTest(test, isPassed, err) {
         const suiteCode = stringUtils.toCammelCase(test.parent.title);
         const testCode = stringUtils.toCammelCase(test.title);

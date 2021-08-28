@@ -1,19 +1,21 @@
 const config = require("../config");
 const callsHandlerUtils = require("./callsHandlerUtils");
 const uuid = require("uuid-random");
+const {getSessionId, store} = require("../redux/sessionStorage");
+const {currentUserSelector} = require("../redux/general/general-selector");
 
 function standardHeaders() {
     return {
-        "transactionId": uuid().replace("-", "").substr(0, 10)
+        transactionId: uuid(),
+        sessionId: getSessionId(),
+        userId: (currentUserSelector(store.getState()) || {id: 0}).id
     }
 }
 
 module.exports = {
-
     directURL(url, apiAndParams) {
         return url + apiAndParams;
     },
-
     callGET(baseURL, api, pathParams, params) {
         let URL = callsHandlerUtils.createParamsURL(baseURL, api, pathParams, params);
         return callsHandlerUtils.fetchWithTimeout(

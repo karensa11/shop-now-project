@@ -148,7 +148,7 @@ public class OrdersController {
 			throw new DetailsNotFoundException("order with id " + orderId + " not found");
 		}
 		OrderDetails result = resultFromDb.get();
-		if (result.getUserId()!=null && result.getUserId().equals(userId)) {
+		if (result.getUserId()!=null && !result.getUserId().equals(userId)) {
 			throw new IllegalArgumentException("invalid user id");
 		}
 		return resultFromDb.get();

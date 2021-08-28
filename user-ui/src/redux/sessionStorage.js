@@ -2,15 +2,19 @@ import {applyMiddleware, createStore, compose} from "redux";
 import handleTransitions from "redux-history-transitions";
 import reducer from "./rootReducer";
 import thunk from "redux-thunk";
+const uuid = require("uuid-random");
 
 export const loadState = () => {
     try {
+        let sessionId = sessionStorage.getItem("sessionId");
+        if (!sessionId) {
+            sessionId = uuid();
+            sessionStorage.setItem("sessionId", sessionId);
+        }
         const serializedState = sessionStorage.getItem("state");
-
         if (serializedState === null) {
             return undefined;
         }
-
         return JSON.parse(serializedState);
     } catch (error) {
         return undefined;
@@ -24,6 +28,10 @@ export const saveState = (state) => {
     } catch (error) {
         // Ignore write errors.
     }
+};
+
+export const getSessionId = () => {
+    return sessionStorage.getItem("sessionId");
 };
 
 const middlewere = applyMiddleware(
