@@ -1,13 +1,13 @@
 import React from "react";
 import "./shopping-cart-page.scss";
 import LayoutWithHeader from "../../layout/layout-with-header/layout-with-header";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {currentOrderSelector} from "../../../redux/order/order-selector";
-import {createStructuredSelector} from "reselect";
 import ShoppingCartItem from "../../shopping-cart-item/shopping-cart-item";
 import Price from "../../common/price/price";
 
-function ShoppingCartPage({currentOrder}) {
+function ShoppingCartPage() {
+    const currentOrder = useSelector(currentOrderSelector);
     return (
         <LayoutWithHeader>
             <div className="shopping-cart-page">
@@ -37,8 +37,4 @@ function ShoppingCartPage({currentOrder}) {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    currentOrder: currentOrderSelector
-})
-
-export default connect(mapStateToProps)(ShoppingCartPage);
+export default ShoppingCartPage;

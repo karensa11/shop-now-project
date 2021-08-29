@@ -676,10 +676,10 @@ fg=magenta</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1330</x>
+      <x>1320</x>
       <y>140</y>
       <w>450</w>
-      <h>250</h>
+      <h>290</h>
     </coordinates>
     <panel_attributes>lt=.
 TECHNOLOGIES AND CONCEPTS
@@ -697,6 +697,7 @@ TECHNOLOGIES AND CONCEPTS
 - react UI with redux and functional components (hooks)
 - UI automation testing (incl negative tests) using selenium, moca, chai
 (nodeJs)
+- session id and transaction id from UI
 fg=dark_gray
 bg=light_gray</panel_attributes>
     <additional_attributes/>
@@ -821,10 +822,10 @@ user details</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1330</x>
-      <y>400</y>
+      <x>1320</x>
+      <y>440</y>
       <w>450</w>
-      <h>480</h>
+      <h>450</h>
     </coordinates>
     <panel_attributes>lt=.
 TODO
@@ -834,16 +835,13 @@ TODO
 - tracking server
 - config server
 - kafka
-- enhance GIT documentation
 - retry for service
 - DB valdations (check input), rest validations
 - kubernates
 - ms automation testing
 - send user id in ms header (and to all sub ms)
-- about (UI)
 - eslint (UI)
 - UI common lib
-- session id and transaction id from UI
 connect it to report, and show all called ms with this
 - GIT readme
 - XSS security (UI)

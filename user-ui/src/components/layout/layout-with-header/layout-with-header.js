@@ -12,7 +12,9 @@ export default function LayoutWithHeader({children}) {
                 <div className="left">
                     <Logo />
                 </div>
-                <SearchBox />
+                <div className="middle">
+                    <SearchBox />
+                </div>
                 <div className="right">
                     <HeaderUser />
                     <HeaderCart />

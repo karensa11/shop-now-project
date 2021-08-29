@@ -1,11 +1,11 @@
 import React from "react";
-import {connect} from "react-redux";
-import {createStructuredSelector} from "reselect";
+import {useSelector} from "react-redux";
 import {categoriesSelector} from "../../redux/catalog/catalog-selector";
 import "./categories-preview.scss";
 import CategoryPreviewItem from "../category-item/category-preview-item";
 
-function CategoriesPreview({categories}) {
+function CategoriesPreview() {
+    const categories = useSelector(categoriesSelector);
     return (
         <div className="categories-preview-component">
             {
@@ -17,8 +17,4 @@ function CategoriesPreview({categories}) {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    categories: categoriesSelector
-});
-
-export default connect(mapStateToProps)(CategoriesPreview);
+export default CategoriesPreview;

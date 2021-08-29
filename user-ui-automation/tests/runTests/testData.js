@@ -7,8 +7,8 @@ const TestData = {
     },
     catalogData: {
         selectedCategoryLabel: 'phones',
-        selectedCatalogItem1Name: 'iphone 11',
-        selectedCatalogItem2Name: 'iphone 12',
+        selectedCatalogItem1Name: 'iPhone 11',
+        selectedCatalogItem2Name: 'iPhone 12',
         searchText: 'iphone'
     }
 };

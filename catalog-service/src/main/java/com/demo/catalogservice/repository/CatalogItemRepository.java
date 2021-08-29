@@ -12,6 +12,6 @@ import com.demo.catalogservice.data.CatalogItem;
 public interface CatalogItemRepository extends JpaRepository<CatalogItem, Long> {
 	public List<CatalogItem> findAllByCategoryId(Long categoryId);
 
-	@Query(value = "select * from CATALOG_ITEM where NAME like ?", nativeQuery = true)
+	@Query(value = "select * from CATALOG_ITEM where lower(NAME) like ?", nativeQuery = true)
 	public List<CatalogItem> findAllBySearchString(String searchString);
 }

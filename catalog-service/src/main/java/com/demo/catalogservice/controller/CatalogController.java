@@ -3,6 +3,8 @@ package com.demo.catalogservice.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,7 +61,7 @@ public class CatalogController {
 	}
 
 	@GetMapping(path = BASE_URL + "/items/search")
-	public List<CatalogItem> search(@RequestParam String searchString) {
-		return catalogItemRepository.findAllBySearchString("%" + searchString + "%");
+	public List<CatalogItem> search(@NotNull @RequestParam String searchString) {
+		return catalogItemRepository.findAllBySearchString("%" + searchString.toLowerCase() + "%");
 	}
 }

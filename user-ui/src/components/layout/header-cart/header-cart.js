@@ -1,13 +1,13 @@
 import React from "react";
 import "./header-cart.scss";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 import {withRouter} from "react-router-dom";
-import {createStructuredSelector} from "reselect";
 import {itemsNumberSelector} from "../../../redux/order/order-selector";
 import * as navigation from "../../../util/navigation";
 import appIcons from "../../../util/applicationIcons";
 
-function HeaderCart({itemsNumber, history}) {
+function HeaderCart({history}) {
+    const itemsNumber = useSelector(itemsNumberSelector);
     const navigateToCart = () => {
         navigation.navigateToCart(history);
     };
@@ -21,8 +21,4 @@ function HeaderCart({itemsNumber, history}) {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    itemsNumber: itemsNumberSelector
-});
-
-export default withRouter(connect(mapStateToProps)(HeaderCart));
+export default withRouter(HeaderCart);

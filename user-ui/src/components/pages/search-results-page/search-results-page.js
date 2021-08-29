@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import "./search-results-page.scss";
-import {connect, useDispatch} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import LayoutWithHeader from "../../layout/layout-with-header/layout-with-header";
 import {createStructuredSelector} from "reselect";
 import {searchResultsSelector} from "../../../redux/catalog/catalog-selector";
@@ -8,9 +8,10 @@ import * as actions from "../../../server/actions";
 import {extractQueryParam} from "../../../util/navigation";
 import SearchResultItem from "../../search-result-item/search-result-item";
 
-function SearchResultsPage({searchResults, location}) {
+function SearchResultsPage({location}) {
     const searchString = extractQueryParam(location, "q");
     const dispatch = useDispatch();
+    const searchResults = useSelector(searchResultsSelector);
     const fetchSearchResults = () => {
         dispatch(actions.searchItems(searchString));
     };
@@ -38,8 +39,4 @@ function SearchResultsPage({searchResults, location}) {
     )
 }
 
-const mapStateToProps = createStructuredSelector({
-    searchResults: searchResultsSelector
-});
-
-export default connect(mapStateToProps)(SearchResultsPage);
+export default SearchResultsPage;

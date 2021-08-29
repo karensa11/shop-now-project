@@ -19,4 +19,4 @@ export const itemsNumberSelector = createSelector(
         }
         return itemsNumber;
     }
-)
+);

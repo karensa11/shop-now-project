@@ -15,7 +15,7 @@ function SearchBox({history}) {
     };
     return (
         <div className="search-box-component">
-            <input type="text" size="70" placeholder="Search..." onChange={searchStringChanged} id="searchInput" />
+            <input type="text" size="100" placeholder="Search..." onChange={searchStringChanged} id="searchInput" />
             <span onClick={navigateToSearchResults} id="searchBtn"><img src={appIcons.searchIcon} alt=""  /></span>
         </div>
     )
