@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>684</x>
-      <y>306</y>
+      <y>315</y>
       <w>180</w>
       <h>234</h>
     </coordinates>
@@ -33,7 +33,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>297</x>
-      <y>387</y>
+      <y>396</y>
       <w>288</w>
       <h>432</h>
     </coordinates>
@@ -75,7 +75,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>918</x>
-      <y>423</y>
+      <y>432</y>
       <w>288</w>
       <h>288</h>
     </coordinates>
@@ -106,7 +106,7 @@ fg=blue</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>990</x>
-      <y>837</y>
+      <y>846</y>
       <w>135</w>
       <h>144</h>
     </coordinates>
@@ -127,7 +127,7 @@ fg=blue</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>720</x>
-      <y>846</y>
+      <y>855</y>
       <w>99</w>
       <h>117</h>
     </coordinates>
@@ -144,7 +144,7 @@ fg=blue</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>441</x>
-      <y>873</y>
+      <y>882</y>
       <w>126</w>
       <h>117</h>
     </coordinates>
@@ -163,7 +163,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>576</x>
-      <y>648</y>
+      <y>657</y>
       <w>360</w>
       <h>36</h>
     </coordinates>
@@ -177,12 +177,12 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>405</x>
-      <y>306</y>
+      <y>315</y>
       <w>297</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-open order details
+get open order details
 fg=blue</panel_attributes>
     <additional_attributes>10.0;90.0;310.0;10.0</additional_attributes>
   </element>
@@ -190,7 +190,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1035</x>
-      <y>702</y>
+      <y>711</y>
       <w>27</w>
       <h>153</h>
     </coordinates>
@@ -202,7 +202,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>765</x>
-      <y>531</y>
+      <y>540</y>
       <w>27</w>
       <h>333</h>
     </coordinates>
@@ -214,7 +214,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>486</x>
-      <y>810</y>
+      <y>819</y>
       <w>45</w>
       <h>81</h>
     </coordinates>
@@ -226,7 +226,7 @@ fg=red</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>297</x>
-      <y>864</y>
+      <y>873</y>
       <w>126</w>
       <h>126</h>
     </coordinates>
@@ -245,7 +245,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>810</y>
+      <y>819</y>
       <w>63</w>
       <h>72</h>
     </coordinates>
@@ -257,7 +257,7 @@ fg=red</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>711</x>
-      <y>135</y>
+      <y>144</y>
       <w>126</w>
       <h>117</h>
     </coordinates>
@@ -273,7 +273,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>522</x>
-      <y>135</y>
+      <y>144</y>
       <w>171</w>
       <h>117</h>
     </coordinates>
@@ -293,7 +293,7 @@ bg=green</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>891</x>
-      <y>135</y>
+      <y>144</y>
       <w>324</w>
       <h>117</h>
     </coordinates>
@@ -310,7 +310,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>360</x>
-      <y>270</y>
+      <y>279</y>
       <w>747</w>
       <h>18</h>
     </coordinates>
@@ -322,7 +322,7 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1053</x>
-      <y>279</y>
+      <y>288</y>
       <w>27</w>
       <h>162</h>
     </coordinates>
@@ -333,7 +333,7 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>765</x>
-      <y>279</y>
+      <y>288</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -344,18 +344,18 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>378</x>
-      <y>279</y>
+      <y>288</y>
       <w>27</w>
-      <h>117</h>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>765</x>
-      <y>243</y>
+      <y>252</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -366,7 +366,7 @@ bg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>576</x>
-      <y>243</y>
+      <y>252</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -377,7 +377,7 @@ bg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>315</x>
-      <y>180</y>
+      <y>189</y>
       <w>54</w>
       <h>72</h>
     </coordinates>
@@ -389,7 +389,7 @@ bg=cyan</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>360</x>
-      <y>198</y>
+      <y>207</y>
       <w>180</w>
       <h>36</h>
     </coordinates>
@@ -401,7 +401,7 @@ configuration per service</panel_attributes>
     <id>UMLDeployment</id>
     <coordinates>
       <x>1152</x>
-      <y>837</y>
+      <y>846</y>
       <w>135</w>
       <h>144</h>
     </coordinates>
@@ -419,7 +419,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1053</x>
-      <y>702</y>
+      <y>711</y>
       <w>180</w>
       <h>153</h>
     </coordinates>
@@ -431,7 +431,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>513</x>
-      <y>333</y>
+      <y>342</y>
       <w>189</w>
       <h>72</h>
     </coordinates>
@@ -445,7 +445,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>972</x>
-      <y>810</y>
+      <y>819</y>
       <w>324</w>
       <h>180</h>
     </coordinates>
@@ -458,7 +458,7 @@ bg=light_gray</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>45</x>
-      <y>459</y>
+      <y>468</y>
       <w>207</w>
       <h>108</h>
     </coordinates>
@@ -469,14 +469,15 @@ bg=light_gray</panel_attributes>
 - type
 - date
 - description
-bg=pink</panel_attributes>
+bg=pink
+fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>63</x>
-      <y>279</y>
+      <y>288</y>
       <w>135</w>
       <h>90</h>
     </coordinates>
@@ -486,14 +487,15 @@ bg=pink</panel_attributes>
 - type
 - date
 - description
-bg=yellow</panel_attributes>
+bg=yellow
+fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLDeployment</id>
     <coordinates>
       <x>27</x>
-      <y>873</y>
+      <y>882</y>
       <w>126</w>
       <h>126</h>
     </coordinates>
@@ -503,14 +505,15 @@ bg=yellow</panel_attributes>
 ID
 USER ID
 MESSAGE
-bg=orange</panel_attributes>
+bg=orange
+fg=blue</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>72</x>
-      <y>558</y>
+      <y>567</y>
       <w>27</w>
       <h>306</h>
     </coordinates>
@@ -522,7 +525,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>72</x>
-      <y>360</y>
+      <y>369</y>
       <w>144</w>
       <h>117</h>
     </coordinates>
@@ -535,7 +538,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>189</x>
-      <y>342</y>
+      <y>351</y>
       <w>126</w>
       <h>108</h>
     </coordinates>
@@ -550,7 +553,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>189</x>
-      <y>288</y>
+      <y>297</y>
       <w>522</w>
       <h>54</h>
     </coordinates>
@@ -565,7 +568,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>702</x>
-      <y>1017</y>
+      <y>1026</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
@@ -578,7 +581,7 @@ fg=blue</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>702</x>
-      <y>1071</y>
+      <y>1080</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
@@ -591,7 +594,7 @@ bg=yellow</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>603</x>
-      <y>972</y>
+      <y>981</y>
       <w>378</w>
       <h>36</h>
     </coordinates>
@@ -603,7 +606,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>738</x>
-      <y>981</y>
+      <y>990</y>
       <w>63</w>
       <h>54</h>
     </coordinates>
@@ -616,7 +619,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>738</x>
-      <y>1044</y>
+      <y>1053</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -628,7 +631,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>954</x>
-      <y>702</y>
+      <y>711</y>
       <w>27</w>
       <h>306</h>
     </coordinates>
@@ -640,7 +643,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>828</x>
-      <y>531</y>
+      <y>540</y>
       <w>27</w>
       <h>477</h>
     </coordinates>
@@ -652,7 +655,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>558</x>
-      <y>810</y>
+      <y>819</y>
       <w>72</w>
       <h>198</h>
     </coordinates>
@@ -664,7 +667,7 @@ fg=magenta</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>891</x>
-      <y>243</y>
+      <y>252</y>
       <w>27</w>
       <h>765</h>
     </coordinates>
@@ -677,7 +680,7 @@ fg=magenta</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>1233</x>
-      <y>126</y>
+      <y>135</y>
       <w>405</w>
       <h>261</h>
     </coordinates>
@@ -698,6 +701,7 @@ TECHNOLOGIES AND CONCEPTS
 - UI automation testing (incl negative tests) using selenium, moca, chai
 (nodeJs)
 - session id and transaction id from UI
+- kafka (a-synch calling between ms)
 fg=dark_gray
 bg=light_gray</panel_attributes>
     <additional_attributes/>
@@ -706,7 +710,7 @@ bg=light_gray</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>288</x>
-      <y>837</y>
+      <y>846</y>
       <w>288</w>
       <h>180</h>
     </coordinates>
@@ -719,7 +723,7 @@ bg=light_gray</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>18</x>
-      <y>846</y>
+      <y>855</y>
       <w>144</w>
       <h>162</h>
     </coordinates>
@@ -732,7 +736,7 @@ bg=light_gray</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>711</x>
-      <y>819</y>
+      <y>828</y>
       <w>117</w>
       <h>153</h>
     </coordinates>
@@ -745,7 +749,7 @@ bg=light_gray</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>891</x>
-      <y>0</y>
+      <y>9</y>
       <w>306</w>
       <h>72</h>
     </coordinates>
@@ -762,7 +766,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>891</x>
-      <y>63</y>
+      <y>72</y>
       <w>126</w>
       <h>90</h>
     </coordinates>
@@ -775,7 +779,7 @@ items for category</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1035</x>
-      <y>63</y>
+      <y>72</y>
       <w>99</w>
       <h>90</h>
     </coordinates>
@@ -789,7 +793,7 @@ cancel order</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1152</x>
-      <y>63</y>
+      <y>72</y>
       <w>90</w>
       <h>90</h>
     </coordinates>
@@ -801,7 +805,7 @@ user details</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>828</x>
-      <y>189</y>
+      <y>198</y>
       <w>81</w>
       <h>27</h>
     </coordinates>
@@ -812,7 +816,7 @@ user details</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>747</x>
-      <y>243</y>
+      <y>252</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
@@ -823,7 +827,7 @@ user details</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>666</x>
-      <y>9</y>
+      <y>18</y>
       <w>162</w>
       <h>63</h>
     </coordinates>
@@ -839,7 +843,7 @@ lt=..</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>819</x>
-      <y>36</y>
+      <y>45</y>
       <w>90</w>
       <h>27</h>
     </coordinates>
@@ -851,7 +855,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>783</x>
-      <y>1125</y>
+      <y>1134</y>
       <w>189</w>
       <h>36</h>
     </coordinates>
@@ -864,7 +868,7 @@ fg=magenta</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>954</x>
-      <y>1125</y>
+      <y>1134</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
@@ -876,7 +880,7 @@ bg=yellow</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>702</x>
-      <y>1125</y>
+      <y>1134</y>
       <w>90</w>
       <h>36</h>
     </coordinates>
@@ -889,7 +893,7 @@ fg=blue</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>738</x>
-      <y>1098</y>
+      <y>1107</y>
       <w>27</w>
       <h>45</h>
     </coordinates>
