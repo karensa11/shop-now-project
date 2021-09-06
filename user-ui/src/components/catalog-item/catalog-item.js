@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {addItem} from "../../util/orderUtil";
 import Price from "../common/price/price";
 
-function CatalogItem({item}) {
+export default function CatalogItem({item}) {
     const dispatch = useDispatch();
     const addItemFunc = () => {
         dispatch(addItem(item.id));
@@ -29,5 +29,3 @@ function CatalogItem({item}) {
         </div>
     )
 }
-
-export default CatalogItem;

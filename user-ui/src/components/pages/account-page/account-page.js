@@ -7,7 +7,7 @@ import LabelSection from "../../common/label-section/label-section";
 import Button from "../../common/button/button";
 import {deleteUser} from "../../../server/actions";
 
-function AccountPage() {
+export default function AccountPage() {
     const dispatch = useDispatch();
     const currentUser = useSelector(currentUserSelector);
     const deleteUserFunc = () => {
@@ -31,5 +31,3 @@ function AccountPage() {
         </LayoutLogin>
     )
 }
-
-export default AccountPage;

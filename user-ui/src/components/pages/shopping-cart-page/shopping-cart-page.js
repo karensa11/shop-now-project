@@ -6,7 +6,7 @@ import {currentOrderSelector} from "../../../redux/order/order-selector";
 import ShoppingCartItem from "../../shopping-cart-item/shopping-cart-item";
 import Price from "../../common/price/price";
 
-function ShoppingCartPage() {
+export default function ShoppingCartPage() {
     const currentOrder = useSelector(currentOrderSelector);
     return (
         <LayoutWithHeader>
@@ -36,5 +36,3 @@ function ShoppingCartPage() {
         </LayoutWithHeader>
     )
 }
-
-export default ShoppingCartPage;

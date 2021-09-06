@@ -1,15 +1,15 @@
 import React from "react";
 import "./header-user.scss";
-import {createStructuredSelector} from "reselect";
 import {currentUserSelector} from "../../../redux/general/general-selector";
-import {connect, useDispatch, useSelector} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 import {navigateToLogin, navigateToRegister, navigateToAccount} from "../../../util/navigation";
 import HeaderButton from "../../common/header-button/header-button";
 import * as generalActions from "../../../redux/general/general-actions";
 import * as orderActions from "../../../redux/order/order-actions";
 
-function HeaderUser({history}) {
+export default function HeaderUser() {
+    const history = useHistory();
     const dispatch = useDispatch();
     const currentUser = useSelector(currentUserSelector);
     const navigateToLoginFunc = () => {
@@ -43,5 +43,3 @@ function HeaderUser({history}) {
         </div>
     )
 }
-
-export default withRouter(HeaderUser);

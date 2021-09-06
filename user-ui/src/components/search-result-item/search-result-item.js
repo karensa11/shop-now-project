@@ -4,7 +4,7 @@ import {addItem} from "../../util/orderUtil";
 import {useDispatch} from "react-redux";
 import Price from "../common/price/price";
 
-function SearchResultItem({item, index}) {
+export default function SearchResultItem({item, index}) {
     const dispatch = useDispatch();
     const addItemFunc = () => {
         dispatch(addItem(item.id));
@@ -29,5 +29,3 @@ function SearchResultItem({item, index}) {
         </div>
     )
 }
-
-export default SearchResultItem;

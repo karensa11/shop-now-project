@@ -2,9 +2,10 @@ import React, {useState} from "react";
 import "./search-box.scss";
 import appIcons from "../../../util/applicationIcons";
 import * as navigation from "../../../util/navigation";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
-function SearchBox({history}) {
+export default function SearchBox() {
+    const history = useHistory();
     const [searchString, setSearchString] = useState("");
     const searchStringChanged = (event) => {
         const {value} = event.target;
@@ -15,10 +16,8 @@ function SearchBox({history}) {
     };
     return (
         <div className="search-box-component">
-            <input type="text" size="100" placeholder="Search..." onChange={searchStringChanged} id="searchInput" />
+            <input type="text" size="50" placeholder="Search..." onChange={searchStringChanged} id="searchInput" />
             <span onClick={navigateToSearchResults} id="searchBtn"><img src={appIcons.searchIcon} alt=""  /></span>
         </div>
     )
 }
-
-export default withRouter(SearchBox);

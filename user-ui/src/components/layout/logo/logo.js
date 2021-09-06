@@ -1,10 +1,11 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import "./logo.scss";
 import * as navigation from "../../../util/navigation";
 import Button from "../../common/button/button";
 
-function Logo({history}) {
+export default function Logo() {
+    const history = useHistory();
     const navigateHome = () => {
         navigation.navigateToHomePage(history);
     };
@@ -12,5 +13,3 @@ function Logo({history}) {
         <Button customClass="logo-component" onClick={navigateHome} id="logoBtn" title="Shop Now" />
     )
 }
-
-export default withRouter(Logo);

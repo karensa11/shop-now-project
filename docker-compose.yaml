@@ -31,6 +31,32 @@ services:
     environment:
       RABBIT_URI: amqp://guest:guest@rabbitmq:5672
 
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - project-network
+    ports:
+      - 22181:2181
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    networks:
+      - project-network
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+ 
   api-gateway:
     image: karensa11/api-gateway:0.0.1-SNAPSHOT
     mem_limit: 700m
@@ -64,10 +90,11 @@ services:
       RABBIT_URI: amqp://guest:guest@rabbitmq:5672
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      SPRING.H2.CONSOLE.SETTINGS.WEB-ALLOW-OTHERS: "true"
       
   orders-service:
     image: karensa11/orders-service:0.0.1-SNAPSHOT
-    mem_limit: 700m
+    mem_limit: 1000m
     ports:
       - "8100:8100"
     networks:
@@ -81,10 +108,12 @@ services:
       RABBIT_URI: amqp://guest:guest@rabbitmq:5672
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING.H2.CONSOLE.SETTINGS.WEB-ALLOW-OTHERS: "true"
       
   users-service:
     image: karensa11/users-service:0.0.1-SNAPSHOT
-    mem_limit: 700m
+    mem_limit: 1000m
     ports:
       - "8200:8200"
     networks:
@@ -98,6 +127,34 @@ services:
       RABBIT_URI: amqp://guest:guest@rabbitmq:5672
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_ZIPKIN_SENDER_TYPE: rabbit
-   
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING.H2.CONSOLE.SETTINGS.WEB-ALLOW-OTHERS: "true"
+
+  tracking-service:
+    image: karensa11/tracking-service:0.0.1-SNAPSHOT
+    mem_limit: 1000m
+    ports:
+      - "8300:8300"
+    networks:
+      - project-network
+    depends_on:
+      - naming-service
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-service:8888/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_GROUP-ID: consumer
+      SPRING_KAFKA_CONSUMER_AUTO-OFFSET-RESET: earliest
+      SPRING_KAFKA_CONSUMER_KEY-DESERIALIZER: org.apache.kafka.common.serialization.StringSerializer
+      SPRING_KAFKA_CONSUMER_VALUE-DESERIALIZER: org.apache.kafka.common.serialization.StringSerializer
+      SPRING.H2.CONSOLE.SETTINGS.WEB-ALLOW-OTHERS: "true"
+
+volumes:
+  data01:
+    driver: local
 networks:
   project-network:

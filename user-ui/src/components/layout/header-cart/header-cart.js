@@ -1,12 +1,13 @@
 import React from "react";
 import "./header-cart.scss";
 import {useSelector} from "react-redux";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {itemsNumberSelector} from "../../../redux/order/order-selector";
 import * as navigation from "../../../util/navigation";
 import appIcons from "../../../util/applicationIcons";
 
-function HeaderCart({history}) {
+export default function HeaderCart() {
+    const history = useHistory();
     const itemsNumber = useSelector(itemsNumberSelector);
     const navigateToCart = () => {
         navigation.navigateToCart(history);
@@ -20,5 +21,3 @@ function HeaderCart({history}) {
         </div>
     )
 }
-
-export default withRouter(HeaderCart);

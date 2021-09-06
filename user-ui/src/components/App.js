@@ -11,7 +11,7 @@ import {currentUserSelector} from "../redux/general/general-selector";
 import RegisterPage from "./pages/register-page/register-page";
 import AccountPage from "./pages/account-page/account-page";
 
-function App(){
+export default function App(){
     const currentUser = useSelector(currentUserSelector);
     const dispatch = useDispatch();
     const retrieveCategories = () => {
@@ -42,5 +42,3 @@ function App(){
         </div>
     );
 }
-
-export default App;

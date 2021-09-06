@@ -18,6 +18,8 @@ import com.demo.userservice.data.OrderDetails;
 import com.demo.userservice.data.User;
 import com.demo.userservice.data.UserAutheticationRequest;
 import com.demo.userservice.feign.OrdersFeign;
+import com.demo.userservice.messages.NotificationMessage;
+import com.demo.userservice.messages.NotificationMessagePublisher;
 import com.demo.userservice.repository.UsersRepository;
 import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsAlreadyExistsException;
@@ -35,6 +37,9 @@ public class UsersController {
 
 	@Autowired
 	private OrdersFeign ordersFeign;
+	
+	@Autowired
+	private NotificationMessagePublisher messagePublisher;
 
 	@PostMapping(path = BASE_PATH+"/authenticate")
 	public Long autheticate(@RequestBody UserAutheticationRequest userDetails) {
@@ -70,9 +75,13 @@ public class UsersController {
 			throw new DetailsAlreadyExistsException("Email already exists");
 		}
 		User saved = usersRepository.save(user);
+		NotificationMessage message = new NotificationMessage();
+		message.setMessage("User with id " + saved.getId() + " created");
+		message.setUserId(saved.getId());
+		messagePublisher.sendMessage(message);
 		return saved.getId();
 		/*
-		URI location = ServletUriComponentsBuilder
+		URI location = ServletUriComponentssBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
 				.buildAndExpand(saved.getId()).toUri();
@@ -87,5 +96,9 @@ public class UsersController {
 		if (order != null) {
 			ordersFeign.cancelOrder(order.getId());
 		}
+		NotificationMessage message = new NotificationMessage();
+		message.setMessage("User with id " + userId + " deleted");
+		message.setUserId(userId);
+		messagePublisher.sendMessage(message);
 	}
 }

@@ -4,7 +4,7 @@ import {categoriesSelector} from "../../redux/catalog/catalog-selector";
 import "./categories-preview.scss";
 import CategoryPreviewItem from "../category-item/category-preview-item";
 
-function CategoriesPreview() {
+export default function CategoriesPreview() {
     const categories = useSelector(categoriesSelector);
     return (
         <div className="categories-preview-component">
@@ -16,5 +16,3 @@ function CategoriesPreview() {
         </div>
     )
 }
-
-export default CategoriesPreview;

@@ -4,7 +4,7 @@ import {categoryItemsSelector} from "../../redux/catalog/catalog-selector";
 import "./catalog-items.scss";
 import CatalogItem from "../catalog-item/catalog-item";
 
-function CatalogItems({categoryId}) {
+export default function CatalogItems({categoryId}) {
     const categoryItems = useSelector(categoryItemsSelector);
     return (
         <div className="catalog-items-component">
@@ -16,5 +16,3 @@ function CatalogItems({categoryId}) {
         </div>
     )
 }
-
-export default CatalogItems;

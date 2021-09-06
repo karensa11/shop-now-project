@@ -5,15 +5,16 @@ import LoginTextInput from "../../common/login-text-input/login-text-input";
 import {INPUT_TYPES} from "../../common/login-text-input/login-text-types";
 import Button from "../../common/button/button";
 import {navigateToLogin} from "../../../util/navigation";
-import {withRouter} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import SubmitBtn from "../../common/submit-btn/submit-btn";
 import * as actions from "../../../server/actions";
 import {useDispatch} from "react-redux";
 
-function RegisterPage({history}) {
+export default function RegisterPage() {
     const [formValues, setFormValues] = useState({[INPUT_TYPES.NAME]: "", [INPUT_TYPES.EMAIL]: "", [INPUT_TYPES.PASSWORD]: "", [INPUT_TYPES.CONFIRM_PASSWORD]: ""});
     const [validity, setValidity] = useState({[INPUT_TYPES.NAME]: false, [INPUT_TYPES.EMAIL]: false, [INPUT_TYPES.PASSWORD]: false, [INPUT_TYPES.CONFIRM_PASSWORD]: false});
     const [forceValidate, setForceValidate] = useState(false);
+    const history = useHistory();
     const dispatch = useDispatch();
     const register = (userDetails) => {
         dispatch(actions.register(userDetails, detailsAlreadyExists));
@@ -64,5 +65,3 @@ function RegisterPage({history}) {
         </LayoutLogin>
     )
 }
-
-export default withRouter(RegisterPage);

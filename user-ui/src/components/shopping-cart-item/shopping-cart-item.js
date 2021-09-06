@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import appIcons from "../../util/applicationIcons";
 import * as orderUtil from "../../util/orderUtil";
 
-function ShoppingCartItem({item, index}) {
+export default function ShoppingCartItem({item, index}) {
     const dispatch = useDispatch();
     const cancelItem = () => {
         dispatch(orderUtil.cancelItem(item));
@@ -40,5 +40,3 @@ function ShoppingCartItem({item, index}) {
         </div>
     )
 }
-
-export default ShoppingCartItem;

@@ -3,7 +3,7 @@ import "./category-preview-item.scss";
 import {retrieveItemsForCategory} from "../../server/actions";
 import {useDispatch} from "react-redux";
 
-function CategoryPreviewItem({item}) {
+export default function CategoryPreviewItem({item}) {
     const dispatch = useDispatch();
     const fetchCategoryItems = () => {
         dispatch(retrieveItemsForCategory(item.id));
@@ -14,5 +14,3 @@ function CategoryPreviewItem({item}) {
         </div>
     )
 }
-
-export default CategoryPreviewItem;

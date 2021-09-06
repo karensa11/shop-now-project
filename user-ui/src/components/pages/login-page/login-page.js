@@ -1,21 +1,23 @@
 import React, {useState, useEffect} from "react";
 import "./login-page.scss";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 import LayoutLogin from "../../layout/layout-login/layout-login";
 import LoginTextInput from "../../common/login-text-input/login-text-input";
 import {INPUT_TYPES} from "../../common/login-text-input/login-text-types";
 import SubmitBtn from "../../common/submit-btn/submit-btn";
 import * as actions from "../../../server/actions";
 import * as generalActions from "../../../redux/general/general-actions";
-import {useDispatch} from "react-redux";
 import Button from "../../common/button/button";
 import {navigateToRegister} from "../../../util/navigation";
-import {withRouter} from "react-router-dom";
 
-function LoginPage({history}) {
+export default function LoginPage() {
     const [formValues, setFormValues] = useState({[INPUT_TYPES.EMAIL]: "", [INPUT_TYPES.PASSWORD]: ""});
     const [validity, setValidity] = useState({[INPUT_TYPES.EMAIL]: false, [INPUT_TYPES.PASSWORD]: false});
     const [forceValidate, setForceValidate] = useState(false);
+    const history = useHistory();
     const dispatch = useDispatch();
+
     const login = (loginData) => {
         dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
     };
@@ -77,5 +79,3 @@ function LoginPage({history}) {
         </LayoutLogin>
     )
 }
-
-export default withRouter(LoginPage);
