@@ -1,6 +1,6 @@
-package com.demo.orderservice.messages;
+package com.demo.tracking.messages;
 
-public class NotificationMessage {
+public class NotificationData {
 	private String message;
 	private Long userId;
 	public String getMessage() {

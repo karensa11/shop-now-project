@@ -64,7 +64,6 @@ public class MessagePublisher<T> {
 
 	public void sendMessage(T message) {
 		try {
-			
 			KafkaTemplate<String, T> kafkaTemplate = kafkaTemplate();
 			
 			ListenableFuture<SendResult<String, T>> future = kafkaTemplate.send(topic, message);

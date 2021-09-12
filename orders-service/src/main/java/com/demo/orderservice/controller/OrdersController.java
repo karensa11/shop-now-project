@@ -22,7 +22,7 @@ import com.demo.orderservice.data.OrderItemInput;
 import com.demo.orderservice.data.OrderResponse;
 import com.demo.orderservice.data.OrderStatus;
 import com.demo.orderservice.feign.CatalogFeign;
-import com.demo.orderservice.messages.NotificationMessage;
+import com.demo.orderservice.messages.NotificationData;
 import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
@@ -85,7 +85,7 @@ public class OrdersController {
 		orderItem.setCatalogId(input.getCatalogId());
 		orderItem.setQuantity(input.getQuantity());
 		orderItemRepository.save(orderItem);
-		NotificationMessage notificationMessage = new NotificationMessage();
+		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage("Order "+ orderDetails.getId() + " created");
 		notificationMessage.setUserId(userId);
 		messagePublisher.sendMessage(notificationMessage);
@@ -149,7 +149,7 @@ public class OrdersController {
 		OrderDetails result = findOrderAndValidate(orderId, userId);
 		result.setStatus(OrderStatus.CANCELLED);
 		orderRepository.save(result);
-		NotificationMessage notificationMessage = new NotificationMessage();
+		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage("Order "+ orderId + " cancelled");
 		notificationMessage.setUserId(userId);
 		messagePublisher.sendMessage(notificationMessage);

@@ -6,4 +6,5 @@
 **/.idea
 **/.mvn
 **/build/static
+**/src_kafka1
 /reports

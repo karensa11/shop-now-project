@@ -18,7 +18,7 @@ import com.demo.userservice.data.OrderDetails;
 import com.demo.userservice.data.User;
 import com.demo.userservice.data.UserAutheticationRequest;
 import com.demo.userservice.feign.OrdersFeign;
-import com.demo.userservice.messages.NotificationMessage;
+import com.demo.userservice.messages.NotificationData;
 import com.demo.userservice.messages.NotificationMessagePublisher;
 import com.demo.userservice.repository.UsersRepository;
 import com.demo.utility.CommonConsts;
@@ -75,7 +75,7 @@ public class UsersController {
 			throw new DetailsAlreadyExistsException("Email already exists");
 		}
 		User saved = usersRepository.save(user);
-		NotificationMessage message = new NotificationMessage();
+		NotificationData message = new NotificationData();
 		message.setMessage("User with id " + saved.getId() + " created");
 		message.setUserId(saved.getId());
 		messagePublisher.sendMessage(message);
@@ -96,7 +96,7 @@ public class UsersController {
 		if (order != null) {
 			ordersFeign.cancelOrder(order.getId());
 		}
-		NotificationMessage message = new NotificationMessage();
+		NotificationData message = new NotificationData();
 		message.setMessage("User with id " + userId + " deleted");
 		message.setUserId(userId);
 		messagePublisher.sendMessage(message);

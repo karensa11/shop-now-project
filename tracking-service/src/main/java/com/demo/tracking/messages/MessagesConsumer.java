@@ -1,4 +1,7 @@
 package com.demo.tracking.messages;
+import java.util.Map;
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +18,14 @@ public class MessagesConsumer {
 	
 	@Autowired
 	private NotificationRepository notificationRepository;
-	
+
 	@KafkaListener(topics = "karen", groupId = "consumer")
-	public void consume(NotificationMessage message) {
-		logger.info("Received Message: {}, userId: {}", message.getMessage(), message.getUserId());
+	public void consume(ConsumerRecord<String, Map<String, Object>> message) {
+		Map<String, Object> value = message.value();
+		logger.info("Received Message: {}, userId: {}", value.get("message"),  value.get("userId"));
 	    Notification notification = new Notification();
-	    notification.setMessage(message.getMessage());
-	    notification.setUserId(message.getUserId());
+	    notification.setMessage((String) value.get("message"));
+	    notification.setUserId(((Integer) value.get("userId")).longValue());
 	    notificationRepository.save(notification);
 	}
 }

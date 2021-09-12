@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 import com.demo.utility.messages.MessagePublisher;
 
 @Component
-public class NotificationMessagePublisher extends MessagePublisher<NotificationMessage> {
+public class NotificationMessagePublisher extends MessagePublisher<NotificationData> {
 	protected NotificationMessagePublisher() {
 		super("karen");
 	}
 
-	public void sendMessage(NotificationMessage message) {
+	public void sendMessage(NotificationData message) {
 		super.sendMessage(message);
 	}
 }

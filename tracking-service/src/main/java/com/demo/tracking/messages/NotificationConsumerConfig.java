@@ -7,8 +7,5 @@ import com.demo.utility.messages.KafkaConsumerConfig;
 
 @EnableKafka
 @Configuration
-public class ConsumerConfigImpl extends KafkaConsumerConfig<NotificationMessage> {
-	protected ConsumerConfigImpl() {
-		super(NotificationMessage.class, "consumer");
-	}
+public class NotificationConsumerConfig extends KafkaConsumerConfig {
 }
