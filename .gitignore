@@ -8,3 +8,4 @@
 **/build/static
 **/src_kafka1
 /reports
+docker_output*

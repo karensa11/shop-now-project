@@ -1,0 +1,1 @@
+ powershell.exe -noexit "& Get-Content docker_output.txt -Wait -Tail 30"
