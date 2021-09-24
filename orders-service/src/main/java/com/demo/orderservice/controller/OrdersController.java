@@ -33,7 +33,7 @@ import com.demo.utility.exception.DetailsNotFoundException;
 @RestController
 public class OrdersController {
 
-	public static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders";
+	public static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders" + CommonConsts.V1;
 
 	@Autowired
 	private CatalogFeign catalogService;

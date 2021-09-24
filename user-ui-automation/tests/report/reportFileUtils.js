@@ -27,6 +27,9 @@ module.exports = {
     imageFile(imageId){
         return this.screenshotsFolder()+imageId+'.png';
     },
+    imageFileSrc(imageId){
+        return 'screenshots/'+imageId+'.png';
+    },
     testFileName(suiteCode, testCode){
         return suiteCode + '_' + testCode + '.html';
     },

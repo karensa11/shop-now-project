@@ -30,7 +30,8 @@ module.exports = {
         return exists;
     },
 
-    takeScreenshot: function(driver, runData) {
+    takeScreenshot: async function(driver, runData) {
+        await driver.sleep(driver, runData, 1500);
         driver.takeScreenshot().then(function (data) {
             writeScreenshot(data, runData);
         });

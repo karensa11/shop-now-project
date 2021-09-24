@@ -4,7 +4,6 @@ module.exports = {
     restId: function(restName) {
         return restName.replace(" ", "_").replace(/\//g, "_");
     },
-
     init: async function (driver, runData){
         await driverUtils.openClient(driver, runData);
     },
@@ -12,6 +11,7 @@ module.exports = {
         await driverUtils.assertTxtValue(driver, runData, 'cartItemsNumber', count+'');
     },
     verifyShoppingCartCount:  async function (driver, runData, count){
+        await driverUtils.sleep(driver, runData);
         await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', count+'');
     },
 };

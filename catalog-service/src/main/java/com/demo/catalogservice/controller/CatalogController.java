@@ -23,15 +23,15 @@ import com.demo.utility.exception.DetailsNotFoundException;
 @CrossOrigin(origins= "*")
 @RestController
 public class CatalogController {
-	
-	private static final String BASE_URL = CommonConsts.MS_PREFIX+"/catalog";
-	
+
+	private static final String BASE_URL = CommonConsts.MS_PREFIX+"/catalog" + CommonConsts.V1;
+
 	@Autowired
 	private CatalogItemRepository catalogItemRepository;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Autowired
 	private Environment environment;
 

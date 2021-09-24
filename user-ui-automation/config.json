@@ -1,5 +1,5 @@
 {
     "clientUrl": "http://localhost:7000/",
-    "reportsFolder": "c:/private/projects/micro-services-course/shop-now-project1/reports/",
-    "resourcesFolder": "C:/private/projects/micro-services-course/shop-now-project1/user-ui-automation/resources/"
+    "reportsFolder": "../reports/",
+    "resourcesFolder": "./resources/"
 }

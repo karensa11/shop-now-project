@@ -30,7 +30,7 @@ import com.demo.utility.exception.DetailsNotFoundException;
 public class UsersController {
 	private Logger logger = LoggerFactory.getLogger(UsersController.class);
 
-	private static final String BASE_PATH = CommonConsts.MS_PREFIX+"/users";
+	private static final String BASE_PATH = CommonConsts.MS_PREFIX+"/users" + CommonConsts.V1;
 	
 	@Autowired
 	private UsersRepository usersRepository;

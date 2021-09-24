@@ -103,7 +103,7 @@ module.exports = {
                     type: 'div',
                     content: [{
                         type: 'img',
-                        attributes: {class: 'screenshot', src: reportFileUtils.imageFile(imageId)}
+                        attributes: {class: 'screenshot', src: reportFileUtils.imageFileSrc(imageId)}
                     }]
                 });
             }

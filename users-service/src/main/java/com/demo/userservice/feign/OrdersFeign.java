@@ -14,7 +14,7 @@ import com.demo.utility.CommonConsts;
 @FeignClient(name = "orders-service")
 public interface OrdersFeign {
 	
-	static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders";
+	static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders"+CommonConsts.V1;
 
 	@GetMapping(path = BASE_PATH + "/user")
 	public OrderDetails getOpenOrderForUser(@RequestHeader @NotNull Long userId);

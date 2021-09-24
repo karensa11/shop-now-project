@@ -3,7 +3,6 @@ const driverUtils = require('../utils/driverUtils');
 const {TestData} = require('./testData');
 
 module.exports = {
-
     testInit: async function(driver, runData) {
         await basicSanityImplUtils.init(driver, runData);
     },
@@ -37,6 +36,7 @@ module.exports = {
         await driverUtils.assertTxtValue(driver, runData, 'searchTextLbl', catalogData.searchText);
         await driverUtils.assertTxtValue(driver, runData, 'searchResultName0Lbl', catalogData.selectedCatalogItem1Name);
         await driverUtils.clickById(driver, runData, 'searchResultAddToCart0Btn');
+        await driverUtils.sleep(driver, runData);
         await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
     },
     testAddToCart: async function(driver, runData) {
@@ -89,6 +89,7 @@ module.exports = {
     testDeleteUser: async function(driver, runData) {
         await driverUtils.clickById(driver, runData, 'deleteAccountBtn');
         await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+        await driverUtils.sleep(driver, runData);
     },
     testLoginFailure: async function(driver, runData) {
         const {userData} = TestData;
