@@ -123,3 +123,7 @@ export function deleteUser(userId) {
         onSuccess: [orderActions.clearOrder, generalActions.logout]
     })
 }
+
+export function getNotifications(userId) {
+
+}

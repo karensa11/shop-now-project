@@ -10,6 +10,7 @@ import LoginPage from "./pages/login-page/login-page";
 import {currentUserSelector} from "../redux/general/general-selector";
 import RegisterPage from "./pages/register-page/register-page";
 import AccountPage from "./pages/account-page/account-page";
+import AdminRouter from "../components-admin/admin-router";
 
 export default function App(){
     const currentUser = useSelector(currentUserSelector);
@@ -24,6 +25,7 @@ export default function App(){
         <div className="app-component">
             <Switch>
                 <Route exact path="/" component={CatalogPage} />
+                <Route path="/admin" component={AdminRouter} />
                 <Route exact path="/cart" component={ShoppingCartPage}/>
                 <Route path={"/search"} component={SearchResultsPage} />
                 <Route path={"/signIn"} render={(props) => (

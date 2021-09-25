@@ -6,9 +6,9 @@ import java.util.List;
 public class OrderDetails {
 
 	private Long id;
+	private LocalDateTime creationDate;
 	private Long userId;
 	private String status;
-	private LocalDateTime creationDate;
 	private List<OrderItem> orderItems;
 	
 	public Long getId() {

@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class OrderDetails {
@@ -18,12 +19,20 @@ public class OrderDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Long userId;
-	private String status = OrderStatus.OPEN;
+	
 	@CreationTimestamp
 	private LocalDateTime creationDate;
+	
+	@UpdateTimestamp
+	private LocalDateTime updateDate;
+	
+	private Long userId;
+	
+	private String status = OrderStatus.OPEN;
+	
 	@Transient
 	private BigDecimal totalPrice;
+	
 	@Transient
 	private int totalItemsNumber;
 	

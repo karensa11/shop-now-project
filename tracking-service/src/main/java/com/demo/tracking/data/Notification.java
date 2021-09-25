@@ -1,8 +1,12 @@
 package com.demo.tracking.data;
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Notification {
@@ -10,6 +14,9 @@ public class Notification {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@CreationTimestamp
+	private Timestamp creationDate;
 
 	private Long userId;
 
@@ -38,5 +45,13 @@ public class Notification {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Timestamp creationDate) {
+		this.creationDate = creationDate;
 	}
 }

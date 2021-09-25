@@ -1,4 +1,6 @@
 package com.demo.tracking.messages;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;

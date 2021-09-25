@@ -11,7 +11,9 @@ export default function AccountPage() {
     const dispatch = useDispatch();
     const currentUser = useSelector(currentUserSelector);
     const deleteUserFunc = () => {
-        dispatch(deleteUser(currentUser.id));
+        if (window.confirm("please confirm deletion")) {
+            dispatch(deleteUser(currentUser.id));
+        }
     };
     return (
         <LayoutLogin>

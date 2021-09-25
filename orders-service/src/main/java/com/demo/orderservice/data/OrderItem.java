@@ -1,9 +1,14 @@
 package com.demo.orderservice.data;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class OrderItem {
@@ -11,11 +16,22 @@ public class OrderItem {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@CreationTimestamp
+	private LocalDateTime creationDate;
+	
+	@UpdateTimestamp
+	private LocalDateTime updateDate;
+	
 	private Long orderId;
+	
 	private Long catalogId;
+	
 	private int quantity;
+	
 	@Transient
 	private CatalogItem catalogItem;
+	
 	public Long getId() {
 		return id;
 	}
@@ -45,5 +61,17 @@ public class OrderItem {
 	}
 	public void setCatalogItem(CatalogItem catalogItem) {
 		this.catalogItem = catalogItem;
+	}
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+	public LocalDateTime getUpdateDate() {
+		return updateDate;
+	}
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+	public void setUpdateDate(LocalDateTime updateDate) {
+		this.updateDate = updateDate;
 	}
 }

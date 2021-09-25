@@ -43,7 +43,7 @@ services:
   
   kafka:
     image: confluentinc/cp-kafka:latest
-    mem_limit: 1000m
+    mem_limit: 700m
     depends_on:
       - zookeeper
     networks:

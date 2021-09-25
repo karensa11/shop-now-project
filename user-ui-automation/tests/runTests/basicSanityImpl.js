@@ -88,6 +88,7 @@ module.exports = {
     },
     testDeleteUser: async function(driver, runData) {
         await driverUtils.clickById(driver, runData, 'deleteAccountBtn');
+        await driverUtils.validateAlertAndClick(driver, runData, 'please confirm deletion');
         await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
         await driverUtils.sleep(driver, runData);
     },

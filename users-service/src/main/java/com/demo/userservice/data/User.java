@@ -1,5 +1,7 @@
 package com.demo.userservice.data;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,12 +10,21 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class User {
 
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@CreationTimestamp
+	private LocalDateTime creationDate;
+	
+	@UpdateTimestamp
+	private LocalDateTime updateDate;
 	
 	@Size(min=2, message="Name should have aqt least 2 characters")
 	@NotEmpty
@@ -58,5 +69,11 @@ public class User {
 	}
 	public void setPasswordPartial(String passwordPartial) {
 		this.passwordPartial = passwordPartial;
+	}
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
 	}
 }
