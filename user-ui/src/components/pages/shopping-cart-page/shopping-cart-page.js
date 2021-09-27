@@ -1,13 +1,19 @@
 import React from "react";
 import "./shopping-cart-page.scss";
 import LayoutWithHeader from "../../layout/layout-with-header/layout-with-header";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {currentOrderSelector} from "../../../redux/order/order-selector";
 import ShoppingCartItem from "../../shopping-cart-item/shopping-cart-item";
 import Price from "../../common/price/price";
+import Button from "../../common/button/button";
+import {cancelOrder} from "../../../server/actions";
 
 export default function ShoppingCartPage() {
     const currentOrder = useSelector(currentOrderSelector);
+    const dispatch = useDispatch();
+    const cancelOrderFunc = () => {
+        dispatch(cancelOrder(currentOrder.id));
+    };
     return (
         <LayoutWithHeader>
             <div className="shopping-cart-page">
@@ -23,10 +29,13 @@ export default function ShoppingCartPage() {
                         )}
                         </div>
                         <div className="bottom">
-                            Subtotal (<span id="shoppingCartItemsNumberLbl">{currentOrder.totalItemsNumber}</span> items):&nbsp;
-                            <span className="price">
-                                <Price price={currentOrder.totalPrice} />
-                            </span>
+                            <div className="item">
+                                Subtotal (<span id="shoppingCartItemsNumberLbl">{currentOrder.totalItemsNumber}</span> items):&nbsp;
+                                <span className="price">
+                                    <Price price={currentOrder.totalPrice} />
+                                </span>
+                            </div>
+                            <Button title="Cancel Order" onClick={cancelOrderFunc} id="cancelOrderBtn" />
                         </div>
                     </div>
                     :

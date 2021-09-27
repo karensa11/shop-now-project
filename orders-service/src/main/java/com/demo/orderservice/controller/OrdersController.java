@@ -1,7 +1,9 @@
 package com.demo.orderservice.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
@@ -52,25 +54,32 @@ public class OrdersController {
 			@PathVariable Long orderId,
 			@RequestHeader(required = false) Long userId) {
 		OrderDetails result = findOrderAndValidate(orderId, userId);
-		int totalItemsNumber = 0;
-		for (OrderItem orderItem:result.getOrderItems()) {
-			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
-			orderItem.setCatalogItem(catalogItem);
-			totalItemsNumber += orderItem.getQuantity();
-		}
-		result.setTotalPrice(calculateTotal(result));
-		result.setTotalItemsNumber(totalItemsNumber);
+		getCatalogItemsAndCalculateTotal(result);
 		return result;
 	}
 
-	@GetMapping(path = BASE_PATH + "/user")
+	@GetMapping(path = BASE_PATH + "/user/{userId}/open")
 	public OrderDetails getOpenOrderForUser(
-			@RequestHeader @NotNull Long userId) {
+			@PathVariable @NotNull Long userId) {
 		Optional<OrderDetails> dbResult = orderRepository.findOpenOrderByUserId(userId);
 		if (dbResult.isPresent()) {
 			return dbResult.get();
 		}
 		return null;
+	}
+
+	@GetMapping(path = BASE_PATH + "/user/{userId}/not-open")
+	public List<OrderDetails> getNotOpenedOrdersForUser(
+			@PathVariable @NotNull Long userId) {
+		List<OrderDetails> items = orderRepository.findNotOpenOrdersByUserId(userId);
+		items = items.stream().filter(item -> {
+			return item.getOrderItems() != null && 
+					!item.getOrderItems().isEmpty();})
+				.collect(Collectors.toList());
+		items.stream().forEach(item -> {
+			getCatalogItemsAndCalculateTotal(item);
+		});
+		return items;
 	}
 
 	@PostMapping(path = BASE_PATH)
@@ -186,5 +195,16 @@ public class OrdersController {
 			result = result.add(BigDecimal.valueOf(item.getQuantity() * item.getCatalogItem().getPrice().doubleValue()));
 		};
 		return result;
+	}
+
+	private void getCatalogItemsAndCalculateTotal(OrderDetails orderDetails) {
+		int totalItemsNumber = 0;
+		for (OrderItem orderItem:orderDetails.getOrderItems()) {
+			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
+			orderItem.setCatalogItem(catalogItem);
+			totalItemsNumber += orderItem.getQuantity();
+		}
+		orderDetails.setTotalPrice(calculateTotal(orderDetails));
+		orderDetails.setTotalItemsNumber(totalItemsNumber);
 	}
 }

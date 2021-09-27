@@ -12,7 +12,8 @@ import com.demo.orderservice.data.OrderStatus;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDetails, Long>{
-	public List<OrderDetails> findByUserId(Long userId);
+	@Query(value = "select * from ORDER_DETAILS where STATUS <> '" + OrderStatus.OPEN + "' and USER_ID = ?", nativeQuery = true)
+	public List<OrderDetails> findNotOpenOrdersByUserId(Long userId);
 	
 	@Query(value = "select * from ORDER_DETAILS where STATUS = '" + OrderStatus.OPEN + "' and USER_ID = ?", nativeQuery = true)
 	public Optional<OrderDetails> findOpenOrderByUserId(Long userId);

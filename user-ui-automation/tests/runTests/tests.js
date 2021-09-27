@@ -43,7 +43,8 @@ describe('Basic Sanity', () => {
     runTest('Add To Cart', basicSanityImpl.testAddToCart);
     runTest('View Shopping Cart', basicSanityImpl.testViewShoppingCart);
     runTest('Change Items Quantity', basicSanityImpl.testChangeQuantity);
-    runTest('View Shopping Cart', basicSanityImpl.testRemoveItem);
+    runTest('Remove Items', basicSanityImpl.testRemoveItem);
+    runTest('Cancel Order', basicSanityImpl.testCancelOrder);
     runTest('View Account', basicSanityImpl.testViewAccount);
     runTest('Delete User', basicSanityImpl.testDeleteUser);
     runTest('Login Failure', basicSanityImpl.testLoginFailure);

@@ -15,6 +15,11 @@
     .bottom {
       padding: 10px 0 10px 0;
       background-color: #f4ede6;
+      display: flex;
+      justify-content: center;
+      .item {
+        padding: 10px;
+      }
 
       .price {
         font-weight: bold;

@@ -17,19 +17,6 @@ export default function LoginPage() {
     const [forceValidate, setForceValidate] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
-
-    const login = (loginData) => {
-        dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
-    };
-    const getUserDetails = (userId) => {
-        dispatch(actions.getLoginData(userId, userDetailsSuccess));
-    };
-    const setUserDetails = (userDetails) => {
-        dispatch(generalActions.login(userDetails));
-    };
-    const getOrderDetails = (orderDetails) => {
-        dispatch(actions.getOrderDetails(orderDetails));
-    };
     const valueChanged = (value, name, isValid) => {
         const formValuesUpdated = {...formValues};
         const validityUpdated = {...validity};
@@ -41,17 +28,21 @@ export default function LoginPage() {
     const navigateToRegisterFunc = () => {
         navigateToRegister(history);
     };
+    const login = (loginData) => {
+        console.log("login");
+        dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
+    };
     const onLoginFailed = () => {
         alert("user not found or password is wrong");
     };
     const userDetailsSuccess = (userDetails) => {
-        setUserDetails(userDetails);
+        dispatch(generalActions.login(userDetails));
         if (userDetails.orderDetails) {
-            getOrderDetails(userDetails.orderDetails);
+            dispatch(actions.getOrderDetails(userDetails.orderDetails));
         }
     };
     const loginSuccess = (userId) => {
-        getUserDetails(userId, userDetailsSuccess);
+        dispatch(actions.getLoginData(userId, userDetailsSuccess));
     };
     const submit = () => {
         const inputData = {

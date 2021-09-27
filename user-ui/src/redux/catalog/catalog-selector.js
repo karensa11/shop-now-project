@@ -3,21 +3,21 @@ import {createSelector} from "reselect";
 const catalogSelector = (state) => state.catalogNs;
 
 export const categoriesSelector = createSelector(
-    [catalogSelector],
-    catalogData => catalogData.categories
+    catalogSelector,
+    slice => slice.categories
 );
 
 export const categoryItemsSelector = createSelector(
-    [catalogSelector],
-    catalogData => catalogData.categoryItems
+    catalogSelector,
+    slice => slice.categoryItems
 );
 
 export const searchResultsSelector = createSelector(
-    [catalogSelector],
-    catalogData => catalogData.searchResults
+    catalogSelector,
+    slice => slice.searchResults
 );
 
 export const searchStringSelector = createSelector(
-    [catalogSelector],
-    catalogData => catalogData.searchResults
+    catalogSelector,
+    slice => slice.searchResults
 );

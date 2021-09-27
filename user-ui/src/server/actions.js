@@ -124,6 +124,10 @@ export function deleteUser(userId) {
     })
 }
 
-export function getNotifications(userId) {
-
+export function getUserOrders(userId) {
+    return actionUtils.wrapGet({
+        serverFunc: serverAPIs.retrieveCurrentUserOrders,
+        actionsCreator: generalActions.setCurrentUserOrders,
+        pathParams: {userId: userId}
+    })
 }

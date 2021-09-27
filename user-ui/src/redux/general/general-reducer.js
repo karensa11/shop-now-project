@@ -3,7 +3,8 @@ import serverStatus from "./serverUpdateStatus";
 
 const INITIAL_STATE = {
     serverStatus: serverStatus.NOT_UPDATING,
-    currentUser: null
+    currentUser: null,
+    currentUserOrders: []
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -17,6 +18,11 @@ const reducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 currentUser: action.payload
+            };
+        case types.SET_CURRENT_USER_ORDERS:
+            return {
+                ...state,
+                currentUserOrders: action.payload
             };
         default: return state;
     }

@@ -35,3 +35,10 @@ export function logout() {
         payload: null
     }
 }
+
+export function setCurrentUserOrders(orders) {
+    return {
+        type: types.SET_CURRENT_USER_ORDERS,
+        payload: orders
+    }
+}

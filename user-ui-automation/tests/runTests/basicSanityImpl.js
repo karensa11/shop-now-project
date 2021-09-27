@@ -80,11 +80,32 @@ module.exports = {
         await driverUtils.clickById(driver, runData, 'remove0Btn');
         await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
     },
+    testCancelOrder: async function(driver, runData) {
+        // add items to cart //
+        await driverUtils.clickById(driver, runData, 'logoBtn');
+        const {catalogData} = TestData;
+        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+        await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
+        await driverUtils.clickById(driver, runData, 'category1Btn');
+        await driverUtils.clickById(driver, runData, 'addToCart1Btn');
+        await driverUtils.sleep(driver, runData);
+        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        // view cart and cancel order //
+        await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
+        await driverUtils.clickById(driver, runData, 'cancelOrderBtn');
+        await driverUtils.sleep(driver, runData);
+        await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+    },
     testViewAccount: async function(driver, runData) {
         const {userData} = TestData;
+        const {catalogData} = TestData;
         await driverUtils.clickById(driver, runData, 'accountBtn');
+        // account details //
         await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
         await driverUtils.assertTxtValue(driver, runData, 'emailLbl', userData.testEmail);
+        // order history //
+        await driverUtils.assertTxtValue(driver, runData, 'itemName00Lbl', catalogData.selectedCatalogItem1Name);
+        await driverUtils.assertTxtValue(driver, runData, 'itemName10Lbl', catalogData.selectedCatalogItem1Name);
     },
     testDeleteUser: async function(driver, runData) {
         await driverUtils.clickById(driver, runData, 'deleteAccountBtn');

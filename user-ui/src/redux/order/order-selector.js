@@ -3,16 +3,16 @@ import {createSelector} from "reselect";
 const orderSelector = (state) => state.orderNs;
 
 export const currentOrderSelector = createSelector(
-    [orderSelector],
-    orderSelector => orderSelector.currentOrder
+    orderSelector,
+    slice => slice.currentOrder
 );
 
 export const itemsNumberSelector = createSelector(
-    [orderSelector],
-    orderSelector => {
+    orderSelector,
+    slice => {
         let itemsNumber = 0;
-        if (orderSelector.currentOrder) {
-            const order = orderSelector.currentOrder;
+        if (slice.currentOrder) {
+            const order = slice.currentOrder;
             order.orderItems.forEach(item => {
                 itemsNumber += item.quantity;
             })

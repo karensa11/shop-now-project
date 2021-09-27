@@ -40,3 +40,6 @@ export function register(pathParams, params, userData) {
 export function deleteUser(pathParams, params) {
     return callsHandler.callDELETE(config.usersURL, "{userId}", pathParams, params);
 }
+export function retrieveCurrentUserOrders(pathParams) {
+    return callsHandler.callGET(config.ordersURL, "user/{userId}/not-open", pathParams);
+}
