@@ -4,6 +4,9 @@ const TestData = {
         testEmail: "t@gmail.com",
         testPassword: "abcdBF",
         testName: "Tom Cruise",
+        adminEmail: "admin1@gmail.com",
+        adminPassword: "abcdFH",
+        adminName: "Admin Admin"
     },
     catalogData: {
         selectedCategoryLabel: 'phones',

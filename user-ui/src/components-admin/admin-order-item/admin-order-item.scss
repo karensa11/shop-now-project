@@ -1,0 +1,35 @@
+.admin-order-item-component {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  margin: 20px 0;
+  border: 1px solid #999;
+  .order-details-title {
+    background-color: #00008b;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: 10px;
+    .title-item {
+      padding: 0 20px;
+      position: relative;
+      top: 10px;
+    }
+  }
+  .order-item-details {
+    display: flex;
+    flex-flow: wrap;
+    padding: 10px;
+    img {
+      height: 70px;
+      width: 40px;
+    }
+    .item-details {
+      margin: 2px 0 0 10px;
+      .item-name {
+        font-weight: bold;
+      }
+    }
+  }
+}

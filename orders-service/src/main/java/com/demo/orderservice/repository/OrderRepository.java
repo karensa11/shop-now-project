@@ -8,13 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.demo.orderservice.data.OrderDetails;
-import com.demo.orderservice.data.OrderStatus;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDetails, Long>{
-	@Query(value = "select * from ORDER_DETAILS where STATUS <> '" + OrderStatus.OPEN + "' and USER_ID = ?", nativeQuery = true)
+	@Query(value = "select * from ORDER_DETAILS where STATUS <> 'OPEN' and USER_ID = ?", nativeQuery = true)
 	public List<OrderDetails> findNotOpenOrdersByUserId(Long userId);
 	
-	@Query(value = "select * from ORDER_DETAILS where STATUS = '" + OrderStatus.OPEN + "' and USER_ID = ?", nativeQuery = true)
+	@Query(value = "select * from ORDER_DETAILS where STATUS = 'OPEN' and USER_ID = ?", nativeQuery = true)
 	public Optional<OrderDetails> findOpenOrderByUserId(Long userId);
 }

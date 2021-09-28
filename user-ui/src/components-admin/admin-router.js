@@ -1,14 +1,16 @@
 import React from "react";
-import "./admin-router.scss";
 import {Switch, Route} from "react-router-dom";
 import TransactionsPage from "./pages/transactions-page/transactions-page";
+import HandleOrderPage from "./pages/handle-order-page/handle-order-page";
+import HomePage from "./pages/home-page/home-page";
 
 export default function AdminRouter({match}) {
+    console.log("AdminRouter", match);
     return (
-        <div className="admin-router-component">
-            <Switch>
-                <Route path={`${match.path}/transactions`} component={TransactionsPage} />
-            </Switch>
-        </div>
+        <Switch>
+            <Route exact path={`${match.path}`} component={HomePage}/>
+            <Route path={`${match.path}/handle-orders`} component={HandleOrderPage}/>
+            <Route path={`${match.path}/transactions`} component={TransactionsPage} />
+        </Switch>
     )
 };

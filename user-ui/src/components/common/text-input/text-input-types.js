@@ -3,7 +3,8 @@ const INPUT_TYPES = {
     CONFIRM_PASSWORD: "confirmPassword",
     EMAIL: "email",
     USERNAME: "username",
-    NAME: "name"
+    NAME: "name",
+    NUMBER: "number"
 };
 const INPUT_TYPES_DATA = {};
 INPUT_TYPES_DATA[INPUT_TYPES.EMAIL] = {
@@ -26,6 +27,11 @@ INPUT_TYPES_DATA[INPUT_TYPES.NAME] = {
     formType: "text",
     validatorExpression: /^[a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?$/,
     validationMessage: "invalid name"
+};
+INPUT_TYPES_DATA[INPUT_TYPES.NUMBER] = {
+    formType: "text",
+    validatorExpression: /^[0-9]+$/,
+    validationMessage: "invalid number"
 };
 
 export {INPUT_TYPES, INPUT_TYPES_DATA};

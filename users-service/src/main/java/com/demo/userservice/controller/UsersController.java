@@ -101,4 +101,13 @@ public class UsersController {
 		message.setUserId(userId);
 		messagePublisher.sendMessage(message);
 	}
+	
+	@GetMapping(path = BASE_PATH + "/{userId}/is-admin")
+	public boolean isAdmin(@PathVariable Long userId) {
+		Optional<User> result = usersRepository.findById(userId);
+		if (!result.isPresent()) {
+			throw new DetailsNotFoundException("User with id " + userId + " not found");
+		}
+		return result.get().getIsAdmin();
+	}
 }

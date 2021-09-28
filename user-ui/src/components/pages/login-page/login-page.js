@@ -3,8 +3,8 @@ import "./login-page.scss";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
 import LayoutLogin from "../../layout/layout-login/layout-login";
-import LoginTextInput from "../../common/login-text-input/login-text-input";
-import {INPUT_TYPES} from "../../common/login-text-input/login-text-types";
+import TextInput from "../../common/text-input/text-input";
+import {INPUT_TYPES} from "../../common/text-input/text-input-types";
 import SubmitBtn from "../../common/submit-btn/submit-btn";
 import * as actions from "../../../server/actions";
 import * as generalActions from "../../../redux/general/general-actions";
@@ -29,7 +29,6 @@ export default function LoginPage() {
         navigateToRegister(history);
     };
     const login = (loginData) => {
-        console.log("login");
         dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
     };
     const onLoginFailed = () => {
@@ -37,8 +36,10 @@ export default function LoginPage() {
     };
     const userDetailsSuccess = (userDetails) => {
         dispatch(generalActions.login(userDetails));
-        if (userDetails.orderDetails) {
-            dispatch(actions.getOrderDetails(userDetails.orderDetails));
+        if (!userDetails.isAdmin) {
+            if (userDetails.orderDetails) {
+                dispatch(actions.getOrderDetails(userDetails.orderDetails));
+            }
         }
     };
     const loginSuccess = (userId) => {
@@ -59,10 +60,10 @@ export default function LoginPage() {
     return (
         <LayoutLogin>
             <div className="login-page">
-                <LoginTextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
-                                onChange={valueChanged} id="emailInput" />
-                <LoginTextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
-                                onChange={valueChanged} id="passwordInput" />
+                <TextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
+                           onChange={valueChanged} id="emailInput" />
+                <TextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
+                           onChange={valueChanged} id="passwordInput" />
                 <SubmitBtn title="Login" onClick={submit} validityArray={validity} setForceValidate={setForceValidate} id="submitLoginBtn" />
                 <div>don't have an account yet ?</div>
                 <Button title="Create an account" onClick={navigateToRegisterFunc} id="navigateToRegister" />

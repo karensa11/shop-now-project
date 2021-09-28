@@ -1,0 +1,24 @@
+.admin-header-component {
+  background-color: #206d98;
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+  .admin-button {
+    background-color: #206d98;
+    border: none;
+    width: 300px;
+  }
+  .right {
+    float: right;
+    position: relative;
+    top: -40px;
+    display: flex;
+    flex-flow: row wrap;
+    .name {
+      position: relative;
+      top: 10px;
+      color: white;
+      margin-right: 20px;
+    }
+  }
+}

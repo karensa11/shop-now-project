@@ -45,6 +45,15 @@ export function updateOrderItem(orderId, orderItemData) {
     })
 }
 
+export function updateOrderDetails(orderId, orderDetailsData) {
+    return actionUtils.wrapUpdate({
+        serverFunc: serverAPIs.updateOrderDetails,
+        pathParams: {orderId: orderId},
+        body: orderDetailsData,
+        onSuccess: getOrderDetails
+    })
+}
+
 export function cancelOrderItem(orderId, orderItemId) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.cancelOrderItem,
@@ -58,6 +67,14 @@ export function cancelOrder(orderId) {
         serverFunc: serverAPIs.cancelOrder,
         pathParams: {orderId: orderId},
         onSuccess: orderActions.clearOrder
+    })
+}
+
+export function placeOrder(orderId, onSuccess) {
+    return actionUtils.wrapUpdate({
+        serverFunc: serverAPIs.placeOrder,
+        pathParams: {orderId: orderId},
+        onSuccess: onSuccess
     })
 }
 

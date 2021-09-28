@@ -6,13 +6,23 @@ import {currentOrderSelector} from "../../../redux/order/order-selector";
 import ShoppingCartItem from "../../shopping-cart-item/shopping-cart-item";
 import Price from "../../common/price/price";
 import Button from "../../common/button/button";
-import {cancelOrder} from "../../../server/actions";
+import {cancelOrder, placeOrder} from "../../../server/actions";
+import * as orderActions from "../../../redux/order/order-actions";
+import {currentUserSelector} from "../../../redux/general/general-selector";
 
 export default function ShoppingCartPage() {
     const currentOrder = useSelector(currentOrderSelector);
+    const currentUser = useSelector(currentUserSelector);
     const dispatch = useDispatch();
     const cancelOrderFunc = () => {
         dispatch(cancelOrder(currentOrder.id));
+    };
+    const placeOrderSuccessFunc = () => {
+        alert("Your order placed with success");
+        dispatch(orderActions.clearOrder());
+    };
+    const placeOrderFunc = () => {
+        dispatch(placeOrder(currentOrder.id, placeOrderSuccessFunc));
     };
     return (
         <LayoutWithHeader>
@@ -36,6 +46,9 @@ export default function ShoppingCartPage() {
                                 </span>
                             </div>
                             <Button title="Cancel Order" onClick={cancelOrderFunc} id="cancelOrderBtn" />
+                            {currentUser &&
+                                <Button title="Place Order" onClick={placeOrderFunc} id="placeOrderBtn"/>
+                            }
                         </div>
                     </div>
                     :

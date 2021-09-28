@@ -41,7 +41,8 @@ public class CatalogController {
 	}
 
 	@GetMapping(path= BASE_URL + "/categories/{categoryId}/items")
-	public List<CatalogItem> getCategoryItems(@PathVariable Long categoryId) {
+	public List<CatalogItem> getCategoryItems(
+			@PathVariable Long categoryId) {
 		Optional<Category> category = categoryRepository.findById(categoryId);
 		if (!category.isPresent()) {
 			throw new DetailsNotFoundException("category with id " + categoryId + "not exists");
@@ -50,7 +51,8 @@ public class CatalogController {
 	}
 
 	@GetMapping(path= BASE_URL + "/items/{itemId}")
-	public CatalogItem getCatalogItem(@PathVariable Long itemId) {
+	public CatalogItem getCatalogItem(
+			@PathVariable Long itemId) {
 		Optional<CatalogItem> item = catalogItemRepository.findById(itemId);
 		if (!item.isPresent()) {
 			throw new DetailsNotFoundException("item with id " + itemId + " not exists");
@@ -61,7 +63,8 @@ public class CatalogController {
 	}
 
 	@GetMapping(path = BASE_URL + "/items/search")
-	public List<CatalogItem> search(@NotNull @RequestParam String searchString) {
+	public List<CatalogItem> search(
+			@NotNull @RequestParam String searchString) {
 		return catalogItemRepository.findAllBySearchString("%" + searchString.toLowerCase() + "%");
 	}
 }

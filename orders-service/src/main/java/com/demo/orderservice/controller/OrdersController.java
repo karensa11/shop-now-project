@@ -1,6 +1,5 @@
 package com.demo.orderservice.controller;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,19 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.orderservice.data.CatalogItem;
 import com.demo.orderservice.data.OrderDetails;
 import com.demo.orderservice.data.OrderItem;
 import com.demo.orderservice.data.OrderItemInput;
 import com.demo.orderservice.data.OrderResponse;
 import com.demo.orderservice.data.OrderStatus;
-import com.demo.orderservice.feign.CatalogFeign;
 import com.demo.orderservice.messages.NotificationData;
 import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.CommonConsts;
-import com.demo.utility.exception.DetailsNotFoundException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -38,13 +34,13 @@ public class OrdersController {
 	public static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders" + CommonConsts.V1;
 
 	@Autowired
-	private CatalogFeign catalogService;
-
-	@Autowired
 	private OrderRepository orderRepository;
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	private OrderUtils orderUtils;
 
 	@Autowired
 	private NotificationMessagePublisher messagePublisher;
@@ -53,8 +49,8 @@ public class OrdersController {
 	public OrderDetails getOrderDetails(
 			@PathVariable Long orderId,
 			@RequestHeader(required = false) Long userId) {
-		OrderDetails result = findOrderAndValidate(orderId, userId);
-		getCatalogItemsAndCalculateTotal(result);
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+		orderUtils.getCatalogItemsAndCalculateTotal(result);
 		return result;
 	}
 
@@ -77,7 +73,7 @@ public class OrdersController {
 					!item.getOrderItems().isEmpty();})
 				.collect(Collectors.toList());
 		items.stream().forEach(item -> {
-			getCatalogItemsAndCalculateTotal(item);
+			orderUtils.getCatalogItemsAndCalculateTotal(item);
 		});
 		return items;
 	}
@@ -117,7 +113,7 @@ public class OrdersController {
 			@PathVariable Long orderId,
 			@RequestHeader(required = false) Long userId,
 			@RequestBody OrderItemInput input) {
-		OrderDetails orderDetails = findOrderAndValidate(orderId, userId);
+		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrderId(orderId);
 		orderItem.setQuantity(input.getQuantity());
@@ -133,10 +129,11 @@ public class OrdersController {
 			@PathVariable Long orderItemId,
 			@RequestHeader(required = false) Long userId,
 			@RequestBody OrderItemInput input) {
-		OrderDetails orderDetails = findOrderAndValidate(orderId, userId);
-		OrderItem orderItem = findOrderItemAndValidate(orderId, orderItemId);
+		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
+		OrderItem orderItem = orderUtils.findOrderItemAndValidate(orderId, orderItemId);
 		orderItem.setQuantity(input.getQuantity());
 		orderItemRepository.save(orderItem);
+		orderRepository.save(orderDetails);
 
 		return new OrderResponse(orderDetails.getId());
 	}
@@ -146,65 +143,38 @@ public class OrdersController {
 			@PathVariable Long orderId,
 			@PathVariable Long orderItemId,
 			@RequestHeader(required = false) Long userId) {
-		findOrderAndValidate(orderId, userId);
-		OrderItem orderItem = findOrderItemAndValidate(orderId, orderItemId);
+		orderUtils.findOrderAndValidate(orderId, userId);
+		OrderItem orderItem = orderUtils.findOrderItemAndValidate(orderId, orderItemId);
 		orderItemRepository.deleteById(orderItem.getId());
 
 		return new OrderResponse(orderId);
 	}
 
+	@PostMapping(path = BASE_PATH + "/{orderId}/place")
+	public void placeOrder(
+			@PathVariable Long orderId, 
+			@RequestHeader(required = false) Long userId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+		if (!OrderStatus.OPEN.equals(result.getStatus())) {
+			throw new IllegalStateException("Order must be open so it can be placed");
+		}
+		result.setStatus(OrderStatus.PLACED);
+		orderRepository.save(result);
+	}
+
 	@DeleteMapping(path = BASE_PATH + "/{orderId}")
-	public void cancelOrder(@PathVariable Long orderId, @RequestHeader(required = false) Long userId) {
-		OrderDetails result = findOrderAndValidate(orderId, userId);
+	public void cancelOrder(
+			@PathVariable Long orderId, 
+			@RequestHeader(required = false) Long userId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+		if (OrderStatus.CANCELLED.equals(result.getStatus())) {
+			throw new IllegalStateException("Order already cancelled");
+		}
 		result.setStatus(OrderStatus.CANCELLED);
 		orderRepository.save(result);
 		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage("Order "+ orderId + " cancelled");
 		notificationMessage.setUserId(userId);
 		messagePublisher.sendMessage(notificationMessage);
-	}
-
-	private OrderDetails findOrderAndValidate(Long orderId, Long userId) {
-		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
-		if (!resultFromDb.isPresent()) {
-			throw new DetailsNotFoundException("order with id " + orderId + " not found");
-		}
-		OrderDetails result = resultFromDb.get();
-		if (result.getUserId()!=null && !result.getUserId().equals(userId)) {
-			throw new IllegalArgumentException("invalid user id");
-		}
-		return resultFromDb.get();
-	}
-
-	private OrderItem findOrderItemAndValidate(Long orderId, Long orderItemId) {
-		Optional<OrderItem> resultFromDb = orderItemRepository.findById(orderItemId);
-		if (!resultFromDb.isPresent()) {
-			throw new DetailsNotFoundException("order item with id " + orderId + " not found");
-		}
-		OrderItem result = resultFromDb.get();
-		System.out.println("result.getOrderId()" + result.getOrderId() + " orderId " + orderId );
-		if (!result.getOrderId().equals(orderId)) {
-			throw new IllegalArgumentException("invalid order id");
-		}
-		return result;
-	}
-
-	private BigDecimal calculateTotal(OrderDetails orderDetails) {
-		BigDecimal result = new BigDecimal(0);
-		for(OrderItem item:orderDetails.getOrderItems()){
-			result = result.add(BigDecimal.valueOf(item.getQuantity() * item.getCatalogItem().getPrice().doubleValue()));
-		};
-		return result;
-	}
-
-	private void getCatalogItemsAndCalculateTotal(OrderDetails orderDetails) {
-		int totalItemsNumber = 0;
-		for (OrderItem orderItem:orderDetails.getOrderItems()) {
-			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
-			orderItem.setCatalogItem(catalogItem);
-			totalItemsNumber += orderItem.getQuantity();
-		}
-		orderDetails.setTotalPrice(calculateTotal(orderDetails));
-		orderDetails.setTotalItemsNumber(totalItemsNumber);
 	}
 }

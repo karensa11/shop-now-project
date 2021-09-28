@@ -32,6 +32,8 @@ public class User {
 	
 	@Email
 	private String email;
+	
+	private Boolean isAdmin = Boolean.FALSE;
 
 	@Size(min=4, message="passwordPartial should have aqt least 4 characters")
 	@NotEmpty
@@ -75,5 +77,11 @@ public class User {
 	}
 	public void setCreationDate(LocalDateTime creationDate) {
 		this.creationDate = creationDate;
+	}
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

@@ -7,7 +7,8 @@ export default function AccountOrderHistoryItem({item, index}) {
         <div className="account-order-history-item-component">
             <div className="order-details-title">
                 <span className="title-item">Order Id: {item.id}</span>|
-                <span className="title-item">Status: {item.status}</span>
+                <span className="title-item">Status: {item.status}</span>|
+                <span className="title-item">Total: {formatPrice(item.totalPrice)}</span>
             </div>
             <div>
                 {item.orderItems && item.orderItems.length &&

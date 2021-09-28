@@ -96,6 +96,35 @@ module.exports = {
         await driverUtils.sleep(driver, runData);
         await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
     },
+    testPlaceOrder: async function(driver, runData) {
+        // add items to cart //
+        await driverUtils.clickById(driver, runData, 'logoBtn');
+        const {catalogData} = TestData;
+        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+        await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
+        await driverUtils.clickById(driver, runData, 'category1Btn');
+        await driverUtils.clickById(driver, runData, 'addToCart1Btn');
+        await driverUtils.sleep(driver, runData);
+        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        // view cart and cancel order //
+        await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
+        await driverUtils.clickById(driver, runData, 'placeOrderBtn');
+        await driverUtils.sleep(driver, runData);
+        await driverUtils.validateAlertAndClick(driver, runData, 'Your order placed with success');
+        await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+    },
+    testCloseOrder: async function(driver, runData) {
+        // logout //
+       // await driverUtils.clickById(driver, runData, 'logoutBtn');
+        // await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+        // login as admin //
+        const {userData} = TestData;
+        await driverUtils.clickById(driver, runData, 'loginBtn');
+        await driverUtils.populateInput(driver, runData, 'emailInput', userData.adminEmail);
+        await driverUtils.populateInput(driver, runData, 'passwordInput', userData.adminPassword);
+        await driverUtils.clickById(driver, runData, 'submitLoginBtn');
+        await driverUtils.assertTxtValue(driver, runData, 'adminNameLbl', userData.adminName);
+    },
     testViewAccount: async function(driver, runData) {
         const {userData} = TestData;
         const {catalogData} = TestData;

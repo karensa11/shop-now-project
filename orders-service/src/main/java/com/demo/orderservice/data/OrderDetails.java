@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,7 +30,10 @@ public class OrderDetails {
 	
 	private Long userId;
 	
-	private String status = OrderStatus.OPEN;
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status = OrderStatus.OPEN;
+	
+	private LocalDateTime deliveredOn;
 	
 	@Transient
 	private BigDecimal totalPrice;
@@ -39,10 +44,12 @@ public class OrderDetails {
 	@OneToMany(mappedBy="orderId")
 	private List<OrderItem> orderItems;
 	
+	
+	
 	public Long getId() {
 		return id;
 	}
-	public String getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 	public LocalDateTime getCreationDate() {
@@ -51,7 +58,7 @@ public class OrderDetails {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setStatus(String status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 	public void setCreationDate(LocalDateTime creationDate) {
@@ -80,5 +87,11 @@ public class OrderDetails {
 	}
 	public void setTotalItemsNumber(int totalItemsNumber) {
 		this.totalItemsNumber = totalItemsNumber;
+	}
+	public LocalDateTime getDeliveredOn() {
+		return deliveredOn;
+	}
+	public void setDeliveredOn(LocalDateTime deliveredOn) {
+		this.deliveredOn = deliveredOn;
 	}
 }

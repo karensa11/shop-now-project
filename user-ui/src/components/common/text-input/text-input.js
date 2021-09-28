@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import "./login-text-input.scss";
-import "./login-text-types";
-import {INPUT_TYPES_DATA, INPUT_TYPES} from "./login-text-types";
+import "./text-input.scss";
+import {INPUT_TYPES_DATA, INPUT_TYPES} from "./text-input-types";
 import appIcons from "../../../util/applicationIcons";
 
-export default function LoginTextInput({onChange, name, title, type, required, forceValidate, comparePassword, id}) {
+export default function TextInput({onChange, name, title, type, required, forceValidate, comparePassword, id}) {
     const [value, setValue] = useState("");
     const [validationMessage, setValidationMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);

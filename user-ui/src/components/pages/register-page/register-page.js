@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import "./register-page.scss";
 import LayoutLogin from "../../layout/layout-login/layout-login";
-import LoginTextInput from "../../common/login-text-input/login-text-input";
-import {INPUT_TYPES} from "../../common/login-text-input/login-text-types";
+import TextInput from "../../common/text-input/text-input";
+import {INPUT_TYPES} from "../../common/text-input/text-input-types";
 import Button from "../../common/button/button";
 import {navigateToLogin} from "../../../util/navigation";
 import {useHistory} from "react-router-dom";
@@ -50,14 +50,14 @@ export default function RegisterPage() {
     return (
         <LayoutLogin>
             <div className="register-page">
-                <LoginTextInput name={INPUT_TYPES.NAME} type={INPUT_TYPES.NAME} title="enter name" forceValidate={forceValidate}
-                                onChange={valueChanged} id="nameInput" />
-                <LoginTextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
-                                onChange={valueChanged} id="emailInput" />
-                <LoginTextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
-                                onChange={valueChanged} id="passwordInput" />
-                <LoginTextInput name={INPUT_TYPES.CONFIRM_PASSWORD} type={INPUT_TYPES.CONFIRM_PASSWORD} title="confirm password" forceValidate={forceValidate}
-                                onChange={valueChanged} id="confirmPasswordInput" comparePassword={password} />
+                <TextInput name={INPUT_TYPES.NAME} type={INPUT_TYPES.NAME} title="enter name" forceValidate={forceValidate}
+                           onChange={valueChanged} id="nameInput" />
+                <TextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
+                           onChange={valueChanged} id="emailInput" />
+                <TextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
+                           onChange={valueChanged} id="passwordInput" />
+                <TextInput name={INPUT_TYPES.CONFIRM_PASSWORD} type={INPUT_TYPES.CONFIRM_PASSWORD} title="confirm password" forceValidate={forceValidate}
+                           onChange={valueChanged} id="confirmPasswordInput" comparePassword={password} />
             </div>
             <SubmitBtn title="Register" onClick={submit} validityArray={validity} setForceValidate={setForceValidate} id="submitRegisterBtn"/>
             <div>Already have an account ?</div>
