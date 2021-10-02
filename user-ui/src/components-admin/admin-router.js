@@ -5,7 +5,6 @@ import HandleOrderPage from "./pages/handle-order-page/handle-order-page";
 import HomePage from "./pages/home-page/home-page";
 
 export default function AdminRouter({match}) {
-    console.log("AdminRouter", match);
     return (
         <Switch>
             <Route exact path={`${match.path}`} component={HomePage}/>

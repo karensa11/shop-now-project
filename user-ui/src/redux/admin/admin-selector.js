@@ -2,7 +2,7 @@ import {createSelector} from "reselect";
 
 const adminSelector = (state) => state.adminNs;
 
-export const currentOrderSelector = createSelector(
+export const currentOrdersSelector = createSelector(
     adminSelector,
-    slice => slice.currentOrder
+    slice => slice.currentOrders
 );

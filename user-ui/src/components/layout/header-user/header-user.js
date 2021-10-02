@@ -27,7 +27,7 @@ export default function HeaderUser() {
     };
     return (
         <div className="header-user-component">
-            {currentUser ?
+            {currentUser && !currentUser.isGuest ?
                 <div className="content">
                     <div className="title">Hello, <span id="nameLbl">{currentUser.name}</span></div>
                     <HeaderButton title="Logout" onClick={logoutFunc} id="logoutBtn" />

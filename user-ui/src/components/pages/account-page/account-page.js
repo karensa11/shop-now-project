@@ -9,6 +9,7 @@ import * as actions from "../../../server/actions";
 import AccountOrderHistory from "../../account-order-history/account-order-history";
 import * as generalActions from "../../../redux/general/general-actions";
 import * as orderActions from "../../../redux/order/order-actions";
+import config from "../../../config";
 
 export default function AccountPage() {
     const dispatch = useDispatch();
@@ -16,11 +17,14 @@ export default function AccountPage() {
     const deleteUserFunc = () => {
         if (window.confirm("please confirm deletion")) {
             dispatch(actions.deleteUser(currentUser.id));
+            dispatch(orderActions.clearOrder());
+            dispatch(actions.login({email: config.guestUserEmail, passwordPartial: config.guestUserPass}));
         }
     };
     const logoutFunc = () => {
         dispatch(generalActions.logout());
         dispatch(orderActions.clearOrder());
+        dispatch(actions.login({email: config.guestUserEmail, passwordPartial: config.guestUserPass}));
     };
     useEffect(() => {
         dispatch(actions.getUserOrders(currentUser.id));

@@ -6,6 +6,7 @@ import {currentUserSelector} from "../../../redux/general/general-selector";
 import Button from "../../../components/common/button/button";
 import {navigateToHomePage} from "../../../util/adminNavigation";
 import * as generalActions from "../../../redux/general/general-actions";
+import * as adminActions from "../../../redux/admin/admin-actions";
 
 export default function AdminHeader() {
     const currentUser = useSelector(currentUserSelector);
@@ -15,6 +16,7 @@ export default function AdminHeader() {
         navigateToHomePage(history);
     };
     const logoutFunc = () => {
+        dispatch(adminActions.clearDara());
         dispatch(generalActions.logout());
     };
     return (

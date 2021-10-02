@@ -1,8 +1,13 @@
 import types from "./admin-types";
 
-export function setCurrentOrder(order) {
+export function setCurrentOrders(orders) {
     return {
-        payload: order,
-        type: types.SET_CURRENT_ADMIN_ORDER
+        payload: orders,
+        type: types.SET_CURRENT_ADMIN_ORDERS
+    }
+}
+export function clearDara() {
+    return {
+        type: types.CLEAR_ADMIN_DATA
     }
 }

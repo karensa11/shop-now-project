@@ -19,8 +19,8 @@ export default function AdminLayout({children}) {
                 <AdminHeader />
                 <div className="content">
                     <div className="links">
-                        <Button title="Handle Order" onClick={navigateToHandleOrdersFunc} />
-                        <Button title="View Transactions" onClick={navigateToTransactionsFunc} />
+                        <Button title="Handle Order" id="handleOrderBtn" onClick={navigateToHandleOrdersFunc} />
+                        <Button title="View Transactions" id="viewTransactionsBtn" onClick={navigateToTransactionsFunc} />
                     </div>
                     {children}
                 </div>

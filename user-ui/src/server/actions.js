@@ -107,27 +107,16 @@ export function login(loginData, onNotFound, onSuccess) {
     return actionUtils.wrapGet({
         serverFunc: serverAPIs.login,
         body: loginData,
+        actionsCreator: generalActions.login,
         onSuccess: onSuccess,
         onNotFound: onNotFound
     })
 }
 
-export function getLoginData(userId, onSuccess) {
-    return actionUtils.wrapGet({
-        serverFunc: serverAPIs.getLoginData,
-        pathParams: {userId: userId},
-        onSuccess: onSuccess
-    })
-}
-
-export function getLoginDataSetToSession(userId) {
-    return getLoginData(userId, generalActions.login);
-}
-
 export function register(userData, onConflict) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.register,
-        onSuccess: getLoginDataSetToSession,
+        onSuccess: generalActions.login,
         onConflict: onConflict,
         body: userData
     })

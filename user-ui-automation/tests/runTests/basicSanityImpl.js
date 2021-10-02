@@ -22,10 +22,7 @@ module.exports = {
     },
     testLogin: async function(driver, runData) {
         const {userData} = TestData;
-        await driverUtils.clickById(driver, runData, 'loginBtn');
-        await driverUtils.populateInput(driver, runData, 'emailInput', userData.testEmail);
-        await driverUtils.populateInput(driver, runData, 'passwordInput', userData.testPassword);
-        await driverUtils.clickById(driver, runData, 'submitLoginBtn');
+        await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
         await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
     },
     testSearch: async function(driver, runData) {
@@ -113,10 +110,10 @@ module.exports = {
         await driverUtils.validateAlertAndClick(driver, runData, 'Your order placed with success');
         await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
     },
-    testCloseOrder: async function(driver, runData) {
-        // logout //
-       // await driverUtils.clickById(driver, runData, 'logoutBtn');
-        // await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+    testLoginAdmin: async function(driver, runData) {
+        // logout from regular user //
+        await driverUtils.clickById(driver, runData, 'logoutBtn');
+        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
         // login as admin //
         const {userData} = TestData;
         await driverUtils.clickById(driver, runData, 'loginBtn');
@@ -125,9 +122,21 @@ module.exports = {
         await driverUtils.clickById(driver, runData, 'submitLoginBtn');
         await driverUtils.assertTxtValue(driver, runData, 'adminNameLbl', userData.adminName);
     },
+    testCloseOrder: async function(driver, runData) {
+        const {userData} = TestData;
+        await driverUtils.clickById(driver, runData, 'handleOrderBtn');
+        await driverUtils.populateInput(driver, runData, 'emailSearchInput', userData.testEmail);
+        await driverUtils.clickById(driver, runData, 'searchOrderAdminBtn');
+        await driverUtils.clickById(driver, runData, 'setDeliveredOn0Btn');
+        await driverUtils.clickById(driver, runData, 'adminLogoutBtn');
+    },
     testViewAccount: async function(driver, runData) {
         const {userData} = TestData;
         const {catalogData} = TestData;
+        // login again to the system //
+        await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
+        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+        // go to account //
         await driverUtils.clickById(driver, runData, 'accountBtn');
         // account details //
         await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
@@ -135,6 +144,9 @@ module.exports = {
         // order history //
         await driverUtils.assertTxtValue(driver, runData, 'itemName00Lbl', catalogData.selectedCatalogItem1Name);
         await driverUtils.assertTxtValue(driver, runData, 'itemName10Lbl', catalogData.selectedCatalogItem1Name);
+        await driverUtils.assertTxtValue(driver, runData, 'orderStatus0Lbl', 'CANCELLED');
+        await driverUtils.assertTxtValue(driver, runData, 'orderStatus1Lbl', 'CANCELLED');
+        await driverUtils.assertTxtValue(driver, runData, 'orderStatus2Lbl', 'CLOSED');
     },
     testDeleteUser: async function(driver, runData) {
         await driverUtils.clickById(driver, runData, 'deleteAccountBtn');

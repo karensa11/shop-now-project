@@ -16,4 +16,7 @@ public interface OrderRepository extends JpaRepository<OrderDetails, Long>{
 	
 	@Query(value = "select * from ORDER_DETAILS where STATUS = 'OPEN' and USER_ID = ?", nativeQuery = true)
 	public Optional<OrderDetails> findOpenOrderByUserId(Long userId);
+	
+	@Query(value = "select * from ORDER_DETAILS where STATUS = 'PLACED' and USER_ID = ?", nativeQuery = true)
+	public List<OrderDetails> findAllPlacedOrderByUserId(Long userId);
 }

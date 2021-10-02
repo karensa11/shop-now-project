@@ -3,18 +3,15 @@ import "./admin-order-item.scss";
 import {formatPrice} from "../../util/formatter";
 import Button from "../../components/common/button/button";
 import {useDispatch} from "react-redux";
-import {closeOrder, searchOrder, setDeliveredOn} from "../../server/adminActions";
+import {searchOrder, setDeliveredOn} from "../../server/adminActions";
 
-export default function AdminOrderItem({item}) {
+export default function AdminOrderItem({item, index}) {
     const dispatch = useDispatch();
     const updateOrderFunc = () => {
         dispatch(searchOrder(item.id));
     };
     const setDeliveredOnFunc = () => {
         dispatch(setDeliveredOn(item.id, updateOrderFunc));
-    };
-    const closeOrderFunc = () => {
-        dispatch(closeOrder(item.id, updateOrderFunc));
     };
     return (
         <div className="admin-order-item-component">
@@ -23,13 +20,10 @@ export default function AdminOrderItem({item}) {
                 <div className="title-item">Status: {item.status}</div>
                 <div className="title-item">Total: {formatPrice(item.totalPrice)}</div>
                 {item.deliveredOn &&
-                <div className="title-item">Delivered On: {item.deliveredOn}</div>
-                }
-                {item.deliveredOn && item.status !== "CLOSED" &&
-                    <Button title="Close Order" onClick={closeOrderFunc} />
+                    <div className="title-item">Delivered On: {item.deliveredOn}</div>
                 }
                 {!item.deliveredOn &&
-                    <Button title="Set Delivered On" onClick={setDeliveredOnFunc} />
+                    <Button title="Set Delivered On" id={`setDeliveredOn${index}Btn`} onClick={setDeliveredOnFunc} />
                 }
             </div>
             <div>

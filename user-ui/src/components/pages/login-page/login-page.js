@@ -29,28 +29,23 @@ export default function LoginPage() {
         navigateToRegister(history);
     };
     const login = (loginData) => {
-        dispatch(actions.login(loginData, onLoginFailed, loginSuccess));
+        dispatch(actions.login(loginData, onLoginFailed, userDetailsSuccess));
     };
     const onLoginFailed = () => {
         alert("user not found or password is wrong");
     };
     const userDetailsSuccess = (userDetails) => {
         dispatch(generalActions.login(userDetails));
-        if (!userDetails.isAdmin) {
-            if (userDetails.orderDetails) {
-                dispatch(actions.getOrderDetails(userDetails.orderDetails));
-            }
+        if (!userDetails.isAdmin && userDetails.orderDetails) {
+            dispatch(actions.getOrderDetails(userDetails.orderDetails));
         }
-    };
-    const loginSuccess = (userId) => {
-        dispatch(actions.getLoginData(userId, userDetailsSuccess));
     };
     const submit = () => {
         const inputData = {
             email: formValues[INPUT_TYPES.EMAIL],
             passwordPartial: formValues[INPUT_TYPES.PASSWORD]
         };
-        login(inputData, onLoginFailed, loginSuccess);
+        login(inputData);
     };
     useEffect(() => {
         if (forceValidate) {

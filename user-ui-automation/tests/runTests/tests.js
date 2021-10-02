@@ -36,7 +36,6 @@ describe('Basic Sanity', () => {
         });
     }
     runTest('Open', basicSanityImpl.testInit);
-    /*
     runTest('Search', basicSanityImpl.testSearch);
     runTest('Register', basicSanityImpl.testRegister);
     runTest('Logout', basicSanityImpl.testLogout);
@@ -47,13 +46,11 @@ describe('Basic Sanity', () => {
     runTest('Remove Items', basicSanityImpl.testRemoveItem);
     runTest('Cancel Order', basicSanityImpl.testCancelOrder);
     runTest('Place Order', basicSanityImpl.testPlaceOrder);
-    */
-    runTest('Close Order (Admin)', basicSanityImpl.testCloseOrder);
-    /*
+    runTest('Login Admin', basicSanityImpl.testLoginAdmin);
+    runTest('Close Order', basicSanityImpl.testCloseOrder);
     runTest('View Account', basicSanityImpl.testViewAccount);
     runTest('Delete User', basicSanityImpl.testDeleteUser);
     runTest('Login Failure', basicSanityImpl.testLoginFailure);
-    */
 
    after(async () => driver.quit());
 });

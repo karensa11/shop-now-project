@@ -38,13 +38,13 @@ export function searchItems(pathParams, params) {
     return callsHandler.callGET(config.catalogURL, "items/search", pathParams, params);
 }
 export function login(pathParams, params, loginData) {
-    return callsHandler.callPOST(config.usersURL, "authenticate", pathParams, params, loginData);
+    return callsHandler.callPOST(config.usersGuestURL, "authenticate", pathParams, params, loginData);
 }
 export function getLoginData(pathParams, params) {
     return callsHandler.callGET(config.usersURL, "{userId}", pathParams, params);
 }
 export function register(pathParams, params, userData) {
-    return callsHandler.callPOST(config.usersURL, "", pathParams, params, userData);
+    return callsHandler.callPOST(config.usersGuestURL, "", pathParams, params, userData);
 }
 export function deleteUser(pathParams, params) {
     return callsHandler.callDELETE(config.usersURL, "{userId}", pathParams, params);
@@ -52,12 +52,12 @@ export function deleteUser(pathParams, params) {
 export function retrieveCurrentUserOrders(pathParams) {
     return callsHandler.callGET(config.ordersURL, "user/{userId}/not-open", pathParams);
 }
-export function searchOrder(pathParams, params) {
-    return callsHandler.callGET(config.ordersAdminURL, "search", pathParams, params);
+export function searchUserByEmail(pathParams, params) {
+    return callsHandler.callGET(config.usersAdminURL, "search-by-email", pathParams, params);
+}
+export function searchPlacedOrders(pathParams, params) {
+    return callsHandler.callGET(config.ordersAdminURL, "{userId}/search-placed", pathParams, params);
 }
 export function setDeliveredOn(pathParams, params) {
     return callsHandler.callPOST(config.ordersAdminURL, "{orderId}/delivery-date", pathParams, params);
-}
-export function closeOrder(pathParams, params) {
-    return callsHandler.callPOST(config.ordersAdminURL, "{orderId}/close", pathParams, params);
 }

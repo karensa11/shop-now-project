@@ -10,7 +10,6 @@ import com.demo.orderservice.data.CatalogItem;
 import com.demo.orderservice.data.OrderDetails;
 import com.demo.orderservice.data.OrderItem;
 import com.demo.orderservice.feign.CatalogFeign;
-import com.demo.orderservice.feign.UsersFeign;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.exception.DetailsNotFoundException;
@@ -26,15 +25,8 @@ public class OrderUtils {
 
 	@Autowired
 	private CatalogFeign catalogService;
-	
-	@Autowired
-	private UsersFeign usersFeign;
 
-	public OrderDetails findOrderAndValidateAdmin(Long orderId, Long userId) {
-		boolean isAdmin = usersFeign.isAdmin(userId);
-		if (!isAdmin) {
-			throw new IllegalStateException("Only admin can do this operation");
-		}
+	public OrderDetails findOrder(Long orderId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
 		if (!resultFromDb.isPresent()) {
 			throw new DetailsNotFoundException("order with id " + orderId + " not found");
@@ -49,7 +41,7 @@ public class OrderUtils {
 		}
 		OrderDetails result = resultFromDb.get();
 		if (result.getUserId()!=null && !result.getUserId().equals(userId)) {
-			throw new IllegalArgumentException("invalid user id");
+			throw new IllegalArgumentException("invalid user id. order user " + result.getUserId() + ", input user " + userId);
 		}
 		return result;
 	}
@@ -62,7 +54,7 @@ public class OrderUtils {
 		OrderItem result = resultFromDb.get();
 		System.out.println("result.getOrderId()" + result.getOrderId() + " orderId " + orderId );
 		if (!result.getOrderId().equals(orderId)) {
-			throw new IllegalArgumentException("invalid order id");
+			throw new IllegalArgumentException("invalid user id. order user ");
 		}
 		return result;
 	}

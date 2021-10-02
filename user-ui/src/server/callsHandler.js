@@ -5,11 +5,16 @@ const {getSessionId, store} = require("../redux/sessionStorage");
 const {currentUserSelector} = require("../redux/general/general-selector");
 
 function standardHeaders() {
-    return {
+    const currentUser = currentUserSelector(store.getState());
+    const  header = {
         transactionId: uuid(),
         sessionId: getSessionId(),
-        userId: (currentUserSelector(store.getState()) || {id: 0}).id
+    };
+    if (currentUser) {
+        header.userId = currentUser.id;
+        header.adminId = currentUser.isAdmin ? currentUser.id : null;
     }
+    return header;
 }
 
 module.exports = {

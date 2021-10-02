@@ -15,4 +15,8 @@ public class UserAutheticationRequest {
 	public void setPasswordPartial(String passwordPartial) {
 		this.passwordPartial = passwordPartial;
 	}
+	@Override
+	public String toString() {
+		return "UserAutheticationRequest [email=" + email + ", passwordPartial=" + passwordPartial + "]";
+	}
 }

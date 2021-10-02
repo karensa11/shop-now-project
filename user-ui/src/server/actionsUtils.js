@@ -14,11 +14,13 @@ export function handleServerUpdate({response, dispatch, onSuccess, onConflict})
     else{
         dispatch(generalActions.serverCallFinished());
         if (onSuccess) {
+            console.log("handleServerUpdate - onSuccess 1");
             if (Array.isArray(onSuccess)) {
                 onSuccess.forEach(onSuccessFunc => {
                     dispatch(onSuccessFunc(response));
                 });
             } else {
+                console.log("handleServerUpdate - onSuccess 2");
                 dispatch(onSuccess(response));
             }
         }

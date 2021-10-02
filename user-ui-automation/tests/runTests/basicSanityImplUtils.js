@@ -14,4 +14,10 @@ module.exports = {
         await driverUtils.sleep(driver, runData);
         await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', count+'');
     },
+    login:  async function (driver, runData, email, password){
+        await driverUtils.clickById(driver, runData, 'loginBtn');
+        await driverUtils.populateInput(driver, runData, 'emailInput', email);
+        await driverUtils.populateInput(driver, runData, 'passwordInput', password);
+        await driverUtils.clickById(driver, runData, 'submitLoginBtn');
+    }
 };

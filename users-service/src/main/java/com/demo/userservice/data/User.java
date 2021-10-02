@@ -34,6 +34,8 @@ public class User {
 	private String email;
 	
 	private Boolean isAdmin = Boolean.FALSE;
+	
+	private Boolean isGuest = Boolean.FALSE;
 
 	@Size(min=4, message="passwordPartial should have aqt least 4 characters")
 	@NotEmpty
@@ -83,5 +85,11 @@ public class User {
 	}
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public Boolean getIsGuest() {
+		return isGuest;
+	}
+	public void setIsGuest(Boolean isGuest) {
+		this.isGuest = isGuest;
 	}
 }

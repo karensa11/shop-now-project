@@ -1,16 +1,18 @@
 import types from "./admin-types";
 
 const INITIAL_STATE = {
-    currentOrder: null
+    currentOrders: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case types.SET_CURRENT_ADMIN_ORDER:
+        case types.SET_CURRENT_ADMIN_ORDERS:
             return {
                 ...state,
-                currentOrder: action.payload
+                currentOrders: action.payload
             };
+        case types.CLEAR_ADMIN_DATA:
+            return INITIAL_STATE;
         default: return state
     }
 };
