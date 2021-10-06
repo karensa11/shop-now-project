@@ -3,7 +3,7 @@ const webdriver = require('selenium-webdriver');
 const basicSanityImpl = require('./basicSanityImpl');
 const stringUtils = require('../lib/stringUtils');
 const testDate = require('../utils/runDate');
-const driverUtils = require('../utils/driverUtils');
+const logger = require('../utils/logUtils');
 
 const chromeCapabilities = webdriver.Capabilities.chrome();
 const chromeOptions = {
@@ -32,7 +32,24 @@ describe('Basic Sanity', () => {
 
     function runTest(testName, testMethod) {
         it(testName, async () => {
-            await testMethod(driver, runData(testName));
+            const keys = Object.keys(testMethod);
+            const runDataObj = runData(testName);
+            for (const key of keys) {
+                logger.logTestKey(key, runDataObj);
+            }
+            for (const key of keys) {
+                logger.logTitle(key, runDataObj);
+                const method = testMethod[key];
+                const startTime = new Date();
+                try {
+                    await method(driver, runDataObj);
+                    logger.logKeysSuccess(key, startTime, runDataObj);
+                } catch (err) {
+                    console.log("test failed", testName);
+                    logger.logKeysFailure(key, startTime, runDataObj);
+                    throw err;
+                }
+            }
         });
     }
     runTest('Open', basicSanityImpl.testInit);

@@ -4,4 +4,5 @@ public enum SecurityRole {
 	GUEST,
 	USER,
 	ADMIN,
+	INTERNAL,
 }

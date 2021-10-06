@@ -13,11 +13,6 @@ function writeScreenshot(data, runData) {
     fileUtils.writeImage(data, reportFileUtils.imageFile(imageId));
     logger.log('IMAGE '+imageId, runData);
 }
-async function _click(driver, runData, by) {
-    await driver.wait(until.elementLocated(by));
-    await this.takeScreenshot(driver, runData);
-    await driver.findElement(by).click();
-}
 
 module.exports = {
     elementExits: async function(driver, runData, id) {
@@ -32,9 +27,8 @@ module.exports = {
 
     takeScreenshot: async function(driver, runData) {
         await driver.sleep(driver, runData, 1500);
-        driver.takeScreenshot().then(function (data) {
-            writeScreenshot(data, runData);
-        });
+        const data = await driver.takeScreenshot();
+        writeScreenshot(data, runData);
     },
 
     openClient: async function(driver, runData) {
@@ -87,6 +81,7 @@ module.exports = {
 
     validateAlertAndClick:  async function(driver, runData, expectedAlertText) {
         logger.log('verify alert opens', runData);
+
         await driver.wait(until.alertIsPresent());
         const alert = await driver.switchTo().alert();
         await driver.switchTo().alert();
@@ -100,7 +95,6 @@ module.exports = {
         logger.log('populate input with id '+id+', text '+value, runData);
 
         await driver.wait(until.elementLocated(By.id(id)));
-        await this.takeScreenshot(driver, runData);
         await driver.findElement(By.id(id)).clear();
         await driver.findElement(By.id(id)).sendKeys(value);
         await this.takeScreenshot(driver, runData);
@@ -120,18 +114,13 @@ module.exports = {
     },
 
     getTxt: async function(driver, runData, id) {
-        logger.log('get label of element with id '+id, runData);
-
         await driver.wait(until.elementLocated(By.id(id)));
-        await this.takeScreenshot(driver, runData);
         const value = driver.findElement(By.id(id)).getText();
         return value;
     },
 
     getIdByTxt: async function(driver, runData, txt, elementType) {
-        logger.log('get id of element with txt '+txt, runData);
         const value = txt;//.split(' ')[1];
-
         let id = null;
         await driver.findElements(By.xpath(`//${elementType}[text() ='${value}']`)).then(function(elements) {
             console.log(elements);

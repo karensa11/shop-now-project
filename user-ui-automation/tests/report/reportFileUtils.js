@@ -24,6 +24,12 @@ module.exports = {
     logFile(testCode){
         return this.logsFolder()+testCode+'.txt';
     },
+    keysFile(testCode){
+        return this.logsFolder()+testCode+'_keys.txt';
+    },
+    keysStatusFile(testCode){
+        return this.logsFolder()+testCode+'_keys_status.txt';
+    },
     imageFile(imageId){
         return this.screenshotsFolder()+imageId+'.png';
     },

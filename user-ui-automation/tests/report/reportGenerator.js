@@ -9,6 +9,54 @@ module.exports = {
         // handle files and folders //
         fileUtils.createDirectoryIfNotExists(reportFileUtils.reportFolder());
         fileUtils.copyFile(config.resourcesFolder + 'styles.css', reportFileUtils.reportFolder() + 'styles.css');
+        fileUtils.copyFile(config.resourcesFolder + 'modal.css', reportFileUtils.reportFolder() + 'modal.css');
+        fileUtils.copyFile(config.resourcesFolder + 'scripts.js', reportFileUtils.reportFolder() + 'scripts.js');
+        fileUtils.copyFile(config.resourcesFolder + 'modal.js', reportFileUtils.reportFolder() + 'modal.js');
+        fileUtils.copyFile(config.resourcesFolder + 'jquery.min.js', reportFileUtils.reportFolder() + 'jquery.min.js');
+
+        Object.keys(runInfo.suites).forEach((suiteCode) => {
+            const suite = runInfo.suites[suiteCode];
+            const testKeys = Object.keys(suite.tests);
+            suite.totalSteps = 0;
+            suite.passedSteps = 0;
+            testKeys.forEach((testCode, index) => {
+                const test = suite.tests[testCode];
+                const testStepsData = fileUtils.fileExists(reportFileUtils.keysFile(testCode)) ?
+                    fileUtils.getAllLines(reportFileUtils.keysFile(testCode)) : [];
+                const testPartsKeysStatus = fileUtils.fileExists(reportFileUtils.keysStatusFile(testCode)) ?
+                    fileUtils.getAllLines(reportFileUtils.keysStatusFile(testCode)) : [];
+                test.stepsData = {};
+                test.stepsPassed = 0;
+                test.totalSteps = 0;
+
+                testStepsData.forEach(step => {
+                    if (step !== "") {
+                        suite.totalSteps++;
+                        test.totalSteps++;
+                        const keyStatus = testPartsKeysStatus.filter(item =>
+                            item.includes(step)
+                        );
+                        const startDate = keyStatus && keyStatus.length ?
+                            keyStatus[0].substr(keyStatus[0].indexOf(" DATE ") + 6, 19) : "";
+                        const duration = keyStatus && keyStatus.length ?
+                            parseInt(keyStatus[0].substr(keyStatus[0].indexOf(" DURATION ") + 11)) : null;
+                        const status = keyStatus && keyStatus.length ?
+                            ((keyStatus[0]).includes("SUCCESS") ?
+                                "SUCCESS" : "FAILURE") : "SKIPPED";
+                        if (status === "SUCCESS"){
+                            test.stepsPassed++;
+                            suite.passedSteps++;
+                        }
+                        status === "FAILURE" && (test.failedStep = step);
+                        test.stepsData[step] = {
+                            status: status,
+                            startDate: startDate,
+                            duration: duration
+                        };
+                    }
+                });
+            });
+        });
 
         // create main report //
         const htmlContent = indexGenerator.createDocument(runInfo);

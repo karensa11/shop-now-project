@@ -20,8 +20,9 @@
 - output: id, name
 *DELETE /users/{id}*
 
-*GET /users/admin/{userId}*
-- output: id, name, pending order id
+*GET /users/internal/{userId}*
+- output: id, isAdmin, isGuest
+
 pending order items count
 *POST /users/admin/search-by-email*
 - output: id, name, pending order id
@@ -120,8 +121,8 @@ ID
 NAME
 EMAIL
 PASSWORD
-IS_ADMIN
-IS_GUEST
+IS ADMIN
+IS GUEST
 bg=orange</panel_attributes>
     <additional_attributes/>
   </element>
@@ -138,6 +139,7 @@ bg=orange</panel_attributes>
 --
 ID
 CREATION DATE
+DELIVERED AT
 USER ID
 STATUS
 bg=orange</panel_attributes>

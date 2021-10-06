@@ -26,4 +26,8 @@ module.exports = {
     stringEqualIgnoreCase(string1, string2) {
         return string1.toLowerCase() === string2.toLowerCase();
     },
-}
+
+    removeSpaces(string) {
+        return string.replace(/[ ]/g, "");
+    }
+};

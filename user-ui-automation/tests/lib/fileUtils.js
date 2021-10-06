@@ -15,10 +15,6 @@ module.exports = {
     {
         return fs.statSync(filePath).mtime;
     },
-    fileExists: function(filePath)
-    {
-        return fs.existsSync(filePath);
-    },
     readFile: function(path)
     {
         let data = null;

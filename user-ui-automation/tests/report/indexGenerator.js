@@ -61,8 +61,10 @@ module.exports = {
                         htmlUtils.createTD(presentationUtils.formatDate(suite.endDate)),
                         htmlUtils.createTD('Duration (S)', 'detailsHeader'),
                         htmlUtils.createTD(presentationUtils.formatDuration(suite.duration)),
-                        htmlUtils.createTD('Passed', 'detailsHeader'),
+                        htmlUtils.createTD('Passed Tests', 'detailsHeader'),
                         htmlUtils.createTD(suite.passedTests+'/'+suite.testsNum),
+                        htmlUtils.createTD('Passed Steps', 'detailsHeader'),
+                        htmlUtils.createTD(suite.passedSteps+'/'+suite.totalSteps),
                         htmlUtils.createTD('Session ID', 'detailsHeader'),
                         htmlUtils.createTD(runInfo.sessionId)
                     ]
@@ -93,6 +95,8 @@ module.exports = {
                     htmlUtils.createTH('Start Time'),
                     htmlUtils.createTH('End Time'),
                     htmlUtils.createTH('Duration (s)'),
+                    htmlUtils.createTH('Passed'),,
+                    htmlUtils.createTH('Failed Step'),
                 ]
             }]
         }
@@ -112,6 +116,8 @@ module.exports = {
                         htmlUtils.createTD(presentationUtils.formatDate(test.startDate)),
                         htmlUtils.createTD(presentationUtils.formatDate(test.endDate)),
                         htmlUtils.createTD(presentationUtils.formatDuration(test.duration)),
+                        htmlUtils.createTD(test.stepsPassed + " / " + test.totalSteps),
+                        htmlUtils.createTD(test.failedStep),
                     ]
                 })
         });

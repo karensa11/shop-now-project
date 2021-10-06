@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SecurityConfig {
+public class RolesConfig {
 
 	private static final String PORPERTIES_FILE_NAME = "security.properties";
 

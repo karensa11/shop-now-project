@@ -1,7 +1,6 @@
-
 body {
-    background-color: #ddd;
-    font-family: Tahoma;
+    background-color: #c4ced7;
+    font-family: verdana;
 }
 table {
     border: 1px solid #ddd;
@@ -32,7 +31,7 @@ a {
 .pageTitle {
     font-size: 20px;
     font-weight: bold;
-    background-color: #225;
+    background-color: #682b8b;
     text-align: center;
     color: white;
     padding: 5px;
@@ -57,28 +56,62 @@ a {
     font-weight: bold;
     background-color: #e2d3c1;
 }
-.testDetails {
+.test-details {
     border: 1px solid #aaa;
-    background-color: #fffdfd;
-    padding: 15px;
+    background-color: #fdfdfd;
+    width: 60%;
 }
 .screenshot {
     transform: scale(0.9);
-    border: 2px solid #939292;
+    border: 2px solid #c7c5c5;
+    width: 400px;
+    height: 200px;
+    box-shadow: 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -khtml-box-shadow: 5px 5px 5px #ccc;
+    cursor: pointer;
+    margin: 5px;
 }
 .error {
-    color: red
+    background-color: palevioletred;
+    padding: 20px;
+    text-align: left;
 }
-.linkPrev {
-    color: #cbc090;
+.link-arrow {
     text-decoration: none;
-    padding-right: 30px;
-}
-.linkNext {
-    color: #cbc090;
-    text-decoration: none;
-    padding-left: 30px;
+    margin: 0 10px;
 }
 .text {
-    background-color: #f1e6db;
+    text-align: left;
+    margin-left: 10px;
+}
+.test-section-title {
+    font-weight: bold;
+    font-size: 20px;
+    background: linear-gradient(#ddd, #aaa);
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+.checkbox-label {
+    margin: 0 10px;
+}
+.test-key {
+    font-size: 20px;
+    font-weight: bold;
+}
+.test-key-status-SUCCESS{
+    background-color: #abecab;
+}
+.test-key-status-FAILURE{
+    background-color: #ffa1a1;
+}
+.test-key-status-SKIPPED{
+    background-color: orange;
+}
+.title-top-link {
+    position: relative;
+    left: 30px;bottom: 2px;
+    font-size: 15px;
+    color: #3a456c;
 }

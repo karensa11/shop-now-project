@@ -1,165 +1,219 @@
 const basicSanityImplUtils = require('./basicSanityImplUtils');
 const driverUtils = require('../utils/driverUtils');
 const {TestData} = require('./testData');
+const logger = require('../utils/logUtils');
 
 module.exports = {
-    testInit: async function(driver, runData) {
-        await basicSanityImplUtils.init(driver, runData);
+    testInit: {
+        INIT: async function(driver, runData) {
+            await basicSanityImplUtils.init(driver, runData);
+        },
     },
-    testRegister: async function(driver, runData) {
-        const {userData} = TestData;
-        await driverUtils.clickById(driver, runData, 'registerBtn');
-        await driverUtils.populateInput(driver, runData, 'emailInput', userData.testEmail);
-        await driverUtils.populateInput(driver, runData, 'nameInput', userData.testName);
-        await driverUtils.populateInput(driver, runData, 'passwordInput', userData.testPassword);
-        await driverUtils.populateInput(driver, runData, 'confirmPasswordInput', userData.testPassword);
-        await driverUtils.clickById(driver, runData, 'submitRegisterBtn');
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+    testRegister: {
+        "REGISTER": async function (driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.clickById(driver, runData, 'registerBtn');
+            await driverUtils.populateInput(driver, runData, 'emailInput', userData.testEmail);
+            await driverUtils.populateInput(driver, runData, 'nameInput', userData.testName);
+            await driverUtils.populateInput(driver, runData, 'passwordInput', userData.testPassword);
+            await driverUtils.populateInput(driver, runData, 'confirmPasswordInput', userData.testPassword);
+            await driverUtils.clickById(driver, runData, 'submitRegisterBtn');
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+        }
     },
-    testLogout: async function(driver, runData) {
-        await driverUtils.clickById(driver, runData, 'logoutBtn');
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+    testLogout: {
+        "LOGOUT": async function (driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.clickById(driver, runData, 'logoutBtn');
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+        }
     },
-    testLogin: async function(driver, runData) {
-        const {userData} = TestData;
-        await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+    testLogin: {
+        "LOGIN": async function (driver, runData) {
+            const {userData} = TestData;
+            await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+        }
     },
-    testSearch: async function(driver, runData) {
-        const {catalogData} = TestData;
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
-        await driverUtils.populateInput(driver, runData, 'searchInput', catalogData.searchText);
-        await driverUtils.clickById(driver, runData, 'searchBtn');
-        await driverUtils.assertTxtValue(driver, runData, 'searchTextLbl', catalogData.searchText);
-        await driverUtils.assertTxtValue(driver, runData, 'searchResultName0Lbl', catalogData.selectedCatalogItem1Name);
-        await driverUtils.clickById(driver, runData, 'searchResultAddToCart0Btn');
-        await driverUtils.sleep(driver, runData);
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+    testSearch: {
+        "SEARCH ITEM": async function (driver, runData) {
+            const {catalogData} = TestData;
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+            await driverUtils.populateInput(driver, runData, 'searchInput', catalogData.searchText);
+            await driverUtils.clickById(driver, runData, 'searchBtn');
+            await driverUtils.assertTxtValue(driver, runData, 'searchTextLbl', catalogData.searchText);
+            await driverUtils.assertTxtValue(driver, runData, 'searchResultName0Lbl', catalogData.selectedCatalogItem1Name);
+        },
+        "ADD RESULT ITEM TO CART": async function (driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.clickById(driver, runData, 'searchResultAddToCart0Btn');
+            await driverUtils.sleep(driver, runData);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        }
     },
-    testAddToCart: async function(driver, runData) {
-        const {catalogData} = TestData;
-        // check existing cart items //
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
-        // browse to catalog item //
-        await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
-        await driverUtils.clickById(driver, runData, 'category1Btn');
-        // add catalog item to cart and check updated //
-        await driverUtils.assertTxtValue(driver, runData, 'catalogItemName1Lbl', catalogData.selectedCatalogItem1Name);
-        await driverUtils.clickById(driver, runData, 'addToCart1Btn');
-        await driverUtils.sleep(driver, runData);
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
-        // add another catalog item to cart and check updated //
-        await driverUtils.assertTxtValue(driver, runData, 'catalogItemName2Lbl', catalogData.selectedCatalogItem2Name);
-        await driverUtils.clickById(driver, runData, 'addToCart2Btn');
-        await driverUtils.sleep(driver, runData);
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 2);
+    testAddToCart: {
+        "CHECK EXISTING CART ITEMS" : async function(driver, runData) {
+            const {catalogData} = TestData;
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+        },
+        "BROWSE CATALOG ITEM" : async function(driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
+            await driverUtils.clickById(driver, runData, 'category1Btn');
+        },
+        "ADD CATALOG ITEM TO CART": async function(driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.assertTxtValue(driver, runData, 'catalogItemName1Lbl', catalogData.selectedCatalogItem1Name);
+            await driverUtils.clickById(driver, runData, 'addToCart1Btn');
+            await driverUtils.sleep(driver, runData);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        },
+        "ADD ANOTHER CATALOG ITEM TO CART": async function(driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.assertTxtValue(driver, runData, 'catalogItemName2Lbl', catalogData.selectedCatalogItem2Name);
+            await driverUtils.clickById(driver, runData, 'addToCart2Btn');
+            await driverUtils.sleep(driver, runData);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 2);
+        }
     },
-    testViewShoppingCart: async function(driver, runData) {
-        // navigate to shopping cart //
-        await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
-        // check shopping cart content //
-        await driverUtils.assertTxtValue(driver, runData, 'shoppingCartLbl', 'Your cart');
-        await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', '2');
+    testViewShoppingCart: {
+        "NAVIGATE TO SHOPPING CART": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
+        },
+        "CHECK SHOPPING CART CONTENT": async function(driver, runData) {
+            await driverUtils.assertTxtValue(driver, runData, 'shoppingCartLbl', 'Your cart');
+            await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', '2');
+        }
     },
-    testChangeQuantity: async function(driver, runData) {
-        await driverUtils.clickById(driver, runData, 'increase0Btn');
-        await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
-        await driverUtils.clickById(driver, runData, 'increase0Btn');
-        await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
-        await driverUtils.clickById(driver, runData, 'increase1Btn');
-        await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 5);
-        await driverUtils.clickById(driver, runData, 'decrease1Btn');
-        await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
+    testChangeQuantity: {
+        "INCREASE ITEM 1 QUANTITY": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'increase0Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
+            await driverUtils.clickById(driver, runData, 'increase0Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
+        },
+        "INCREASE ITEM 2 QUANTITY": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'increase1Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 5);
+        },
+        "DECREASE ITEM 2 QUANTITY": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'decrease1Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
+        }
     },
-    testRemoveItem: async function(driver, runData) {
-        await driverUtils.clickById(driver, runData, 'remove1Btn');
-        await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
-        await driverUtils.clickById(driver, runData, 'remove0Btn');
-        await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+    testRemoveItem: {
+        "REMOVE ITEMS": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'remove1Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
+            await driverUtils.clickById(driver, runData, 'remove0Btn');
+        },
+        "CHECK CART IS EMPTY": async function(driver, runData) {
+            await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+        }
     },
-    testCancelOrder: async function(driver, runData) {
-        // add items to cart //
-        await driverUtils.clickById(driver, runData, 'logoBtn');
-        const {catalogData} = TestData;
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
-        await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
-        await driverUtils.clickById(driver, runData, 'category1Btn');
-        await driverUtils.clickById(driver, runData, 'addToCart1Btn');
-        await driverUtils.sleep(driver, runData);
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
-        // view cart and cancel order //
-        await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
-        await driverUtils.clickById(driver, runData, 'cancelOrderBtn');
-        await driverUtils.sleep(driver, runData);
-        await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+    testCancelOrder: {
+        "NAVIGATE TO CATALOG": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'logoBtn');
+            const {catalogData} = TestData;
+        },
+        "ADD ITEMS TO CART": async function(driver, runData) {
+            const {catalogData} = TestData;
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+            await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
+            await driverUtils.clickById(driver, runData, 'category1Btn');
+            await driverUtils.clickById(driver, runData, 'addToCart1Btn');
+            await driverUtils.sleep(driver, runData);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        },
+        "VIEW CART AND CANCEL ORDER": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
+            await driverUtils.clickById(driver, runData, 'cancelOrderBtn');
+            await driverUtils.sleep(driver, runData);
+            await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+        }
     },
-    testPlaceOrder: async function(driver, runData) {
-        // add items to cart //
-        await driverUtils.clickById(driver, runData, 'logoBtn');
-        const {catalogData} = TestData;
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
-        await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
-        await driverUtils.clickById(driver, runData, 'category1Btn');
-        await driverUtils.clickById(driver, runData, 'addToCart1Btn');
-        await driverUtils.sleep(driver, runData);
-        await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
-        // view cart and cancel order //
-        await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
-        await driverUtils.clickById(driver, runData, 'placeOrderBtn');
-        await driverUtils.sleep(driver, runData);
-        await driverUtils.validateAlertAndClick(driver, runData, 'Your order placed with success');
-        await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+    testPlaceOrder: {
+        "ADD ITEMS TO CART": async function(driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.clickById(driver, runData, 'logoBtn');
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+            await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
+            await driverUtils.clickById(driver, runData, 'category1Btn');
+            await driverUtils.clickById(driver, runData, 'addToCart1Btn');
+            await driverUtils.sleep(driver, runData);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+        },
+        "VIEW CART AND PLACE ORDER": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'viewShoppingCartBtn');
+            await driverUtils.clickById(driver, runData, 'placeOrderBtn');
+            await driverUtils.sleep(driver, runData);
+            await driverUtils.validateAlertAndClick(driver, runData, 'Your order placed with success');
+            await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
+        }
     },
-    testLoginAdmin: async function(driver, runData) {
-        // logout from regular user //
-        await driverUtils.clickById(driver, runData, 'logoutBtn');
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
-        // login as admin //
-        const {userData} = TestData;
-        await driverUtils.clickById(driver, runData, 'loginBtn');
-        await driverUtils.populateInput(driver, runData, 'emailInput', userData.adminEmail);
-        await driverUtils.populateInput(driver, runData, 'passwordInput', userData.adminPassword);
-        await driverUtils.clickById(driver, runData, 'submitLoginBtn');
-        await driverUtils.assertTxtValue(driver, runData, 'adminNameLbl', userData.adminName);
+    testLoginAdmin: {
+        "LOGOUT FROM REGULAR USER": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'logoutBtn');
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+        },
+        "LOGIN AS ADMIN": async function(driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.clickById(driver, runData, 'loginBtn');
+            await driverUtils.populateInput(driver, runData, 'emailInput', userData.adminEmail);
+            await driverUtils.populateInput(driver, runData, 'passwordInput', userData.adminPassword);
+            await driverUtils.clickById(driver, runData, 'submitLoginBtn');
+            await driverUtils.assertTxtValue(driver, runData, 'adminNameLbl', userData.adminName);
+        }
     },
-    testCloseOrder: async function(driver, runData) {
-        const {userData} = TestData;
-        await driverUtils.clickById(driver, runData, 'handleOrderBtn');
-        await driverUtils.populateInput(driver, runData, 'emailSearchInput', userData.testEmail);
-        await driverUtils.clickById(driver, runData, 'searchOrderAdminBtn');
-        await driverUtils.clickById(driver, runData, 'setDeliveredOn0Btn');
-        await driverUtils.clickById(driver, runData, 'adminLogoutBtn');
+    testCloseOrder: {
+        "VIEW AND CLOSE ORDER": async function(driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.clickById(driver, runData, 'handleOrderBtn');
+            await driverUtils.populateInput(driver, runData, 'emailSearchInput', userData.testEmail);
+            await driverUtils.clickById(driver, runData, 'searchOrderAdminBtn');
+            await driverUtils.clickById(driver, runData, 'setDeliveredOn0Btn');
+            await driverUtils.clickById(driver, runData, 'adminLogoutBtn');
+        }
     },
-    testViewAccount: async function(driver, runData) {
-        const {userData} = TestData;
-        const {catalogData} = TestData;
-        // login again to the system //
-        await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
-        // go to account //
-        await driverUtils.clickById(driver, runData, 'accountBtn');
-        // account details //
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
-        await driverUtils.assertTxtValue(driver, runData, 'emailLbl', userData.testEmail);
-        // order history //
-        await driverUtils.assertTxtValue(driver, runData, 'itemName00Lbl', catalogData.selectedCatalogItem1Name);
-        await driverUtils.assertTxtValue(driver, runData, 'itemName10Lbl', catalogData.selectedCatalogItem1Name);
-        await driverUtils.assertTxtValue(driver, runData, 'orderStatus0Lbl', 'CANCELLED');
-        await driverUtils.assertTxtValue(driver, runData, 'orderStatus1Lbl', 'CANCELLED');
-        await driverUtils.assertTxtValue(driver, runData, 'orderStatus2Lbl', 'CLOSED');
+    testViewAccount: {
+        "LOGIN AGAIN TO THE SYSTEM": async function(driver, runData) {
+            const {userData} = TestData;
+            await basicSanityImplUtils.login(driver, runData, userData.testEmail, userData.testPassword);
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+        },
+        "GO TO ACCOUNT": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'accountBtn');
+        },
+        "CHECK ACCOUNT DETAILS": async function(driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', userData.testName);
+            await driverUtils.assertTxtValue(driver, runData, 'emailLbl', userData.testEmail);
+        },
+        "CHECK ORDER HISTORY": async function(driver, runData) {
+            const {catalogData} = TestData;
+            await driverUtils.assertTxtValue(driver, runData, 'itemName00Lbl', catalogData.selectedCatalogItem1Name);
+            await driverUtils.assertTxtValue(driver, runData, 'itemName10Lbl', catalogData.selectedCatalogItem1Name);
+            await driverUtils.assertTxtValue(driver, runData, 'orderStatus0Lbl', 'CANCELLED');
+            await driverUtils.assertTxtValue(driver, runData, 'orderStatus1Lbl', 'CANCELLED');
+            await driverUtils.assertTxtValue(driver, runData, 'orderStatus2Lbl', 'CLOSED');
+        }
     },
-    testDeleteUser: async function(driver, runData) {
-        await driverUtils.clickById(driver, runData, 'deleteAccountBtn');
-        await driverUtils.validateAlertAndClick(driver, runData, 'please confirm deletion');
-        await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
-        await driverUtils.sleep(driver, runData);
+    testDeleteUser: {
+        "DELETE ACCOUNT": async function(driver, runData) {
+            await driverUtils.clickById(driver, runData, 'deleteAccountBtn');
+            await driverUtils.validateAlertAndClick(driver, runData, 'please confirm deletion');
+            await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
+            await driverUtils.sleep(driver, runData);
+        }
     },
-    testLoginFailure: async function(driver, runData) {
-        const {userData} = TestData;
-        await driverUtils.clickById(driver, runData, 'loginBtn');
-        await driverUtils.populateInput(driver, runData, 'emailInput', userData.testEmail);
-        await driverUtils.populateInput(driver, runData, 'passwordInput', userData.testPassword);
-        await driverUtils.clickById(driver, runData, 'submitLoginBtn');
-        await driverUtils.validateAlertAndClick(driver, runData, 'user not found or password is wrong');
+    testLoginFailure: {
+        "VERIFY UNABLE TO LOGIN": async function(driver, runData) {
+            const {userData} = TestData;
+            await driverUtils.clickById(driver, runData, 'loginBtn');
+            await driverUtils.populateInput(driver, runData, 'emailInput', userData.testEmail);
+            await driverUtils.populateInput(driver, runData, 'passwordInput', userData.testPassword);
+            await driverUtils.clickById(driver, runData, 'submitLoginBtn');
+            await driverUtils.validateAlertAndClick(driver, runData, 'user not found or password is wrong');
+        }
     },
 };
