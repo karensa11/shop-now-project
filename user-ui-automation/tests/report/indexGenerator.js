@@ -14,25 +14,26 @@ module.exports = {
         return {
             type: 'head',
             content: [
-                {
-                    type: 'title', content: 'Automation Report'
-                },
-                {
-                    type: 'link', attributes: {rel: 'stylesheet', href: 'styles.css'}
-                }
+                htmlUtils.createTitle('Automation Report'),
+                htmlUtils.createCSS('styles.css')
             ]
         };
     },
     createBody(runInfo) {
         const body = {
             type: 'body',
-            attributes: {style: 'padding: 1rem'},
             content: [
                 this.createReportHeader(),
-                htmlUtils.createBR(),htmlUtils.createBR(),
-                this.createReportGeneralDetails(runInfo),
-                htmlUtils.createBR(),htmlUtils.createBR(),
-                this.createSuites(runInfo)
+                {
+                    type: 'div',
+                    attributes: {id: 'divContent'},
+                    content: [
+                        htmlUtils.createBR(), htmlUtils.createBR(),
+                        this.createReportGeneralDetails(runInfo),
+                        htmlUtils.createBR(), htmlUtils.createBR(),
+                        this.createSuites(runInfo)
+                    ]
+                }
             ]
         };
         return body;
@@ -40,36 +41,79 @@ module.exports = {
     createReportHeader() {
         return {
             type: 'div',
-            attributes: {class: 'pageTitle'},
-            content: 'TEST RUN'
+            attributes: {class: 'pageTitle', align: 'center'},
+            content: [
+                {
+                    type: 'div',
+                    attributes: {class: 'pageTitleMain', align: 'center'},
+                    content: 'SHOP TESTING'
+                },
+                {
+                    type: 'div',
+                    attributes: {class: 'currentPage', align: 'center'},
+                    content: 'OVERVIEW'
+                }]
         }
     },
     createReportGeneralDetails(runInfo) {
         const suite = Object.values(runInfo.suites)[0];
         return {
-            type: 'table',
-            attributes: {class: 'details', align: 'center'},
-            content: [
-                {
-                    type: 'tr',
-                    content: [
-                        htmlUtils.createTD('Browser', 'detailsHeader'),
-                        htmlUtils.createTD('chrome'),
-                        htmlUtils.createTD('Start', 'detailsHeader'),
-                        htmlUtils.createTD(presentationUtils.formatDate(suite.startDate)),
-                        htmlUtils.createTD('End', 'detailsHeader'),
-                        htmlUtils.createTD(presentationUtils.formatDate(suite.endDate)),
-                        htmlUtils.createTD('Duration (S)', 'detailsHeader'),
-                        htmlUtils.createTD(presentationUtils.formatDuration(suite.duration)),
-                        htmlUtils.createTD('Passed Tests', 'detailsHeader'),
-                        htmlUtils.createTD(suite.passedTests+'/'+suite.testsNum),
-                        htmlUtils.createTD('Passed Steps', 'detailsHeader'),
-                        htmlUtils.createTD(suite.passedSteps+'/'+suite.totalSteps),
-                        htmlUtils.createTD('Session ID', 'detailsHeader'),
-                        htmlUtils.createTD(runInfo.sessionId)
-                    ]
-                }
-            ]
+            type: 'div',
+            attributes: {align: 'center'},
+            content: [{
+                type: 'table',
+                content: [
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Browser', 'detailsHeader'),
+                            htmlUtils.createTD('chrome'),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Start', 'detailsHeader'),
+                            htmlUtils.createTD(presentationUtils.formatDate(suite.startDate)),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('End', 'detailsHeader'),
+                            htmlUtils.createTD(presentationUtils.formatDate(suite.endDate)),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Duration (S)', 'detailsHeader'),
+                            htmlUtils.createTD(presentationUtils.formatDuration(suite.duration)),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Passed Tests', 'detailsHeader'),
+                            htmlUtils.createTD(suite.passedTests + '/' + suite.testsNum),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Passed Steps', 'detailsHeader'),
+                            htmlUtils.createTD(suite.passedSteps + '/' + suite.totalSteps),
+                        ]
+                    },
+                    {
+                        type: 'tr',
+                        content: [
+                            htmlUtils.createTD('Session ID', 'detailsHeader'),
+                            htmlUtils.createTD(runInfo.sessionId)
+                        ]
+                    }
+                ]
+            }]
         }
     },
     createSuites(runInfo) {
@@ -77,7 +121,7 @@ module.exports = {
             type: 'div',
             attributes: {align: 'center'},
             content: []
-        }
+        };
         Object.values(runInfo.suites).forEach(suite => {
             result.content.push(this.createTests(suite));
         });
@@ -86,9 +130,10 @@ module.exports = {
     createTests(suite) {
         const result = {
             type: 'table',
-            attributes: {class: 'details'},
+            attributes: {class: 'detailsTable'},
             content: [{
                 type: 'tr',
+                attributes: {class: 'tableTitle'},
                 content: [
                     htmlUtils.createTH('Test Name'),
                     htmlUtils.createTH('Status'),

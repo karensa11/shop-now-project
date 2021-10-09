@@ -61,7 +61,7 @@ module.exports = {
             content: {}
         }
     },
-    createScc(path){
+    createCSS(path){
         return {
             type: 'link',
             attributes: {rel: 'stylesheet', href: path}
