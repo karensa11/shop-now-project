@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.orderservice.data.OrderDetails;
-import com.demo.orderservice.data.OrderItem;
-import com.demo.orderservice.data.OrderItemInput;
-import com.demo.orderservice.data.OrderResponse;
-import com.demo.orderservice.data.OrderStatus;
+import com.demo.orderservice.data.entity.OrderDetails;
+import com.demo.orderservice.data.entity.OrderItem;
+import com.demo.orderservice.data.entity.OrderStatus;
+import com.demo.orderservice.data.rest.OrderItemRequest;
+import com.demo.orderservice.data.rest.OrderResponse;
 import com.demo.orderservice.messages.NotificationData;
 import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
@@ -81,7 +82,7 @@ public class OrdersController {
 	@PostMapping(path = BASE_PATH)
 	public OrderResponse createOrder(
 			@RequestHeader(required = false) Long userId, 
-			@RequestBody OrderItemInput input) {
+			@Validated @RequestBody OrderItemRequest input) {
 		OrderDetails orderDetails = new OrderDetails();
 		orderDetails.setUserId(userId);
 		OrderDetails saved = orderRepository.save(orderDetails);
@@ -112,7 +113,7 @@ public class OrdersController {
 	public OrderResponse createOrderItem(
 			@PathVariable Long orderId,
 			@RequestHeader(required = false) Long userId,
-			@RequestBody OrderItemInput input) {
+			@Validated @RequestBody OrderItemRequest input) {
 		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrderId(orderId);
@@ -128,7 +129,7 @@ public class OrdersController {
 			@PathVariable Long orderId,
 			@PathVariable Long orderItemId,
 			@RequestHeader(required = false) Long userId,
-			@RequestBody OrderItemInput input) {
+			@Validated @RequestBody OrderItemRequest input) {
 		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
 		OrderItem orderItem = orderUtils.findOrderItemAndValidate(orderId, orderItemId);
 		orderItem.setQuantity(input.getQuantity());

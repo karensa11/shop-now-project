@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.userservice.data.User;
+import com.demo.userservice.data.entity.User;
 import com.demo.userservice.repository.UsersRepository;
 import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsNotFoundException;
@@ -22,7 +22,8 @@ public class UsersAdminController {
 	private UsersRepository usersRepository;
 
 	@GetMapping(path = BASE_PATH+"/search-by-email")
-	public User searchUserByEmail(@RequestParam String email) {
+	public User searchUserByEmail(
+			@RequestParam String email) {
 		Optional<User> result = usersRepository.findByEmail(email);
 		if (!result.isPresent()) {
 			throw new DetailsNotFoundException("No user found for email " + email);

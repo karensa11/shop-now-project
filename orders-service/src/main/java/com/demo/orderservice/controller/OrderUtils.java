@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.demo.orderservice.data.CatalogItem;
-import com.demo.orderservice.data.OrderDetails;
-import com.demo.orderservice.data.OrderItem;
+import com.demo.orderservice.data.entity.OrderDetails;
+import com.demo.orderservice.data.entity.OrderItem;
+import com.demo.orderservice.data.feign.CatalogItem;
 import com.demo.orderservice.feign.CatalogFeign;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;

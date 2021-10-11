@@ -1,8 +1,14 @@
-package com.demo.orderservice.data;
+package com.demo.catalogservice.data.entity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class CatalogItem {
+
+	@Id
 	private Long id;
 	private Long categoryId;
 	private String name;
@@ -12,9 +18,6 @@ public class CatalogItem {
 	private String port;
 	public Long getId() {
 		return id;
-	}
-	public Long getCategoryId() {
-		return categoryId;
 	}
 	public String getName() {
 		return name;
@@ -31,9 +34,6 @@ public class CatalogItem {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -45,6 +45,12 @@ public class CatalogItem {
 	}
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
+	}
+	public Long getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 	public String getPort() {
 		return port;

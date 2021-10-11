@@ -1,4 +1,4 @@
-package com.demo.orderservice.data;
+package com.demo.orderservice.data.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

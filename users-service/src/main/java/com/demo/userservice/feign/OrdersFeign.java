@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-import com.demo.userservice.data.OrderDetails;
+import com.demo.userservice.data.feign.OrderDetails;
 import com.demo.utility.CommonConsts;
 
 @FeignClient(name = "orders-service")

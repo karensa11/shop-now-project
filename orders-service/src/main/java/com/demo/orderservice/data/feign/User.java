@@ -1,6 +1,4 @@
-package com.demo.orderservice.data;
-
-import javax.persistence.Entity;
+package com.demo.orderservice.data.feign;
 
 public class User {
 

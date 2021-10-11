@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.orderservice.data.OrderDetails;
-import com.demo.orderservice.data.OrderStatus;
+import com.demo.orderservice.data.entity.OrderDetails;
+import com.demo.orderservice.data.entity.OrderStatus;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.CommonConsts;
 

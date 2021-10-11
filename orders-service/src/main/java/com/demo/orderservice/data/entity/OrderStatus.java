@@ -1,4 +1,4 @@
-package com.demo.userservice.data;
+package com.demo.orderservice.data.entity;
 
 public enum OrderStatus {
 	OPEN,

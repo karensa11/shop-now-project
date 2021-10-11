@@ -1,4 +1,4 @@
-package com.demo.userservice.data;
+package com.demo.userservice.data.feign;
 
 import java.time.LocalDateTime;
 import java.util.List;

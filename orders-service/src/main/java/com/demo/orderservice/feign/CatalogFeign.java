@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.demo.orderservice.data.CatalogItem;
+import com.demo.orderservice.data.feign.CatalogItem;
 import com.demo.utility.CommonConsts;
 
 @FeignClient(name = "catalog-service")

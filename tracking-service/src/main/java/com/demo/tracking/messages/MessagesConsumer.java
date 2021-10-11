@@ -1,6 +1,5 @@
 package com.demo.tracking.messages;
-import java.sql.Date;
-import java.sql.Timestamp;
+
 import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.demo.tracking.data.Notification;
+import com.demo.tracking.data.entity.Notification;
 import com.demo.tracking.repository.NotificationRepository;
 
 @Component

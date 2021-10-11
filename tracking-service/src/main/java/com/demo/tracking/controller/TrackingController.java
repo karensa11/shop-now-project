@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.tracking.data.Notification;
+import com.demo.tracking.data.entity.Notification;
 import com.demo.tracking.repository.NotificationRepository;
 import com.demo.utility.CommonConsts;
 
@@ -20,7 +20,8 @@ public class TrackingController {
 	private NotificationRepository notificationRepository;
 
 	@GetMapping(path = BASE_PATH + "/userId/{userId}")
-	public List<Notification> getNotifications(@PathVariable Long userId) {
+	public List<Notification> getNotifications(
+			@PathVariable Long userId) {
 		return notificationRepository.findAllByUserId(userId);
 	}
 }

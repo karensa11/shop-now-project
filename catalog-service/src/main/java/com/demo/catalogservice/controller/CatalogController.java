@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.catalogservice.data.CatalogItem;
-import com.demo.catalogservice.data.Category;
+import com.demo.catalogservice.data.entity.CatalogItem;
+import com.demo.catalogservice.data.entity.Category;
 import com.demo.catalogservice.repository.CatalogItemRepository;
 import com.demo.catalogservice.repository.CategoryRepository;
 import com.demo.utility.CommonConsts;

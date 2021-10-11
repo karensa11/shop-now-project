@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.userservice.data.User;
+import com.demo.userservice.data.entity.User;
 import com.demo.userservice.repository.UsersRepository;
 import com.demo.utility.CommonConsts;
 import com.demo.utility.exception.DetailsNotFoundException;

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.demo.orderservice.data.OrderDetails;
+import com.demo.orderservice.data.entity.OrderDetails;
 
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDetails, Long>{

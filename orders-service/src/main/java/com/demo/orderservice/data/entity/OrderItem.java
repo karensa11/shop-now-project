@@ -1,4 +1,4 @@
-package com.demo.orderservice.data;
+package com.demo.orderservice.data.entity;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +9,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.demo.orderservice.data.feign.CatalogItem;
 
 @Entity
 public class OrderItem {

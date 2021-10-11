@@ -1,4 +1,4 @@
-package com.demo.userservice.data;
+package com.demo.userservice.data.entity;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.demo.userservice.data.feign.OrderDetails;
 
 @Entity
 public class User {

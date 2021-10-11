@@ -3,7 +3,7 @@ package com.demo.orderservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.demo.orderservice.data.OrderItem;
+import com.demo.orderservice.data.entity.OrderItem;
 
 @Repository
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long>{

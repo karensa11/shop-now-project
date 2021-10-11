@@ -1,8 +1,9 @@
-package com.demo.orderservice.data;
+package com.demo.orderservice.data.rest;
 
-public class OrderItemInput {
+public class OrderItemRequest {
 	private int quantity;
 	private Long catalogId;
+	
 	public int getQuantity() {
 		return quantity;
 	}

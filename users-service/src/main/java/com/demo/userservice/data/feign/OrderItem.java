@@ -1,4 +1,4 @@
-package com.demo.userservice.data;
+package com.demo.userservice.data.feign;
 
 public class OrderItem {
 

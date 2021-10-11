@@ -1,4 +1,4 @@
-package com.demo.tracking.data;
+package com.demo.tracking.data.entity;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;

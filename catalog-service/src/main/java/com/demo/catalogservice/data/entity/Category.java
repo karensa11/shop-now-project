@@ -1,4 +1,4 @@
-package com.demo.catalogservice.data;
+package com.demo.catalogservice.data.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

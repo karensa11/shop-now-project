@@ -1,4 +1,4 @@
-package com.demo.orderservice.data;
+package com.demo.userservice.data.feign;
 
 public enum OrderStatus {
 	OPEN,

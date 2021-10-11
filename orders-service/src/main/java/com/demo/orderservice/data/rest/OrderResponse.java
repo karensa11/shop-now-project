@@ -1,4 +1,4 @@
-package com.demo.orderservice.data;
+package com.demo.orderservice.data.rest;
 
 public class OrderResponse {
 	private Long id;
