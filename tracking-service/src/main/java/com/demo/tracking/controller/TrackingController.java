@@ -14,7 +14,7 @@ import com.demo.utility.CommonConsts;
 @RestController
 public class TrackingController {
 	
-	private static final String BASE_PATH = CommonConsts.MS_PREFIX + "/tracking" + CommonConsts.V1;
+	private static final String BASE_PATH = CommonConsts.MS_PREFIX + "/tracking/admin" + CommonConsts.V1;
 	
 	@Autowired
 	private NotificationRepository notificationRepository;

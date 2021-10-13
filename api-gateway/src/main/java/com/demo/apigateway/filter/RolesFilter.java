@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class RolesFilter implements GlobalFilter{
-	private Logger logger = LoggerFactory.getLogger(RolesFilter.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private RolesConfig securityConfig;

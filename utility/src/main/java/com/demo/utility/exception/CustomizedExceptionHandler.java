@@ -1,20 +1,20 @@
-package com.demo.rest.webservices.controller;
+package com.demo.utility.exception;
 
 import java.util.Date;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.demo.utility.exception.DetailsAlreadyExistsException;
-import com.demo.utility.exception.DetailsNotFoundException;
-import com.demo.utility.exception.ExceptionResponse;
 
 /**
  * Common exception handler for all the controllers.
@@ -23,7 +23,14 @@ import com.demo.utility.exception.ExceptionResponse;
  * @author KARENSA
  *
  */
+@ControllerAdvice
+@RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	@PostConstruct
+	private void postConstruct() {
+		System.out.println("CustomizedExceptionHandler - postConstruct");
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleExceptionCust(Exception ex, WebRequest request) throws Exception {
