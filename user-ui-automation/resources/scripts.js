@@ -128,64 +128,14 @@ function showHide(elementsClass, radioBoxId){
 function openImageModal(e, imageIndex, mockupId)
 {
     // dynamic modal elements //
-    var images = jQuery.parseJSON(sessionStorage.getItem('images'));
-    var image = images[imageIndex];
-    var mockups = jQuery.parseJSON(sessionStorage.getItem('mockups'));
-    var mockupElements = mockups[image.step];
-    var mockupsStr = "";
-    if(mockupElements){
-        for (var i = 0; i < mockupElements.length; i++) {
-            mockupsStr +=
-                '&nbsp;&nbsp;'+
-                '<span onmouseenter="imageModalEnter()"><img class="mockupUrlIcon" src="mockups/'+mockupElements[i].pathId+'.png" title="mockup path '+mockupElements[i].url+'" onclick="openLink(\''+mockupElements[i].url+'\', '+i+')"/></span>'+
-                '<span onmouseenter="imageModalEnter()"><img class="mockupCompareIcon" src="../resources/images/compare.png" title="compare mockup with image" onclick="openImageModal(event, '+imageIndex+', \''+mockupElements[i].pathId+'\')"/></span>';
-        }
-    }
-    var scrollDots = "";
-    for (var i = 0; i < images.length; i++) {
-        if(imageIndex==i){
-            scrollDots += "<span class='dotActive' onmouseenter='imageModalEnter()'>. </span>";
-        }
-        else{
-            scrollDots += "<span class='dotInactive' onclick='openImageModal(event,"+(i)+")' title='"+images[i].path+"' onmouseenter='imageModalEnter()'>. </span>";
-        }
-    }
-    imageIndex==0 ? prevAction='':prevAction='openImageModal(event,'+(imageIndex-1)+')';
-    imageIndex==images.length-1 ? nextAction='':nextAction='openImageModal(event,'+(imageIndex+1)+')';
-    imageIndex==0 ? prevClass='backNextInactive':prevClass='backNextActive';
-    imageIndex==images.length-1 ? nextClass='backNextInactive':nextClass='backNextActive';
-
-    var imageHTML = "", contentWidth=0;
-    if(mockupId){
-        imageHTML =
-            "<table style='background-color:transparent;border:none;border-collapse:collapse;'><tr>"+
-            "<td valign='top' style='border:none;padding:0px;'><img class='subImage' title='"+image.path+"' src='"+image.path+"' onclick='"+nextAction+"'/></td>"+
-            "<td valign='top' style='border:none;padding:0px;'><img class='subImage' src='mockups/"+mockupId+".png' onclick='"+nextAction+"'/></td>"+
-            "</tr></table>";
-        contentWidth = 1300;
-    }
-    else{
-        imageHTML = "<img class='mainImage' title='"+image.path+"' src='"+image.path+"' onclick='"+nextAction+"'/>";
-        contentWidth = 1000;
-    }
+    const imageHTML = "<img class='mainImage' title='"+imageIndex+"' src='"+imageIndex+"' />";
+    const contentWidth = 1000;
 
     // create modal //
     openModal(e,
         "<div class='imageModalContent' style='width:"+contentWidth+"px'>"+
         "  <div class='imageContainer' onmouseout='imageModalOut()'>"+
-        "    <div class='topBar' align='center'>"+
-        "      <div class='dots' onmouseenter='imageModalEnter()'>"+scrollDots+"</div>"+
-        "      <div class='compare'>"+mockupsStr+"</div>"+
-        "    </div>"+
-        "    <div class='backNextContainer' onmouseenter='imageModalEnter()' >"+
-        "      <div class='backDiv' title='prev' onclick='"+prevAction+"'>"+
-        "        <md-icon class='material-icons md-light md-48 "+prevClass+"'>keyboard_arrow_left</md-icon>"+
-        "      </div>"+
-        "      <div class='nextDiv' title='next' onclick='"+nextAction+"'>"+
-        "        <md-icon class='material-icons md-light md-48 "+nextClass+"'>keyboard_arrow_right</md-icon>"+
-        "      </div>"+
-        "    </div>"+
-        "    <div class='imageSubContainer' onclick='"+nextAction+"' onmouseenter='imageModalEnter()'>"+
+        "    <div class='imageSubContainer'>"+
         "      "+imageHTML+
         "    </div>"+
         "  </div>"+

@@ -28,9 +28,8 @@ module.exports = {
                     type: 'div',
                     attributes: {id: 'divContent'},
                     content: [
-                        htmlUtils.createBR(), htmlUtils.createBR(),
                         this.createReportGeneralDetails(runInfo),
-                        htmlUtils.createBR(), htmlUtils.createBR(),
+                        htmlUtils.createBR(),
                         this.createSuites(runInfo)
                     ]
                 }
@@ -140,7 +139,7 @@ module.exports = {
                     htmlUtils.createTH('Start Time'),
                     htmlUtils.createTH('End Time'),
                     htmlUtils.createTH('Duration (s)'),
-                    htmlUtils.createTH('Passed'),,
+                    htmlUtils.createTH('Passed'),
                     htmlUtils.createTH('Failed Step'),
                 ]
             }]
@@ -157,12 +156,12 @@ module.exports = {
                                 htmlUtils.createA(test.testName, reportFileUtils.testFileName(suite.suiteCode, test.testCode))
                             ]
                         },
-                        htmlUtils.createTD(test.isPassed ? 'PASS' : 'FAIL', test.isPassed ? 'pass' : 'fail'),
-                        htmlUtils.createTD(presentationUtils.formatDate(test.startDate)),
+                        htmlUtils.createTD(test.isPassed ? 'SUCCESS' : 'FAILURE', test.isPassed ? 'test-key-status test-key-status-SUCCESS' : 'test-key-status test-key-status-FAILURE'),
+                        htmlUtils.createTD(presentationUtils.formatDate(test.startDate), 'tableColOdd'),
                         htmlUtils.createTD(presentationUtils.formatDate(test.endDate)),
-                        htmlUtils.createTD(presentationUtils.formatDuration(test.duration)),
+                        htmlUtils.createTD(presentationUtils.formatDuration(test.duration), 'tableColOdd'),
                         htmlUtils.createTD(test.stepsPassed + " / " + test.totalSteps),
-                        htmlUtils.createTD(test.failedStep),
+                        htmlUtils.createTD(test.failedStep, 'failureStep tableColOdd'),
                     ]
                 })
         });

@@ -74,7 +74,7 @@ module.exports = {
                 type: 'tr',
                 attributes: {class: 'tableTitle'},
                 content: [
-                    htmlUtils.createTH('Steps (' + test.stepsData.length + ')'),
+                    htmlUtils.createTH('Steps (' + Object.keys(test.stepsData).length + ')'),
                     htmlUtils.createTH('Status'),
                     htmlUtils.createTH('Start Date'),
                     htmlUtils.createTH('Duration (s)'),
@@ -95,7 +95,7 @@ module.exports = {
                 attributes: {onclick: 'toggleElement(\''+stepId+'\');'},
                 content: [
                     htmlUtils.createTD(keyElement, 'testName'),
-                    htmlUtils.createTD(stepData.status, 'test-key-status-'+stepData.status),
+                    htmlUtils.createTD(stepData.status, 'test-key-status test-key-status-'+stepData.status),
                     htmlUtils.createTD(stepData.startDate),
                     htmlUtils.createTD(durationFormatted),
                 ]

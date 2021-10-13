@@ -17,14 +17,10 @@
 
 			#modal {
 				position:absolute;
-				background:rgba(0,0,0,0.2);
-				border-radius:2px;
-				padding:4px;
+				z-index: 100;
 			}
 
 			#content {
-				background:#fff;
-				padding:20px;
 			}
 
 			#close {

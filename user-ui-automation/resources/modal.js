@@ -32,18 +32,12 @@
 				$overlay = $('<div id="overlay"></div>');
 				$modal = $('<div id="modal"></div>');
 				$content = $('<div id="content"></div>');
-				$close = $('<a id="close" href="#">X</a>');
 				$modal.hide();
 				$overlay.hide();
-				$modal.append($content, $close);
+				$modal.append($content);
 
 				$(document).ready(function(){
 					$('body').append($overlay, $modal);						
-				});
-
-				$close.click(function(e){
-					e.preventDefault();
-					method.close();
 				});
 				
 				$overlay.click(function(e){
