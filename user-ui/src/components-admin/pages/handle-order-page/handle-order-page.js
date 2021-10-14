@@ -20,7 +20,6 @@ export default function HandleOrderPage() {
         dispatch(actions.searchOrder(userDetails.id));
     };
     const searchOrder = () => {
-        console.log("searchOrder");
         dispatch(actions.searchByEmail(email, emailNotFound, emailFound));
     };
     return (

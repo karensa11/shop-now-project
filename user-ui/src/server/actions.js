@@ -123,18 +123,16 @@ export function register(userData, onConflict, onFailure) {
     })
 }
 
-export function deleteUser(userId) {
+export function deleteUser() {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.deleteUser,
-        pathParams: {userId: userId},
         onSuccess: [orderActions.clearOrder, generalActions.logout]
     })
 }
 
-export function getUserOrders(userId) {
+export function getUserOrders() {
     return actionUtils.wrapGet({
         serverFunc: serverAPIs.retrieveCurrentUserOrders,
-        actionsCreator: generalActions.setCurrentUserOrders,
-        pathParams: {userId: userId}
+        actionsCreator: generalActions.setCurrentUserOrders
     })
 }

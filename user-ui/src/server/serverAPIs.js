@@ -47,10 +47,10 @@ export function register(pathParams, params, userData) {
     return callsHandler.callPOST(config.usersGuestURL, "", pathParams, params, userData);
 }
 export function deleteUser(pathParams, params) {
-    return callsHandler.callDELETE(config.usersURL, "{userId}", pathParams, params);
+    return callsHandler.callDELETE(config.usersURL, "", pathParams, params);
 }
 export function retrieveCurrentUserOrders(pathParams) {
-    return callsHandler.callGET(config.ordersURL, "user/{userId}/not-open", pathParams);
+    return callsHandler.callGET(config.ordersURL, "user/not-open", pathParams);
 }
 export function searchUserByEmail(pathParams, params) {
     return callsHandler.callGET(config.usersAdminURL, "search-by-email", pathParams, params);

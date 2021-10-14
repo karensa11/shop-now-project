@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.userservice.data.entity.User;
@@ -33,28 +33,28 @@ public class UsersController {
 	@Autowired
 	private NotificationMessagePublisher messagePublisher;
 	
-	@DeleteMapping(path = BASE_PATH+"/{userId}")
+	@DeleteMapping(path = BASE_PATH)
 	public void deleteUser(
-			@PathVariable Long userId) {
-		Optional<User> user = usersRepository.findById(userId);
+			@RequestHeader Long authenticationId) {
+		Optional<User> user = usersRepository.findById(authenticationId);
 		if (!user.isPresent()) {
-			throw new DetailsNotFoundException("User with id "+userId+" not found");
+			throw new DetailsNotFoundException("User with id "+authenticationId+" not found");
 		}
 		
-		OrderDetails order = ordersFeign.getOpenOrderForUser(userId);
+		OrderDetails order = ordersFeign.getOpenOrderForUser(authenticationId);
 		if (order != null) {
-			ordersFeign.cancelOrder(order.getId(), userId);
+			ordersFeign.cancelOrder(order.getId(), authenticationId);
 		}
-		List<OrderDetails> orders = ordersFeign.getNotOpenedOrdersForUser(userId);
+		List<OrderDetails> orders = ordersFeign.getNotOpenedOrdersForUser(authenticationId);
 		orders.stream().forEach(item -> {
 			if (item.getStatus().equals(OrderStatus.PLACED.toString())) {
-				ordersFeign.cancelOrder(item.getId(), userId);
+				ordersFeign.cancelOrder(item.getId(), authenticationId);
 			}
 		});
-		usersRepository.deleteById(userId);
+		usersRepository.deleteById(authenticationId);
 		NotificationData message = new NotificationData();
-		message.setMessage("User with id " + userId + " deleted");
-		message.setUserId(userId);
+		message.setMessage("User with id " + authenticationId + " deleted");
+		message.setUserId(authenticationId);
 		messagePublisher.sendMessage(message);
 	}
 }

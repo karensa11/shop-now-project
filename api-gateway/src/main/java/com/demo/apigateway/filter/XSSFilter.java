@@ -1,7 +1,5 @@
 package com.demo.apigateway.filter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -15,7 +13,6 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class XSSFilter implements GlobalFilter {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

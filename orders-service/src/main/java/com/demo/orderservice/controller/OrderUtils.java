@@ -34,14 +34,14 @@ public class OrderUtils {
 		return resultFromDb.get();
 	}
 	
-	public OrderDetails findOrderAndValidate(Long orderId, Long userId) {
+	public OrderDetails findOrderAndValidate(Long orderId, Long authenticationId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
 		if (!resultFromDb.isPresent()) {
 			throw new DetailsNotFoundException("order with id " + orderId + " not found");
 		}
 		OrderDetails result = resultFromDb.get();
-		if (result.getUserId()!=null && !result.getUserId().equals(userId)) {
-			throw new IllegalArgumentException("invalid user id. order user " + result.getUserId() + ", input user " + userId);
+		if (result.getUserId()!=null && !result.getUserId().equals(authenticationId)) {
+			throw new IllegalArgumentException("invalid user id. order user " + result.getUserId() + ", input user " + authenticationId);
 		}
 		return result;
 	}

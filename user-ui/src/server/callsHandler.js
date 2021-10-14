@@ -11,8 +11,7 @@ function standardHeaders() {
         sessionId: getSessionId(),
     };
     if (currentUser) {
-        header.userId = currentUser.id;
-        header.adminId = currentUser.isAdmin ? currentUser.id : null;
+        header.authenticationId = currentUser.id;
     }
     return header;
 }

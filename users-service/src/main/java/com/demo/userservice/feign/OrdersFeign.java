@@ -2,8 +2,6 @@ package com.demo.userservice.feign;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,16 +16,16 @@ public interface OrdersFeign {
 	
 	static final String BASE_PATH = CommonConsts.MS_PREFIX+"/orders"+CommonConsts.V1;
 
-	@GetMapping(path = BASE_PATH + "/user/{userId}/open")
+	@GetMapping(path = BASE_PATH + "/user/open")
 	public OrderDetails getOpenOrderForUser(
-			@PathVariable @NotNull Long userId);
+			@RequestHeader Long authenticationId);
 
-	@GetMapping(path = BASE_PATH + "/user/{userId}/not-open")
+	@GetMapping(path = BASE_PATH + "/user/not-open")
 	public List<OrderDetails> getNotOpenedOrdersForUser(
-			@PathVariable @NotNull Long userId);
+			@RequestHeader Long authenticationId);
 
 	@DeleteMapping(path = BASE_PATH + "/{orderId}")
 	public void cancelOrder(
 			@PathVariable Long orderId, 
-			@RequestHeader(required = false) Long userId);
+			@RequestHeader Long authenticationId);
 }

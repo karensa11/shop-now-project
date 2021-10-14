@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -49,26 +47,26 @@ public class OrdersController {
 	@GetMapping(path = BASE_PATH + "/{orderId}")
 	public OrderDetails getOrderDetails(
 			@PathVariable Long orderId,
-			@RequestHeader(required = false) Long userId) {
-		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+			@RequestHeader Long authenticationId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, authenticationId);
 		orderUtils.getCatalogItemsAndCalculateTotal(result);
 		return result;
 	}
 
-	@GetMapping(path = BASE_PATH + "/user/{userId}/open")
+	@GetMapping(path = BASE_PATH + "/user/open")
 	public OrderDetails getOpenOrderForUser(
-			@PathVariable @NotNull Long userId) {
-		Optional<OrderDetails> dbResult = orderRepository.findOpenOrderByUserId(userId);
+			@RequestHeader Long authenticationId) {
+		Optional<OrderDetails> dbResult = orderRepository.findOpenOrderByUserId(authenticationId);
 		if (dbResult.isPresent()) {
 			return dbResult.get();
 		}
 		return null;
 	}
 
-	@GetMapping(path = BASE_PATH + "/user/{userId}/not-open")
+	@GetMapping(path = BASE_PATH + "/user/not-open")
 	public List<OrderDetails> getNotOpenedOrdersForUser(
-			@PathVariable @NotNull Long userId) {
-		List<OrderDetails> items = orderRepository.findNotOpenOrdersByUserId(userId);
+			@RequestHeader Long authenticationId) {
+		List<OrderDetails> items = orderRepository.findNotOpenOrdersByUserId(authenticationId);
 		items = items.stream().filter(item -> {
 			return item.getOrderItems() != null && 
 					!item.getOrderItems().isEmpty();})
@@ -81,10 +79,10 @@ public class OrdersController {
 
 	@PostMapping(path = BASE_PATH)
 	public OrderResponse createOrder(
-			@RequestHeader(required = false) Long userId, 
+			@RequestHeader Long authenticationId, 
 			@Validated @RequestBody OrderItemRequest input) {
 		OrderDetails orderDetails = new OrderDetails();
-		orderDetails.setUserId(userId);
+		orderDetails.setUserId(authenticationId);
 		OrderDetails saved = orderRepository.save(orderDetails);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrderId(saved.getId());
@@ -93,7 +91,7 @@ public class OrdersController {
 		orderItemRepository.save(orderItem);
 		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage("Order "+ orderDetails.getId() + " created");
-		notificationMessage.setUserId(userId);
+		notificationMessage.setUserId(authenticationId);
 		messagePublisher.sendMessage(notificationMessage);
 		/*
 		try {
@@ -112,9 +110,9 @@ public class OrdersController {
 	@PostMapping(path = BASE_PATH + "/{orderId}/item")
 	public OrderResponse createOrderItem(
 			@PathVariable Long orderId,
-			@RequestHeader(required = false) Long userId,
+			@RequestHeader Long authenticationId,
 			@Validated @RequestBody OrderItemRequest input) {
-		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
+		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, authenticationId);
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrderId(orderId);
 		orderItem.setQuantity(input.getQuantity());
@@ -128,9 +126,9 @@ public class OrdersController {
 	public OrderResponse updateOrderItem(
 			@PathVariable Long orderId,
 			@PathVariable Long orderItemId,
-			@RequestHeader(required = false) Long userId,
+			@RequestHeader Long authenticationId,
 			@Validated @RequestBody OrderItemRequest input) {
-		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, userId);
+		OrderDetails orderDetails = orderUtils.findOrderAndValidate(orderId, authenticationId);
 		OrderItem orderItem = orderUtils.findOrderItemAndValidate(orderId, orderItemId);
 		orderItem.setQuantity(input.getQuantity());
 		orderItemRepository.save(orderItem);
@@ -143,8 +141,8 @@ public class OrdersController {
 	public OrderResponse cancelOrderItem(
 			@PathVariable Long orderId,
 			@PathVariable Long orderItemId,
-			@RequestHeader(required = false) Long userId) {
-		orderUtils.findOrderAndValidate(orderId, userId);
+			@RequestHeader Long authenticationId) {
+		orderUtils.findOrderAndValidate(orderId, authenticationId);
 		OrderItem orderItem = orderUtils.findOrderItemAndValidate(orderId, orderItemId);
 		orderItemRepository.deleteById(orderItem.getId());
 
@@ -154,8 +152,8 @@ public class OrdersController {
 	@PostMapping(path = BASE_PATH + "/{orderId}/place")
 	public void placeOrder(
 			@PathVariable Long orderId, 
-			@RequestHeader(required = false) Long userId) {
-		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+			@RequestHeader Long authenticationId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, authenticationId);
 		if (!OrderStatus.OPEN.equals(result.getStatus())) {
 			throw new IllegalStateException("Order must be open so it can be placed");
 		}
@@ -166,8 +164,8 @@ public class OrdersController {
 	@DeleteMapping(path = BASE_PATH + "/{orderId}")
 	public void cancelOrder(
 			@PathVariable Long orderId, 
-			@RequestHeader(required = false) Long userId) {
-		OrderDetails result = orderUtils.findOrderAndValidate(orderId, userId);
+			@RequestHeader Long authenticationId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, authenticationId);
 		if (OrderStatus.CANCELLED.equals(result.getStatus())) {
 			throw new IllegalStateException("Order already cancelled");
 		}
@@ -175,7 +173,7 @@ public class OrdersController {
 		orderRepository.save(result);
 		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage("Order "+ orderId + " cancelled");
-		notificationMessage.setUserId(userId);
+		notificationMessage.setUserId(authenticationId);
 		messagePublisher.sendMessage(notificationMessage);
 	}
 }

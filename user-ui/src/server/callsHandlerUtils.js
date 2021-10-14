@@ -33,21 +33,25 @@ module.exports = {
             timer
         ]).then(
             (response) => {
-                console.log("fetchWithTimeout", response.headers);
-            if(response.timeout) {
-                console.log("timeout");
-                callback({serverErrorCode: serverResponseTypes.FAILURE});
-            } else if (response.status !== 200) {
-                return callback({serverErrorCode: response.status});
-            } else {
-                const contentType = response.headers.get("content-type");
-                if (contentType && contentType.indexOf("application/json") !== -1) {
-                    return callback(response.json());
+                if(response.timeout) {
+                    console.log("timeout in fetching ", baseURL);
+                    callback({serverErrorCode: serverResponseTypes.FAILURE});
+                } else if (response.status !== 200) {
+                    return callback({serverErrorCode: response.status});
+                } else {
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return callback(response.json());
+                    }
+                    else {
+                        return callback({});
+                    }
                 }
-                else {
-                    return callback({});
-                }
+            },
+            (err) => {
+                callback({code: "failure"});
+                console.log("fetchWithTimeout - err", err)
             }
-        }, (err) => {callback({code: "failure"});console.log("fetchWithTimeout - err", err);});
+        );
     }
 }

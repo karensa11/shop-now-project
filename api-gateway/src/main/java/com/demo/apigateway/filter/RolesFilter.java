@@ -31,11 +31,11 @@ public class RolesFilter implements GlobalFilter{
 
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-		String userId = exchange.getRequest().getHeaders().get("userId") == null ? 
-				null : exchange.getRequest().getHeaders().get("userId").get(0);
+		String authenticationId = exchange.getRequest().getHeaders().get("authenticationId") == null ? 
+				null : exchange.getRequest().getHeaders().get("authenticationId").get(0);
 		String serviceName = ((ServerWebExchangeDecorator)exchange).getDelegate().getRequest().getPath().value();
 		List<String> securityRoles = securityConfig.getSecurityRole(serviceName);
-		logger.info("User id {}, serviceName {}, Security roles {}", userId, serviceName, securityRoles);
+		logger.info("AuthenticationId id {}, serviceName {}, Security roles {}", authenticationId, serviceName, securityRoles);
 
 		if (securityRoles == null || securityRoles.isEmpty()) {
 			throw new ConfigException("no security configuration found for " + serviceName);
@@ -45,12 +45,12 @@ public class RolesFilter implements GlobalFilter{
 			throw new SecurityException("access to this rest not allowed");
 		}
 
-		if (userId == null) {
+		if (authenticationId == null) {
 			if (!securityRoles.contains(SecurityRole.GUEST.toString())) {
 				throw new SecurityException("Access to this rest not allowed for guest user. Please send authenticated user id");
 			}
 		} else {
-			User user = getUserDetails(userId);
+			User user = getUserDetails(authenticationId);
 			if (securityRoles.contains(SecurityRole.ADMIN.toString()) && !user.getIsAdmin()) {
 				throw new SecurityException("access to " + serviceName + " requires user with admin permissions");
 			}
@@ -58,9 +58,9 @@ public class RolesFilter implements GlobalFilter{
 		return chain.filter(exchange);
 	}
 
-	private User getUserDetails(String userId) {
+	private User getUserDetails(String authenticationId) {
 		Map<String, String> pathVariables = new HashMap<>();
-		pathVariables.put("userId", userId);
+		pathVariables.put("userId", authenticationId);
 		ResponseEntity<User> userResponse = 
 				new RestTemplate().getForEntity("http://users-service:8200/msp/users/internal/v1/{userId}", User.class, pathVariables);
 		User user = userResponse.getBody();

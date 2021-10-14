@@ -16,7 +16,7 @@ export default function AccountPage() {
     const currentUser = useSelector(currentUserSelector);
     const deleteUserFunc = () => {
         if (window.confirm("please confirm deletion")) {
-            dispatch(actions.deleteUser(currentUser.id));
+            dispatch(actions.deleteUser());
             dispatch(orderActions.clearOrder());
             dispatch(actions.login({email: config.guestUserEmail, passwordPartial: config.guestUserPass}));
         }
@@ -27,7 +27,7 @@ export default function AccountPage() {
         dispatch(actions.login({email: config.guestUserEmail, passwordPartial: config.guestUserPass}));
     };
     useEffect(() => {
-        dispatch(actions.getUserOrders(currentUser.id));
+        dispatch(actions.getUserOrders());
     }, []);
     return (
         <LayoutLogin>
