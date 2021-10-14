@@ -1,28 +1,27 @@
 import * as generalActions from "../redux/general/general-actions";
 import serverResponseTypes from "./serverResponseTypes";
 
-export function handleServerUpdate({response, dispatch, onSuccess, onConflict})
+export function handleServerUpdate({response, dispatch, onSuccess, onConflict, onFailure})
 {
-    if(response && response.serverErrorCode === serverResponseTypes.FAILURE){ // response can come empty from update
+    if(response) { // response can come empty from update
         const {serverErrorCode} = response;
-        if (serverErrorCode === serverResponseTypes.CONFLICT && onConflict) { // conflict in creation - details already exists
-            onConflict();
-        } else {
+        if (serverErrorCode === serverResponseTypes.FAILURE || serverErrorCode === serverResponseTypes.BAD_REQUEST) { // conflict in creation - details already exists
             dispatch(generalActions.serverCallFailed());
+            onFailure && dispatch(onFailure(response));
+            return;
+        } else if (serverErrorCode === serverResponseTypes.CONFLICT && onConflict) { // conflict in creation - details already exists
+            onConflict();
+            return;
         }
     }
-    else{
-        dispatch(generalActions.serverCallFinished());
-        if (onSuccess) {
-            console.log("handleServerUpdate - onSuccess 1");
-            if (Array.isArray(onSuccess)) {
-                onSuccess.forEach(onSuccessFunc => {
-                    dispatch(onSuccessFunc(response));
-                });
-            } else {
-                console.log("handleServerUpdate - onSuccess 2");
-                dispatch(onSuccess(response));
-            }
+    dispatch(generalActions.serverCallFinished());
+    if (onSuccess) {
+        if (Array.isArray(onSuccess)) {
+            onSuccess.forEach(onSuccessFunc => {
+                dispatch(onSuccessFunc(response));
+            });
+        } else {
+            dispatch(onSuccess(response));
         }
     }
 }
@@ -57,7 +56,7 @@ export function wrapUpdate({serverFunc, pathParams, params, body, onSuccess, onF
         dispatch(generalActions.serverCallStarted());
         return serverFunc(pathParams, params, body)
             .then(response => {
-                handleServerUpdate({response, dispatch, onSuccess, onNotFound, onConflict});
+                handleServerUpdate({response, dispatch, onSuccess, onNotFound, onConflict, onFailure});
             }).catch((response) => {
                 dispatch(generalActions.serverCallFailed());
                 onFailure && onFailure(response);

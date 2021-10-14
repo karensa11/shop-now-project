@@ -10,10 +10,11 @@ export default function AccountOrderHistory() {
         <div className="account-order-history-component">
             <div className="orders-title">Your Orders</div>
             <div>
-                {currentOrders &&
+                {currentOrders && currentOrders.length ?
                     currentOrders.map((item, index) => (
                         <AccountOrderHistoryItem key={item.id} index={index} item={item} />
-                    ))
+                    )) :
+                    <div>No Orders To Show</div>
                 }
             </div>
         </div>

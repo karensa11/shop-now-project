@@ -28,7 +28,7 @@ export default function ShoppingCartItem({item, index}) {
                     {catalogItem.description}
                 </div>
                 <div className="price">
-                    {formatPrice(catalogItem.price)}
+                    {formatPrice(item.itemPrice)}
                 </div>
                 <div className="buttons">
                     <img src={appIcons.plusIcon} onClick={increaseItem} title="increase quantity" alt="" id={`increase${index}Btn`} />

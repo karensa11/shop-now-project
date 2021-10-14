@@ -17,8 +17,8 @@ export default function RegisterPage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const register = (userDetails) => {
-        dispatch(actions.register(userDetails, detailsAlreadyExists));
-    }
+        dispatch(actions.register(userDetails, detailsAlreadyExists, submitFailed));
+    };
     const valueChanged = (value, name, isValid) => {
         const formValuesUpdated = {...formValues};
         const validityUpdated = {...validity};
@@ -38,13 +38,16 @@ export default function RegisterPage() {
     const detailsAlreadyExists = () => {
         alert("email already exists");
     };
+    const submitFailed = () => {
+        alert("registration failed");
+    };
     const submit = () => {
         const inputData = {
             name: formValues[INPUT_TYPES.NAME],
             email: formValues[INPUT_TYPES.EMAIL],
             passwordPartial: formValues[INPUT_TYPES.PASSWORD],
         };
-        register(inputData, detailsAlreadyExists);
+        register(inputData);
     };
     const password = formValues[INPUT_TYPES.PASSWORD];
     return (

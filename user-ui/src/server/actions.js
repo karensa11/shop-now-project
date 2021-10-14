@@ -113,10 +113,11 @@ export function login(loginData, onNotFound, onSuccess) {
     })
 }
 
-export function register(userData, onConflict) {
+export function register(userData, onConflict, onFailure) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.register,
         onSuccess: generalActions.login,
+        onFailure: onFailure,
         onConflict: onConflict,
         body: userData
     })

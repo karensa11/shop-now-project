@@ -1,5 +1,6 @@
 package com.demo.orderservice.data.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -30,6 +31,9 @@ public class OrderItem {
 	private Long catalogId;
 	
 	private int quantity;
+	
+	@Transient
+	private BigDecimal itemPrice;
 	
 	@Transient
 	private CatalogItem catalogItem;
@@ -75,5 +79,11 @@ public class OrderItem {
 	}
 	public void setUpdateDate(LocalDateTime updateDate) {
 		this.updateDate = updateDate;
+	}
+	public BigDecimal getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(BigDecimal itemPrice) {
+		this.itemPrice = itemPrice;
 	}
 }

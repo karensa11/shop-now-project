@@ -73,6 +73,7 @@ public class OrderUtils {
 			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
 			orderItem.setCatalogItem(catalogItem);
 			totalItemsNumber += orderItem.getQuantity();
+			orderItem.setItemPrice(catalogItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity())));
 		}
 		orderDetails.setTotalPrice(calculateTotal(orderDetails));
 		orderDetails.setTotalItemsNumber(totalItemsNumber);
