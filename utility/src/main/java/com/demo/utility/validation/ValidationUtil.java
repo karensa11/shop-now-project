@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 public class ValidationUtil {
 	private static Logger logger = LoggerFactory.getLogger(ValidationUtil.class);
 	private static final String[] forbiddenCaractersRoundBrackets = {"(", ")"};
-	private static final String[] forbiddenCaracters = {"{", "}", "[", "]", "<", ">", "*"};
+	private static final String[] forbiddenCaracters = {"{", "}", "[", "]", "<", ">"};
 	private static final String[] forbiddenWords = {"table", "select"};
 	public static void validateBadString(String element, boolean okRoundBrackets) {
 		logger.info("validateBadString {} {}", element, okRoundBrackets);
@@ -20,7 +20,7 @@ public class ValidationUtil {
 		}
 		for (String item:forbiddenCaracters) {
 			if (elementToAnalize.contains(item)) {
-				throw new SecurityException("invalid value " + element);
+				throw new SecurityException("invalid value " + element + ", " + item);
 			}
 		}
 		for (String item:forbiddenWords) {

@@ -64,6 +64,7 @@ describe('Basic Sanity', () => {
     runTest('Cancel Order', basicSanityImpl.testCancelOrder);
     runTest('Place Order', basicSanityImpl.testPlaceOrder);
     runTest('Login Admin', basicSanityImpl.testLoginAdmin);
+    runTest('View Notifications', basicSanityImpl.testViewNotifications);
     runTest('Close Order', basicSanityImpl.testCloseOrder);
     runTest('View Account', basicSanityImpl.testViewAccount);
     runTest('Delete User', basicSanityImpl.testDeleteUser);

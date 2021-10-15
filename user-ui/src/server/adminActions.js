@@ -9,6 +9,13 @@ export function searchOrder(userId) {
         actionsCreator: adminNsActions.setCurrentOrders
     })
 }
+export function searchNotifications(userId) {
+    return actionUtils.wrapGet({
+        serverFunc: serverAPIs.searchNotifications,
+        pathParams: {userId: userId},
+        actionsCreator: adminNsActions.setCurrentNotifications
+    })
+}
 export function setDeliveredOn(orderId, onSuccess) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.setDeliveredOn,

@@ -5,6 +5,7 @@ module.exports = {
   usersAdminURL: "http://localhost:8666/users-service/msp/users/admin/v1/",
   usersGuestURL: "http://localhost:8666/users-service/msp/users/guest/v1/",
   usersURL: "http://localhost:8666/users-service/msp/users/v1/",
+  trackingAdminURL: "http://localhost:8666/tracking-service/msp/tracking/admin/v1/",
   timeoutInterval: 10000,
   guestUserEmail: "guest1@gmail.com",
   guestUserPass: "abcdEB"

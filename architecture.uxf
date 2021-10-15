@@ -805,6 +805,7 @@ fg=magenta</panel_attributes>
     <panel_attributes>ADMIN
 --
 close orders
+view notifications
 layer=1
 bg=pink</panel_attributes>
     <additional_attributes/>

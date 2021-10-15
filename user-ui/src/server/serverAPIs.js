@@ -55,6 +55,9 @@ export function retrieveCurrentUserOrders(pathParams) {
 export function searchUserByEmail(pathParams, params) {
     return callsHandler.callGET(config.usersAdminURL, "search-by-email", pathParams, params);
 }
+export function searchNotifications(pathParams, params) {
+    return callsHandler.callGET(config.trackingAdminURL, "userId/{userId}", pathParams, params);
+}
 export function searchPlacedOrders(pathParams, params) {
     return callsHandler.callGET(config.ordersAdminURL, "{userId}/search-placed", pathParams, params);
 }

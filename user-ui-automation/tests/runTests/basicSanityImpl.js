@@ -149,13 +149,13 @@ module.exports = {
             await driverUtils.sleep(driver, runData);
             await driverUtils.validateAlertAndClick(driver, runData, 'Your order placed with success');
             await driverUtils.assertTxtValue(driver, runData, 'noItemsLbl', 'No items in cart');
-        }
-    },
-    testLoginAdmin: {
+        },
         "LOGOUT FROM REGULAR USER": async function(driver, runData) {
             await driverUtils.clickById(driver, runData, 'logoutBtn');
             await driverUtils.assertTxtValue(driver, runData, 'nameLbl', 'guest');
         },
+    },
+    testLoginAdmin: {
         "LOGIN AS ADMIN": async function(driver, runData) {
             const {userData} = TestData;
             await driverUtils.clickById(driver, runData, 'loginBtn');
@@ -163,6 +163,17 @@ module.exports = {
             await driverUtils.populateInput(driver, runData, 'passwordInput', userData.adminPassword);
             await driverUtils.clickById(driver, runData, 'submitLoginBtn');
             await driverUtils.assertTxtValue(driver, runData, 'adminNameLbl', userData.adminName);
+        }
+    },
+    testViewNotifications: {
+        "VIEW NOTIFICATIONS": async function(driver, runData) {
+            const {userData, notificationData} = TestData;
+            await driverUtils.clickById(driver, runData, 'viewTransactionsBtn');
+            await driverUtils.populateInput(driver, runData, 'emailSearchInput', userData.testEmail);
+            await driverUtils.clickById(driver, runData, 'searchNotificationAdminBtn');
+            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage0Lbl', notificationData.userNotificationRegex);
+            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage1Lbl', notificationData.orderNotificationRegex);
+            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage2Lbl', notificationData.orderCancelledNotificationRegex);
         }
     },
     testCloseOrder: {

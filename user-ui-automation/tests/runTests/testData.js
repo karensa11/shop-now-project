@@ -13,6 +13,11 @@ const TestData = {
         selectedCatalogItem1Name: 'iPhone 11',
         selectedCatalogItem2Name: 'iPhone 12',
         searchText: 'iphone'
+    },
+    notificationData: {
+        userNotificationRegex: /User with id [0-9]+ created/,
+        orderNotificationRegex: /Order [0-9]+ created/,
+        orderCancelledNotificationRegex: /Order [0-9]+ cancelled/
     }
 };
 const Elements = {

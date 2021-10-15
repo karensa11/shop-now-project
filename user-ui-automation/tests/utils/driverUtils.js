@@ -143,6 +143,15 @@ module.exports = {
         return value;
     },
 
+    assertTxtValueRegex: async function(driver, runData, id, expectedRegex) {
+        logger.log('verify txt of '+id+' matches '+expectedRegex, runData);
+
+        const value = await this.getTxt(driver, runData, id);
+        await this.takeScreenshot(driver, runData);
+        expect(value).to.match(expectedRegex);
+        return value;
+    },
+
     assertElementNotExists: async function(driver, runData, id) {
         logger.log('check if element not exists '+id, runData);
 
