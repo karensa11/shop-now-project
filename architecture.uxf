@@ -582,6 +582,7 @@ TECHNOLOGIES AND CONCEPTS
 - data types validation (ms)
 - kafka (messages between ms)
 - customized spring anotations (enable)
+- eslint (UI code standards validation)
 fg=dark_gray
 bg=light_gray</panel_attributes>
     <additional_attributes/>

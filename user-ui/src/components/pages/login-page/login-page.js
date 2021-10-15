@@ -55,12 +55,15 @@ export default function LoginPage() {
     return (
         <LayoutLogin>
             <div className="login-page">
-                <TextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL} title="enter email" forceValidate={forceValidate}
+                <TextInput name={INPUT_TYPES.EMAIL} type={INPUT_TYPES.EMAIL}
+                           title="enter email" forceValidate={forceValidate}
                            onChange={valueChanged} id="emailInput" />
-                <TextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD} title="enter password" forceValidate={forceValidate}
+                <TextInput name={INPUT_TYPES.PASSWORD} type={INPUT_TYPES.PASSWORD}
+                           title="enter password" forceValidate={forceValidate}
                            onChange={valueChanged} id="passwordInput" />
-                <SubmitBtn title="Login" onClick={submit} validityArray={validity} setForceValidate={setForceValidate} id="submitLoginBtn" />
-                <div>don't have an account yet ?</div>
+                <SubmitBtn title="Login" onClick={submit} validityArray={validity} setForceValidate={setForceValidate}
+                           id="submitLoginBtn" />
+                <div>don&apos;t have an account yet ?</div>
                 <Button title="Create an account" onClick={navigateToRegisterFunc} id="navigateToRegister" />
             </div>
         </LayoutLogin>

@@ -40,7 +40,9 @@ export default function ShoppingCartPage() {
                         </div>
                         <div className="bottom">
                             <div className="item">
-                                Subtotal (<span id="shoppingCartItemsNumberLbl">{currentOrder.totalItemsNumber}</span> items):&nbsp;
+                                Subtotal
+                                (<span id="shoppingCartItemsNumberLbl">{currentOrder.totalItemsNumber}</span> items):
+                                &nbsp;
                                 <span className="price">
                                     <Price price={currentOrder.totalPrice} />
                                 </span>

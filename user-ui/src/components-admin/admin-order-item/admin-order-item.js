@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./admin-order-item.scss";
 import {formatPrice} from "../../util/formatter";
 import Button from "../../components/common/button/button";
@@ -28,7 +29,7 @@ export default function AdminOrderItem({item, index}) {
             </div>
             <div>
                 {item.orderItems && item.orderItems.length &&
-                item.orderItems.map((orderItem, index2) => {
+                item.orderItems.map((orderItem) => {
                     const {catalogItem} = orderItem;
                     return (
                         <div className="order-item-details" key={orderItem.id}>
@@ -47,3 +48,7 @@ export default function AdminOrderItem({item, index}) {
         </div>
     )
 }
+AdminOrderItem.propTypes = {
+    item: PropTypes.object,
+    index: PropTypes.number,
+};

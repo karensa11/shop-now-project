@@ -21,7 +21,8 @@ export default function AdminHeader() {
     };
     return (
         <div className="admin-header-component">
-            <Button customClass="admin-button" title="Shop Now Admin Managemant System" onClick={navigateToHomePageFunc} />
+            <Button customClass="admin-button" title="Shop Now Admin Managemant System"
+                    onClick={navigateToHomePageFunc} />
             <div className="right">
                 <div className="name" id="adminNameLbl">{currentUser.name}</div>
                 <Button title="logout" onClick={logoutFunc} id="adminLogoutBtn" />

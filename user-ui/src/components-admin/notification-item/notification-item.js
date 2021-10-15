@@ -1,5 +1,6 @@
 import React from "react";
 import "./notification-item.scss";
+import PropTypes from "prop-types";
 
 export default function NotificationItem({item, index}) {
     return (
@@ -13,3 +14,7 @@ export default function NotificationItem({item, index}) {
         </tr>
     )
 }
+NotificationItem.propTypes = {
+    item: PropTypes.object,
+    index: PropTypes.number,
+};

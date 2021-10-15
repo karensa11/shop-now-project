@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,6 @@ import com.demo.orderservice.data.entity.OrderItem;
 import com.demo.orderservice.data.entity.OrderStatus;
 import com.demo.orderservice.data.rest.OrderItemRequest;
 import com.demo.orderservice.data.rest.OrderResponse;
-import com.demo.orderservice.messages.NotificationData;
-import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.CommonConsts;
@@ -40,9 +39,6 @@ public class OrdersController {
 	
 	@Autowired
 	private OrderUtils orderUtils;
-
-	@Autowired
-	private NotificationMessagePublisher messagePublisher;
 
 	@GetMapping(path = BASE_PATH + "/{orderId}")
 	public OrderDetails getOrderDetails(
@@ -89,10 +85,7 @@ public class OrdersController {
 		orderItem.setCatalogId(input.getCatalogId());
 		orderItem.setQuantity(input.getQuantity());
 		orderItemRepository.save(orderItem);
-		NotificationData notificationMessage = new NotificationData();
-		notificationMessage.setMessage("Order "+ orderDetails.getId() + " created");
-		notificationMessage.setUserId(authenticationId);
-		messagePublisher.sendMessage(notificationMessage);
+		orderUtils.sendOrderNotification("Order "+ orderDetails.getId() + " created", authenticationId);
 		/*
 		try {
 			URI location = new URI(ServletUriComponentsBuilder
@@ -106,6 +99,7 @@ public class OrdersController {
 		 */
 		return new OrderResponse(saved.getId());
 	}
+	
 
 	@PostMapping(path = BASE_PATH + "/{orderId}/item")
 	public OrderResponse createOrderItem(
@@ -169,11 +163,23 @@ public class OrdersController {
 		if (OrderStatus.CANCELLED.equals(result.getStatus())) {
 			throw new IllegalStateException("Order already cancelled");
 		}
+		if (OrderStatus.CLOSED.equals(result.getStatus())) {
+			throw new IllegalStateException("Order is closed");
+		}
 		result.setStatus(OrderStatus.CANCELLED);
 		orderRepository.save(result);
-		NotificationData notificationMessage = new NotificationData();
-		notificationMessage.setMessage("Order "+ orderId + " cancelled");
-		notificationMessage.setUserId(authenticationId);
-		messagePublisher.sendMessage(notificationMessage);
+		orderUtils.sendOrderNotification("Order "+ orderId + " cancelled", authenticationId);
+	}
+
+	@PutMapping(path = BASE_PATH + "/{orderId}/associate-user")
+	public void associateUserToOrder(
+			@PathVariable Long orderId, 
+			@RequestHeader Long authenticationId) {
+		OrderDetails result = orderUtils.findOrderAndValidate(orderId, authenticationId);
+		if (!OrderStatus.OPEN.equals(result.getStatus())) {
+			throw new IllegalStateException("Can associate user only to open order");
+		}
+		result.setUserId(authenticationId);
+		orderUtils.sendOrderNotification("Order "+ orderId + " associated with user", authenticationId);
 	}
 }

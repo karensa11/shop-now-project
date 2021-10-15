@@ -25,7 +25,8 @@ export default function HandleOrderPage() {
     return (
         <AdminLayout>
             <div className="handle-order-page">
-                <TextInput title="Insert email to search orders for" id="emailSearchInput" onChange={setEmail} type={INPUT_TYPES.EMAIL} />
+                <TextInput title="Insert email to search orders for" id="emailSearchInput" onChange={setEmail}
+                           type={INPUT_TYPES.EMAIL} />
                 <Button title="search" onClick={searchOrder} id="searchOrderAdminBtn" />
                 {currentOrders && currentOrders.map((item, index) => (
                     <AdminOrderItem item={item} index={index} key={item.id} />

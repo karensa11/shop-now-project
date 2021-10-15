@@ -4,6 +4,7 @@ import Logo from "../logo/logo";
 import SearchBox from "../search-box/search-box";
 import HeaderUser from "../header-user/header-user";
 import HeaderCart from "../header-cart/header-cart";
+import PropTypes from "prop-types";
 
 export default function LayoutWithHeader({children}) {
     return (
@@ -28,3 +29,6 @@ export default function LayoutWithHeader({children}) {
         </div>
     )
 }
+LayoutWithHeader.propTypes = {
+    children: PropTypes.any
+};

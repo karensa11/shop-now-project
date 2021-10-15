@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import "./text-input.scss";
 import {INPUT_TYPES_DATA, INPUT_TYPES} from "./text-input-types";
 import appIcons from "../../../util/applicationIcons";
+import PropTypes from "prop-types";
 
 export default function TextInput({onChange, name, title, type, required, forceValidate, comparePassword, id}) {
     const [value, setValue] = useState("");
@@ -52,8 +53,8 @@ export default function TextInput({onChange, name, title, type, required, forceV
                 {isPassword &&
                     <img src={showPassword ? appIcons.hideIcon : appIcons.viewIcon} onClick={switchShowImage} alt="" />
                 }
-                <input type={inputType} name={name} onChange={validateAndSave} size={isPassword ? "47" : "50"} onFocus={validateAndSave}
-                       className={validationMessage ? "invalid" : ""} id={id}/>
+                <input type={inputType} name={name} onChange={validateAndSave} size={isPassword ? "47" : "50"}
+                       onFocus={validateAndSave} className={validationMessage ? "invalid" : ""} id={id}/>
             </div>
             {validationMessage &&
                 <div className="validation-message">
@@ -63,3 +64,13 @@ export default function TextInput({onChange, name, title, type, required, forceV
         </div>
     )
 }
+TextInput.propTypes = {
+    onChange: PropTypes.func,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    title: PropTypes.string,
+    comparePassword: PropTypes.string,
+    forceValidate: PropTypes.bool,
+    required: PropTypes.bool,
+    id: PropTypes.string,
+};

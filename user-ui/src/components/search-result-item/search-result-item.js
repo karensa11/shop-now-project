@@ -3,6 +3,7 @@ import "./search-result-item.scss";
 import {addItem} from "../../util/orderUtil";
 import {useDispatch} from "react-redux";
 import Price from "../common/price/price";
+import PropTypes from "prop-types";
 
 export default function SearchResultItem({item, index}) {
     const dispatch = useDispatch();
@@ -29,3 +30,7 @@ export default function SearchResultItem({item, index}) {
         </div>
     )
 }
+SearchResultItem.propTypes = {
+    item: PropTypes.object,
+    index: PropTypes.number,
+};

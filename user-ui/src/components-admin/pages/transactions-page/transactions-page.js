@@ -25,7 +25,8 @@ export default function TransactionsPage() {
     return (
         <AdminLayout>
             <div className="transactions-page">
-                <TextInput title="Insert email to search notifications for" id="emailSearchInput" onChange={setEmail} type={INPUT_TYPES.EMAIL} />
+                <TextInput title="Insert email to search notifications for" id="emailSearchInput" onChange={setEmail}
+                           type={INPUT_TYPES.EMAIL} />
                 <Button title="search" onClick={searchNotifications} id="searchNotificationAdminBtn" />
                 <div className="notifications">
                     <table>
@@ -38,7 +39,7 @@ export default function TransactionsPage() {
                             </th>
                         </tr>
                         {currentNotifications && currentNotifications.map((item, index) => (
-                            <NotificationItem item={item} index={index } />
+                            <NotificationItem item={item} index={index} key={item.id} />
                         ))}
                     </table>
                 </div>

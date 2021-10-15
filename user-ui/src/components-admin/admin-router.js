@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Switch, Route} from "react-router-dom";
 import TransactionsPage from "./pages/transactions-page/transactions-page";
 import HandleOrderPage from "./pages/handle-order-page/handle-order-page";
@@ -12,4 +13,7 @@ export default function AdminRouter({match}) {
             <Route path={`${match.path}/transactions`} component={TransactionsPage} />
         </Switch>
     )
+}
+AdminRouter.propTypes = {
+    match: PropTypes.object
 };

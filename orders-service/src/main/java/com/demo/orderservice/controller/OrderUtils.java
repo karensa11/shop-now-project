@@ -10,6 +10,8 @@ import com.demo.orderservice.data.entity.OrderDetails;
 import com.demo.orderservice.data.entity.OrderItem;
 import com.demo.orderservice.data.feign.CatalogItem;
 import com.demo.orderservice.feign.CatalogFeign;
+import com.demo.orderservice.messages.NotificationData;
+import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.exception.DetailsNotFoundException;
@@ -25,6 +27,9 @@ public class OrderUtils {
 
 	@Autowired
 	private CatalogFeign catalogService;
+	
+	@Autowired
+	private NotificationMessagePublisher messagePublisher;
 
 	public OrderDetails findOrder(Long orderId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
@@ -77,5 +82,12 @@ public class OrderUtils {
 		}
 		orderDetails.setTotalPrice(calculateTotal(orderDetails));
 		orderDetails.setTotalItemsNumber(totalItemsNumber);
+	}
+	
+	public void sendOrderNotification(String message, Long authenticationId) {
+		NotificationData notificationMessage = new NotificationData();
+		notificationMessage.setMessage(message);
+		notificationMessage.setUserId(authenticationId);
+		messagePublisher.sendMessage(notificationMessage);
 	}
 }

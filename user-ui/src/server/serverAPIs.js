@@ -1,5 +1,5 @@
-const callsHandler = require("./callsHandler");
-const config = require("../config");
+import * as callsHandler from "./callsHandler";
+import config from "../config";
 
 export function getCategories() {
     return callsHandler.callGET(config.catalogURL, "categories");
@@ -13,8 +13,8 @@ export function createOrder(pathParams, params, orderItemData) {
 export function createOrderItem(pathParams, params, orderItemData) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/item", pathParams, params, orderItemData);
 }
-export function updateOrderDetails(pathParams, params, orderDetailsData) {
-    return callsHandler.callPOST(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params, orderDetailsData);
+export function updateOrderDetails(pathParams, params, orderData) {
+    return callsHandler.callPOST(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params, orderData);
 }
 export function updateOrderItem(pathParams, params, orderItemData) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params, orderItemData);
@@ -22,13 +22,13 @@ export function updateOrderItem(pathParams, params, orderItemData) {
 export function cancelOrderItem(pathParams, params) {
     return callsHandler.callDELETE(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params);
 }
-export function cancelOrder(pathParams, params) {
+export function cancelOrder(pathParams) {
     return callsHandler.callDELETE(config.ordersURL, "{orderId}", pathParams);
 }
 export function updateDeliveredOn(pathParams, params, deliveredOn) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/delivery-date", pathParams, {deliveredOn: deliveredOn});
 }
-export function placeOrder(pathParams, params) {
+export function placeOrder(pathParams) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/place", pathParams);
 }
 export function getOrderDetails(pathParams) {

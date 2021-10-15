@@ -1,5 +1,6 @@
 import React from "react";
 import "./catalog-item.scss";
+import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 import {addItem} from "../../util/orderUtil";
 import Price from "../common/price/price";
@@ -29,3 +30,6 @@ export default function CatalogItem({item}) {
         </div>
     )
 }
+CatalogItem.propTypes = {
+    item: PropTypes.object
+};

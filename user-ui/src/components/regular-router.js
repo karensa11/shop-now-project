@@ -8,6 +8,7 @@ import RegisterPage from "./pages/register-page/register-page";
 import AccountPage from "./pages/account-page/account-page";
 import {useSelector} from "react-redux";
 import {currentUserSelector} from "../redux/general/general-selector";
+import PropTypes from "prop-types";
 
 export default function RegularRouter({match}) {
     const currentUser = useSelector(currentUserSelector);
@@ -30,4 +31,7 @@ export default function RegularRouter({match}) {
             )} />
         </Switch>
     )
+}
+RegularRouter.propTypes = {
+    match: PropTypes.object,
 };

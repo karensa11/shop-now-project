@@ -1,7 +1,6 @@
-const serverResponseTypes = require("./serverResponseTypes").default;
+import serverResponseTypes from "./serverResponseTypes";
 
-module.exports = {
-    createParamsURL: function(baseURL, api, pathParams, params) {
+export function createParamsURL(baseURL, api, pathParams, params) {
         let URL = baseURL;
         let modifiedAPI = api;
         if (pathParams) {
@@ -21,37 +20,36 @@ module.exports = {
             URL += paramsStr;
         }
         return URL;
-    },
-    fetchWithTimeout: function(baseURL, options, delay, callback) {
-        const timer = new Promise((resolve) => {
-            setTimeout(resolve, delay, {
-                timeout: true,
-            });
+}
+export function fetchWithTimeout(baseURL, options, delay, callback) {
+    const timer = new Promise((resolve) => {
+        setTimeout(resolve, delay, {
+            timeout: true,
         });
-        return Promise.race([
-            fetch(baseURL, options),
-            timer
-        ]).then(
-            (response) => {
-                if(response.timeout) {
-                    console.log("timeout in fetching ", baseURL);
-                    callback({serverErrorCode: serverResponseTypes.FAILURE});
-                } else if (response.status !== 200) {
-                    return callback({serverErrorCode: response.status});
-                } else {
-                    const contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
-                        return callback(response.json());
-                    }
-                    else {
-                        return callback({});
-                    }
+    });
+    return Promise.race([
+        fetch(baseURL, options),
+        timer
+    ]).then(
+        (response) => {
+            if(response.timeout) {
+                console.log("timeout in fetching ", baseURL);
+                callback({serverErrorCode: serverResponseTypes.FAILURE});
+            } else if (response.status !== 200) {
+                return callback({serverErrorCode: response.status});
+            } else {
+                const contentType = response.headers.get("content-type");
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    return callback(response.json());
                 }
-            },
-            (err) => {
-                callback({code: "failure"});
-                console.log("fetchWithTimeout - err", err)
+                else {
+                    return callback({});
+                }
             }
-        );
-    }
+        },
+        (err) => {
+            callback({code: "failure"});
+            console.log("fetchWithTimeout - err", err)
+        }
+    );
 }

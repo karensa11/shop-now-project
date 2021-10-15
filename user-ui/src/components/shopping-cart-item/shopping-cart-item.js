@@ -4,6 +4,7 @@ import {formatPrice} from "../../util/formatter";
 import {useDispatch} from "react-redux";
 import appIcons from "../../util/applicationIcons";
 import * as orderUtil from "../../util/orderUtil";
+import PropTypes from "prop-types";
 
 export default function ShoppingCartItem({item, index}) {
     const dispatch = useDispatch();
@@ -31,12 +32,19 @@ export default function ShoppingCartItem({item, index}) {
                     {formatPrice(item.itemPrice)}
                 </div>
                 <div className="buttons">
-                    <img src={appIcons.plusIcon} onClick={increaseItem} title="increase quantity" alt="" id={`increase${index}Btn`} />
+                    <img src={appIcons.plusIcon} onClick={increaseItem} title="increase quantity"
+                         alt="" id={`increase${index}Btn`} />
                     <div className="quantity">{item.quantity}</div>
-                    <img src={appIcons.minusIcon} onClick={decreaseItem} title="increase quantity" alt="" id={`decrease${index}Btn`} />
-                    <img src={appIcons.trashIcon} onClick={cancelItem} title="remove this cart item" alt=""  id={`remove${index}Btn`} />
+                    <img src={appIcons.minusIcon} onClick={decreaseItem} title="increase quantity"
+                         alt="" id={`decrease${index}Btn`} />
+                    <img src={appIcons.trashIcon} onClick={cancelItem} title="remove this cart item"
+                         alt=""  id={`remove${index}Btn`} />
                 </div>
             </div>
         </div>
     )
 }
+ShoppingCartItem.propTypes = {
+    item: PropTypes.object,
+    index: PropTypes.number,
+};

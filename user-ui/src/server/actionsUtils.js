@@ -5,11 +5,11 @@ export function handleServerUpdate({response, dispatch, onSuccess, onConflict, o
 {
     if(response) { // response can come empty from update
         const {serverErrorCode} = response;
-        if (serverErrorCode === serverResponseTypes.FAILURE || serverErrorCode === serverResponseTypes.BAD_REQUEST) { // conflict in creation - details already exists
+        if (serverErrorCode === serverResponseTypes.FAILURE || serverErrorCode === serverResponseTypes.BAD_REQUEST) {
             dispatch(generalActions.serverCallFailed());
             onFailure && dispatch(onFailure(response));
             return;
-        } else if (serverErrorCode === serverResponseTypes.CONFLICT && onConflict) { // conflict in creation - details already exists
+        } else if (serverErrorCode === serverResponseTypes.CONFLICT && onConflict) {
             onConflict();
             return;
         }
@@ -29,7 +29,8 @@ export function handleServerGet({response, dispatch, actionsCreator, onSuccess, 
 {
     if(response.serverErrorCode){
         const {serverErrorCode} = response;
-        if (serverErrorCode === serverResponseTypes.NOT_FOUND && onNotFound) { // details not found (e.g. search user by email). expected status 404
+        // details not found (e.g. search user by email). expected status 404
+        if (serverErrorCode === serverResponseTypes.NOT_FOUND && onNotFound) {
             onNotFound();
         } else {
             dispatch(generalActions.serverCallFailed());

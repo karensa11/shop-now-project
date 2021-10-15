@@ -1,5 +1,6 @@
 import React from "react";
 import "./account-order-history-item.scss";
+import PropTypes from "prop-types";
 import {formatPrice} from "../../util/formatter";
 
 export default function AccountOrderHistoryItem({item, index}) {
@@ -21,10 +22,17 @@ export default function AccountOrderHistoryItem({item, index}) {
                             <img src={catalogItem.imageUrl} alt="" />
                             <div className="item-details">
                                 <div>
-                                    <span className="item-name" id={`itemName${index}${index2}Lbl`}>{catalogItem.name}</span>&nbsp;
+                                    <span className="item-name" id={`itemName${index}${index2}Lbl`}>
+                                        {catalogItem.name}
+                                    </span>&nbsp;
                                     {catalogItem.description}
                                 </div>
-                                <div>Quantity: <span id={`itemQuantity${index}${index2}Lbl`}>{orderItem.quantity}</span></div>
+                                <div>
+                                    Quantity:
+                                    <span id={`itemQuantity${index}${index2}Lbl`}>
+                                        {orderItem.quantity}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     )})
@@ -33,3 +41,7 @@ export default function AccountOrderHistoryItem({item, index}) {
         </div>
     )
 }
+AccountOrderHistoryItem.propTypes = {
+    item: PropTypes.object,
+    index: PropTypes.number,
+};

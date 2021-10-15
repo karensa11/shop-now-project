@@ -1,4 +1,4 @@
-const createHistory = require("history").createBrowserHistory;
+import {createBrowserHistory as createHistory} from"history";
 
 export function refreshPage() {
     const historyBack = createHistory();
@@ -28,7 +28,7 @@ export function navigateToCart(history) {
     history.push("/cart");
 }
 export function navigateToSearchResults(history, searchQuery) {
-    history.push("/search?q="+searchQuery);
+    history.push("/search?q=" + searchQuery);
 }
 export function navigateToLogin(history) {
     history.push("/signIn");

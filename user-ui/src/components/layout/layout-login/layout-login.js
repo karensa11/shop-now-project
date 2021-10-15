@@ -1,6 +1,7 @@
 import React from "react";
 import "./layout-login.scss";
 import Logo from "../logo/logo";
+import PropTypes from "prop-types";
 
 export default function LayoutLogin({children}) {
     return (
@@ -16,3 +17,6 @@ export default function LayoutLogin({children}) {
         </div>
     )
 }
+LayoutLogin.propTypes = {
+    children: PropTypes.any
+};

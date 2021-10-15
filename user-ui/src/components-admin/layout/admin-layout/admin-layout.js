@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./admin-layout.scss";
 import {useHistory} from "react-router-dom";
 import AdminHeader from "../admin-header/admin-header";
@@ -19,8 +20,10 @@ export default function AdminLayout({children}) {
                 <AdminHeader />
                 <div className="content">
                     <div className="links">
-                        <Button title="Handle Order" id="handleOrderBtn" onClick={navigateToHandleOrdersFunc} />
-                        <Button title="View Transactions" id="viewTransactionsBtn" onClick={navigateToTransactionsFunc} />
+                        <Button title="Handle Order" id="handleOrderBtn"
+                                onClick={navigateToHandleOrdersFunc} />
+                        <Button title="View Transactions" id="viewTransactionsBtn"
+                                onClick={navigateToTransactionsFunc} />
                     </div>
                     {children}
                 </div>
@@ -28,3 +31,6 @@ export default function AdminLayout({children}) {
         </div>
     )
 }
+AdminLayout.propTypes = {
+    children: PropTypes.any
+};

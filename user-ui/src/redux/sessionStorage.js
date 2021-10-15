@@ -2,7 +2,7 @@ import {applyMiddleware, createStore, compose} from "redux";
 import handleTransitions from "redux-history-transitions";
 import reducer from "./rootReducer";
 import thunk from "redux-thunk";
-const uuid = require("uuid-random");
+import uuid from "uuid-random";
 
 export const loadState = () => {
     try {

@@ -6,6 +6,7 @@ import {searchResultsSelector} from "../../../redux/catalog/catalog-selector";
 import * as actions from "../../../server/actions";
 import {extractQueryParam} from "../../../util/navigation";
 import SearchResultItem from "../../search-result-item/search-result-item";
+import PropTypes from "prop-types";
 
 export default function SearchResultsPage({location}) {
     const searchString = extractQueryParam(location, "q");
@@ -23,8 +24,11 @@ export default function SearchResultsPage({location}) {
                 {searchResults && searchResults.length  ?
                     <div className="table">
                         <div className="results-count-header">
-                            Showing <span id="searchResultsCountLbl">{searchResults.length}</span>&nbsp;
-                            results for <span className="results-count">"<span id="searchTextLbl">{searchString}</span>"</span>
+                            Showing
+                            <span id="searchResultsCountLbl">{searchResults.length}</span>
+                            &nbsp;
+                            results for <span className="results-count">&quot;
+                            <span id="searchTextLbl">{searchString}</span>&quot;</span>
                         </div>
                         {searchResults.map((item, index) => (
                             <SearchResultItem item={item} key={item.id} index={index} />
@@ -37,3 +41,6 @@ export default function SearchResultsPage({location}) {
         </LayoutWithHeader>
     )
 }
+SearchResultsPage.propTypes = {
+    location: PropTypes.object,
+};
