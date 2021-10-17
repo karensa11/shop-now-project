@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import com.demo.orderservice.data.entity.OrderDetails;
 import com.demo.orderservice.data.entity.OrderItem;
 import com.demo.orderservice.data.feign.CatalogItem;
+import com.demo.orderservice.data.feign.User;
 import com.demo.orderservice.feign.CatalogFeign;
+import com.demo.orderservice.feign.UsersInternalFeign;
 import com.demo.orderservice.messages.NotificationData;
 import com.demo.orderservice.messages.NotificationMessagePublisher;
 import com.demo.orderservice.repository.OrderItemRepository;
@@ -27,9 +29,12 @@ public class OrderUtils {
 
 	@Autowired
 	private CatalogFeign catalogService;
-	
+
 	@Autowired
 	private NotificationMessagePublisher messagePublisher;
+
+	@Autowired
+	private UsersInternalFeign usersInternalFeign;
 
 	public OrderDetails findOrder(Long orderId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
@@ -38,7 +43,7 @@ public class OrderUtils {
 		}
 		return resultFromDb.get();
 	}
-	
+
 	public OrderDetails findOrderAndValidate(Long orderId, Long authenticationId) {
 		Optional<OrderDetails> resultFromDb = orderRepository.findById(orderId);
 		if (!resultFromDb.isPresent()) {
@@ -46,7 +51,10 @@ public class OrderUtils {
 		}
 		OrderDetails result = resultFromDb.get();
 		if (result.getUserId()!=null && !result.getUserId().equals(authenticationId)) {
-			throw new IllegalArgumentException("invalid user id. order user " + result.getUserId() + ", input user " + authenticationId);
+			User user = usersInternalFeign.getUser(result.getUserId());
+			if (!user.getIsGuest()) {
+				throw new IllegalArgumentException("invalid user id. order user " + result.getUserId() + ", input user " + authenticationId);
+			}
 		}
 		return result;
 	}
@@ -63,7 +71,7 @@ public class OrderUtils {
 		}
 		return result;
 	}
-	
+
 	private BigDecimal calculateTotal(OrderDetails orderDetails) {
 		BigDecimal result = new BigDecimal(0);
 		for(OrderItem item:orderDetails.getOrderItems()){
@@ -83,7 +91,7 @@ public class OrderUtils {
 		orderDetails.setTotalPrice(calculateTotal(orderDetails));
 		orderDetails.setTotalItemsNumber(totalItemsNumber);
 	}
-	
+
 	public void sendOrderNotification(String message, Long authenticationId) {
 		NotificationData notificationMessage = new NotificationData();
 		notificationMessage.setMessage(message);

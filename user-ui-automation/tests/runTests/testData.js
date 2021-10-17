@@ -17,6 +17,7 @@ const TestData = {
     notificationData: {
         userNotificationRegex: /User with id [0-9]+ created/,
         orderNotificationRegex: /Order [0-9]+ created/,
+        orderAssociatedNotificationRegex: /Order [0-9]+ associated with user/,
         orderCancelledNotificationRegex: /Order [0-9]+ cancelled/
     }
 };

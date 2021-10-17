@@ -51,11 +51,13 @@ module.exports = {
             await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
         }
     },
-    testAddToCart: {
+    testCartAssociatedToUser: {
         "CHECK EXISTING CART ITEMS" : async function(driver, runData) {
             const {catalogData} = TestData;
-            await basicSanityImplUtils.verifyCartCount(driver, runData, 0);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
         },
+    },
+    testAddToCart: {
         "BROWSE CATALOG ITEM" : async function(driver, runData) {
             const {catalogData} = TestData;
             await driverUtils.assertTxtValue(driver, runData, 'category1Btn', catalogData.selectedCategoryLabel);
@@ -66,14 +68,14 @@ module.exports = {
             await driverUtils.assertTxtValue(driver, runData, 'catalogItemName1Lbl', catalogData.selectedCatalogItem1Name);
             await driverUtils.clickById(driver, runData, 'addToCart1Btn');
             await driverUtils.sleep(driver, runData);
-            await basicSanityImplUtils.verifyCartCount(driver, runData, 1);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 2);
         },
         "ADD ANOTHER CATALOG ITEM TO CART": async function(driver, runData) {
             const {catalogData} = TestData;
             await driverUtils.assertTxtValue(driver, runData, 'catalogItemName2Lbl', catalogData.selectedCatalogItem2Name);
             await driverUtils.clickById(driver, runData, 'addToCart2Btn');
             await driverUtils.sleep(driver, runData);
-            await basicSanityImplUtils.verifyCartCount(driver, runData, 2);
+            await basicSanityImplUtils.verifyCartCount(driver, runData, 3);
         }
     },
     testViewShoppingCart: {
@@ -82,29 +84,29 @@ module.exports = {
         },
         "CHECK SHOPPING CART CONTENT": async function(driver, runData) {
             await driverUtils.assertTxtValue(driver, runData, 'shoppingCartLbl', 'Your cart');
-            await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', '2');
+            await driverUtils.assertTxtValue(driver, runData, 'shoppingCartItemsNumberLbl', '3');
         }
     },
     testChangeQuantity: {
         "INCREASE ITEM 1 QUANTITY": async function(driver, runData) {
             await driverUtils.clickById(driver, runData, 'increase0Btn');
-            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
-            await driverUtils.clickById(driver, runData, 'increase0Btn');
             await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
+            await driverUtils.clickById(driver, runData, 'increase0Btn');
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 5);
         },
         "INCREASE ITEM 2 QUANTITY": async function(driver, runData) {
             await driverUtils.clickById(driver, runData, 'increase1Btn');
-            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 5);
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 6);
         },
         "DECREASE ITEM 2 QUANTITY": async function(driver, runData) {
             await driverUtils.clickById(driver, runData, 'decrease1Btn');
-            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 5);
         }
     },
     testRemoveItem: {
         "REMOVE ITEMS": async function(driver, runData) {
             await driverUtils.clickById(driver, runData, 'remove1Btn');
-            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 3);
+            await basicSanityImplUtils.verifyShoppingCartCount(driver, runData, 4);
             await driverUtils.clickById(driver, runData, 'remove0Btn');
         },
         "CHECK CART IS EMPTY": async function(driver, runData) {
@@ -172,8 +174,9 @@ module.exports = {
             await driverUtils.populateInput(driver, runData, 'emailSearchInput', userData.testEmail);
             await driverUtils.clickById(driver, runData, 'searchNotificationAdminBtn');
             await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage0Lbl', notificationData.userNotificationRegex);
-            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage1Lbl', notificationData.orderNotificationRegex);
+            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage1Lbl', notificationData.orderAssociatedNotificationRegex);
             await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage2Lbl', notificationData.orderCancelledNotificationRegex);
+            await driverUtils.assertTxtValueRegex(driver, runData, 'notificationMessage3Lbl', notificationData.orderNotificationRegex);
         }
     },
     testCloseOrder: {

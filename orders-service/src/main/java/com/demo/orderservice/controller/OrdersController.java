@@ -172,7 +172,7 @@ public class OrdersController {
 	}
 
 	@PutMapping(path = BASE_PATH + "/{orderId}/associate-user")
-	public void associateUserToOrder(
+	public OrderResponse associateUserToOrder(
 			@PathVariable Long orderId, 
 			@RequestHeader Long authenticationId) {
 		OrderDetails result = orderUtils.findOrderAndValidate(orderId, authenticationId);
@@ -180,6 +180,8 @@ public class OrdersController {
 			throw new IllegalStateException("Can associate user only to open order");
 		}
 		result.setUserId(authenticationId);
+		orderRepository.save(result);
 		orderUtils.sendOrderNotification("Order "+ orderId + " associated with user", authenticationId);
+		return new OrderResponse(orderId);
 	}
 }

@@ -15,9 +15,6 @@ function standardHeaders() {
     }
     return header;
 }
-export function directURL(url, apiAndParams) {
-    return url + apiAndParams;
-}
 export function callGET(baseURL, api, pathParams, params) {
     let URL = callsHandlerUtils.createParamsURL(baseURL, api, pathParams, params);
     return callsHandlerUtils.fetchWithTimeout(
@@ -39,6 +36,22 @@ export function callPOST(baseURL, api, pathParams, params, body) {
         URL,
         {
             method: "POST",
+            headers: {
+                ...standardHeaders(),
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        },
+        config.timeoutInterval,
+        (result) => {return result});
+}
+export function callPUT(baseURL, api, pathParams, params, body) {
+    let URL = callsHandlerUtils.createParamsURL(baseURL, api, pathParams, params);
+    return callsHandlerUtils.fetchWithTimeout(
+        URL,
+        {
+            method: "PUT",
             headers: {
                 ...standardHeaders(),
                 "Accept": "application/json",

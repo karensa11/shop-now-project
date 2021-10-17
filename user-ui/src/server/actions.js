@@ -45,15 +45,6 @@ export function updateOrderItem(orderId, orderItemData) {
     })
 }
 
-export function updateOrderDetails(orderId, orderDetailsData) {
-    return actionUtils.wrapUpdate({
-        serverFunc: serverAPIs.updateOrderDetails,
-        pathParams: {orderId: orderId},
-        body: orderDetailsData,
-        onSuccess: getOrderDetails
-    })
-}
-
 export function cancelOrderItem(orderId, orderItemId) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.cancelOrderItem,
@@ -90,6 +81,14 @@ export function getOrderDetailsWithId(orderId) {
     })
 }
 
+export function associateUserToOrder(orderId) {
+    return actionUtils.wrapUpdate({
+        serverFunc: serverAPIs.associateUserToOrder,
+        pathParams: {orderId: orderId},
+        onSuccess: getOrderDetails
+    })
+}
+
 export function searchItems(searchString) {
     if (!searchString || searchString === "") {
         return (dispatch) => {
@@ -113,12 +112,13 @@ export function login(loginData, onNotFound, onSuccess) {
     })
 }
 
-export function register(userData, onConflict, onFailure) {
+export function register(userData, onConflict, onFailure, onSuccess) {
     return actionUtils.wrapUpdate({
         serverFunc: serverAPIs.register,
-        onSuccess: generalActions.login,
+        actionsCreator: generalActions.login,
         onFailure: onFailure,
         onConflict: onConflict,
+        onSuccess: onSuccess,
         body: userData
     })
 }

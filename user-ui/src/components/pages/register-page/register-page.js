@@ -8,7 +8,8 @@ import {navigateToLogin} from "../../../util/navigation";
 import {useHistory} from "react-router-dom";
 import SubmitBtn from "../../common/submit-btn/submit-btn";
 import * as actions from "../../../server/actions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {currentOrderSelector} from "../../../redux/order/order-selector";
 
 export default function RegisterPage() {
     const [formValues, setFormValues] = useState(
@@ -16,10 +17,16 @@ export default function RegisterPage() {
     const [validity, setValidity] = useState(
         {[TYPES.NAME]: false, [TYPES.EMAIL]: false, [TYPES.PASSWORD]: false, [TYPES.CONFIRM_PASSWORD]: false});
     const [forceValidate, setForceValidate] = useState(false);
+    const currentOrder = useSelector(currentOrderSelector);
     const history = useHistory();
     const dispatch = useDispatch();
     const register = (userDetails) => {
-        dispatch(actions.register(userDetails, detailsAlreadyExists, submitFailed));
+        dispatch(actions.register(userDetails, detailsAlreadyExists, submitFailed, registrationSuccess));
+    };
+    const registrationSuccess = () => {
+        if (currentOrder) {
+            return actions.associateUserToOrder(currentOrder.id);
+        }
     };
     const valueChanged = (value, name, isValid) => {
         const formValuesUpdated = {...formValues};

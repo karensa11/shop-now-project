@@ -13,9 +13,6 @@ export function createOrder(pathParams, params, orderItemData) {
 export function createOrderItem(pathParams, params, orderItemData) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/item", pathParams, params, orderItemData);
 }
-export function updateOrderDetails(pathParams, params, orderData) {
-    return callsHandler.callPOST(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params, orderData);
-}
 export function updateOrderItem(pathParams, params, orderItemData) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/item/{orderItemId}", pathParams, params, orderItemData);
 }
@@ -24,9 +21,6 @@ export function cancelOrderItem(pathParams, params) {
 }
 export function cancelOrder(pathParams) {
     return callsHandler.callDELETE(config.ordersURL, "{orderId}", pathParams);
-}
-export function updateDeliveredOn(pathParams, params, deliveredOn) {
-    return callsHandler.callPOST(config.ordersURL, "{orderId}/delivery-date", pathParams, {deliveredOn: deliveredOn});
 }
 export function placeOrder(pathParams) {
     return callsHandler.callPOST(config.ordersURL, "{orderId}/place", pathParams);
@@ -40,8 +34,8 @@ export function searchItems(pathParams, params) {
 export function login(pathParams, params, loginData) {
     return callsHandler.callPOST(config.usersGuestURL, "authenticate", pathParams, params, loginData);
 }
-export function getLoginData(pathParams, params) {
-    return callsHandler.callGET(config.usersURL, "{userId}", pathParams, params);
+export function associateUserToOrder(pathParams) {
+    return callsHandler.callPUT(config.ordersURL, "{orderId}/associate-user", pathParams);
 }
 export function register(pathParams, params, userData) {
     return callsHandler.callPOST(config.usersGuestURL, "", pathParams, params, userData);

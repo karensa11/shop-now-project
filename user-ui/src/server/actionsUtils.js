@@ -1,9 +1,9 @@
 import * as generalActions from "../redux/general/general-actions";
 import serverResponseTypes from "./serverResponseTypes";
 
-export function handleServerUpdate({response, dispatch, onSuccess, onConflict, onFailure})
+export function handleServerUpdate({response, dispatch, onSuccess, onConflict, onFailure, actionsCreator})
 {
-    if(response) { // response can come empty from update
+    if (response) { // response can come empty from update
         const {serverErrorCode} = response;
         if (serverErrorCode === serverResponseTypes.FAILURE || serverErrorCode === serverResponseTypes.BAD_REQUEST) {
             dispatch(generalActions.serverCallFailed());
@@ -15,6 +15,7 @@ export function handleServerUpdate({response, dispatch, onSuccess, onConflict, o
         }
     }
     dispatch(generalActions.serverCallFinished());
+    actionsCreator && dispatch(actionsCreator(response));
     if (onSuccess) {
         if (Array.isArray(onSuccess)) {
             onSuccess.forEach(onSuccessFunc => {
@@ -52,12 +53,13 @@ export function wrapGet({serverFunc, actionsCreator, pathParams, params, body, o
     }
 }
 
-export function wrapUpdate({serverFunc, pathParams, params, body, onSuccess, onFailure, onNotFound, onConflict}) {
+export function wrapUpdate(
+    {serverFunc, pathParams, params, body, onSuccess, onFailure, onNotFound, onConflict, actionsCreator}) {
     return (dispatch) => {
         dispatch(generalActions.serverCallStarted());
         return serverFunc(pathParams, params, body)
             .then(response => {
-                handleServerUpdate({response, dispatch, onSuccess, onNotFound, onConflict, onFailure});
+                handleServerUpdate({response, dispatch, onSuccess, onNotFound, onConflict, onFailure, actionsCreator});
             }).catch((response) => {
                 dispatch(generalActions.serverCallFailed());
                 onFailure && onFailure(response);
