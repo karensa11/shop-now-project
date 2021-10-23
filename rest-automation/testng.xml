@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Micro Services Sanity">
+  <test name="Test Catalog">
+  	<parameter name="categoryId" value="1"/>
+    <parameter name="category0Name" value="phones"/>
+    <parameter name="category1Name" value="accessories"/>
+    <parameter name="item0Name" value="iPhone 11"/>
+    <classes>
+    	<class name="com.demo.sanity.tests.CatalogTests"/>
+    </classes>
+  </test> 
+   
+  <test name="Test Users">
+    <parameter name="userEmail" value="bobd@gmail.com"/>
+    <parameter name="newUserEmail" value="a@gmail.com"/>
+    <parameter name="newUserName" value="aaaa aaaa"/>
+    <parameter name="userPassword" value="abcdBF"/>
+    <parameter name="userName" value="Bob Dilan"/>
+    <parameter name="adminId" value="10003"/>
+    <classes>
+       <class name="com.demo.sanity.tests.UsersTests"/>
+    </classes>
+  </test>
+   
+  <test name="Test Orders">
+  	<parameter name="orderId" value="10001"/>
+    <parameter name="userId" value="10001"/>
+    <parameter name="userId2" value="10002"/>
+    <parameter name="catalogId" value="1"/>
+    <parameter name="item0Name" value="iPhone 11"/>
+    <classes>
+       <class name="com.demo.sanity.tests.OrdersTests"/>
+    </classes>
+  </test>
+   
+  <test name="Test Notifications">
+    <parameter name="adminId" value="10003"/>
+    <parameter name="userId" value="10001"/>
+    <classes>
+       <class name="com.demo.sanity.tests.TrackingTests"/>
+    </classes>
+  </test>
+</suite>

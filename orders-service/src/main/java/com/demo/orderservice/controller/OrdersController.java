@@ -24,6 +24,7 @@ import com.demo.orderservice.data.rest.OrderResponse;
 import com.demo.orderservice.repository.OrderItemRepository;
 import com.demo.orderservice.repository.OrderRepository;
 import com.demo.utility.CommonConsts;
+import com.demo.utility.exception.DetailsAlreadyExistsException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -77,6 +78,10 @@ public class OrdersController {
 	public OrderResponse createOrder(
 			@RequestHeader Long authenticationId, 
 			@Validated @RequestBody OrderItemRequest input) {
+		Optional<OrderDetails> openOrder = orderRepository.findOpenOrderByUserId(authenticationId);
+		if (openOrder.isPresent()) {
+			throw new DetailsAlreadyExistsException("There is alerady an open order for given user");
+		}
 		OrderDetails orderDetails = new OrderDetails();
 		orderDetails.setUserId(authenticationId);
 		OrderDetails saved = orderRepository.save(orderDetails);
