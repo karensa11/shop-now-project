@@ -1,0 +1,11 @@
+TITLE VERIFY UNABLE TO LOGIN
+2021-10-23 22:03:42 | click button with id loginBtn
+2021-10-23 22:03:42 | IMAGE 45378359-a882-46cb-9774-9a3942d24fba
+2021-10-23 22:03:42 | populate input with id emailInput, text t@gmail.com
+2021-10-23 22:03:43 | IMAGE 4a1a9b73-c4c8-431a-8f7c-fa665c79f637
+2021-10-23 22:03:43 | populate input with id passwordInput, text abcdBF
+2021-10-23 22:03:43 | IMAGE 85533374-9ffc-4383-9b1e-b11d7b08dfcd
+2021-10-23 22:03:43 | click button with id submitLoginBtn
+2021-10-23 22:03:43 | IMAGE 08ca5c98-8900-49ed-bc98-116a8ad02988
+2021-10-23 22:03:43 | verify alert opens
+2021-10-23 22:03:44 | verify txt of alert equals user not found or password is wrong

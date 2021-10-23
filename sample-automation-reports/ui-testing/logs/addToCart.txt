@@ -1,0 +1,21 @@
+TITLE BROWSE CATALOG ITEM
+2021-10-23 22:03:06 | verify txt of category1Btn equals phones
+2021-10-23 22:03:06 | IMAGE 6206442e-6b48-4bfb-b23e-e538394ff98a
+2021-10-23 22:03:06 | click button with id category1Btn
+2021-10-23 22:03:06 | IMAGE 573e6aef-3a85-4cb7-84f1-553a3a429851
+TITLE ADD CATALOG ITEM TO CART
+2021-10-23 22:03:06 | verify txt of catalogItemName1Lbl equals iPhone 11
+2021-10-23 22:03:07 | IMAGE 55215746-0e99-442c-90a5-411cdfc3bacd
+2021-10-23 22:03:07 | click button with id addToCart1Btn
+2021-10-23 22:03:07 | IMAGE 0cf199ad-0548-434b-bdd3-3b0c20575835
+2021-10-23 22:03:07 | sleep for 1000
+2021-10-23 22:03:08 | verify txt of cartItemsNumber equals 2
+2021-10-23 22:03:09 | IMAGE 2c729060-aa33-436c-a936-37951ff1ff61
+TITLE ADD ANOTHER CATALOG ITEM TO CART
+2021-10-23 22:03:09 | verify txt of catalogItemName2Lbl equals iPhone 12
+2021-10-23 22:03:09 | IMAGE adfc0fe4-b0ee-4896-a685-9050221ce7bd
+2021-10-23 22:03:09 | click button with id addToCart2Btn
+2021-10-23 22:03:09 | IMAGE 22ea31ae-99cf-4b2c-935e-66a6bf3bc023
+2021-10-23 22:03:10 | sleep for 1000
+2021-10-23 22:03:11 | verify txt of cartItemsNumber equals 3
+2021-10-23 22:03:11 | IMAGE c8176e18-7cbf-46e7-9a7a-86cfedbb2f20

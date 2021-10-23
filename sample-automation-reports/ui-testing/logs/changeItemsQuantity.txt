@@ -1,0 +1,23 @@
+TITLE INCREASE ITEM 1 QUANTITY
+2021-10-23 22:03:12 | click button with id increase0Btn
+2021-10-23 22:03:12 | IMAGE f549b407-e70d-4b64-8431-c371bf5e037d
+2021-10-23 22:03:12 | sleep for 1000
+2021-10-23 22:03:13 | verify txt of shoppingCartItemsNumberLbl equals 4
+2021-10-23 22:03:13 | IMAGE 10aaee02-c87f-466f-b5e7-7c5517b38bb5
+2021-10-23 22:03:13 | click button with id increase0Btn
+2021-10-23 22:03:13 | IMAGE 8270cf98-5ce5-4303-a416-89b2372e4f92
+2021-10-23 22:03:13 | sleep for 1000
+2021-10-23 22:03:14 | verify txt of shoppingCartItemsNumberLbl equals 5
+2021-10-23 22:03:14 | IMAGE fafdb2d1-35e6-4b74-b652-ec4fa8fd966f
+TITLE INCREASE ITEM 2 QUANTITY
+2021-10-23 22:03:14 | click button with id increase1Btn
+2021-10-23 22:03:15 | IMAGE 60ff91f8-c466-409c-9b34-4da449ce9642
+2021-10-23 22:03:15 | sleep for 1000
+2021-10-23 22:03:16 | verify txt of shoppingCartItemsNumberLbl equals 6
+2021-10-23 22:03:16 | IMAGE 66e38c7e-f1a3-48df-a947-17cb6e65bf2f
+TITLE DECREASE ITEM 2 QUANTITY
+2021-10-23 22:03:16 | click button with id decrease1Btn
+2021-10-23 22:03:16 | IMAGE be327d54-b80c-4482-b478-0ece8465f94b
+2021-10-23 22:03:16 | sleep for 1000
+2021-10-23 22:03:17 | verify txt of shoppingCartItemsNumberLbl equals 5
+2021-10-23 22:03:17 | IMAGE b503c1bc-396a-48ef-871a-864ebbb168f4

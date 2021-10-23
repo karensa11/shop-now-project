@@ -1,0 +1,963 @@
+body {
+    font-family: tahoma;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+table {
+    border: 1px solid #ddd;
+    padding: 1px;
+    border-collapse: collapse;
+    text-align: center;
+}
+#divContent
+{
+     margin: 25px;
+     padding: 10px;
+     margin-top: 95px;
+     border-radius: 2px;
+}
+
+.detailsTable
+{
+    width:100%;
+}
+.detailsTable tr
+{
+    border-bottom: 1px solid black !important;
+    border-top: 1px solid black !important;
+    border-collapse: collapse;
+    font-size:13px;
+}
+.tableTitle
+{
+    background-color: #2A849A;
+    color:white;
+    height: 30px;
+}
+table td, table th {
+    border-color: #aaa;
+    border-style: solid;
+    border-width: 1px;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    min-height: 22px;
+}
+th {
+    vertical-align: bottom;
+    font-weight: normal;
+}
+th, td {
+    border: 1px solid #009;
+    padding: 3px;
+}
+a {
+    color: #225;
+}
+.tableHeader {
+    background-color: #32334b;
+    color: white;
+}
+.details {
+    font-size: 12px;
+}
+.pageTitle {
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    height: 85px;
+    background-color: #119cbf;
+    /* box-shadow: 2px 3px 5px rgb(66 110 117 / 87%); */
+    color: white;
+    z-index: 50;
+}
+.pageTitleMain {
+    width: 100%;
+    height: 35px;
+    background-color: #1C5473;
+    padding-top: 15px;
+}
+pageTitleMain {
+    width: 100%;
+    height: 35px;
+    background-color: #1C5473;
+    padding-top: 15px;
+}
+.currentPage {
+    font-size: 17px;
+    font-weight: bold;
+    padding-top: 7px;
+}
+.detailsHeader {
+    font-weight: bold;
+    background-color: #e4e4e4;
+    padding: 5px 20px;
+}
+.suiteHeader {
+    background-color: #52528d;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    text-align: center;
+}
+.pass {
+    background-color: #abecab;
+}
+.fail {
+    background-color: #ffa1a1;
+}
+.testName {
+    font-weight: bold;
+    background-color: #f2f2f2;
+    text-align: left;
+    padding-left: 5px;
+}
+.test-details {
+    border: 1px solid #aaa;
+    background-color: #fdfdfd;
+    width: 60%;
+}
+.screenshot {
+    transform: scale(0.9);
+    border: 2px solid #c7c5c5;
+    width: 400px;
+    height: 200px;
+    box-shadow: 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -khtml-box-shadow: 5px 5px 5px #ccc;
+    cursor: pointer;
+    margin: 5px;
+}
+.error {
+    background-color: palevioletred;
+    padding: 20px;
+    text-align: left;
+}
+.link-arrow {
+    text-decoration: none;
+    margin: 0 10px;
+}
+.text {
+    text-align: left;
+    margin-left: 10px;
+}
+.test-section-title {
+    font-weight: bold;
+    font-size: 20px;
+    background: linear-gradient(#ddd, #aaa);
+    margin-bottom: 10px;
+    padding: 5px 0;
+}
+.checkbox-label {
+    margin: 0 10px;
+}
+.test-key {
+    font-size: 20px;
+    font-weight: bold;
+}
+.test-key-status {
+    color: white;
+    font-weight: bold;
+}
+.test-key-status-SUCCESS{
+    background-color: #0a0;
+}
+.test-key-status-FAILURE{
+    background-color: #F00;
+}
+.test-key-status-SKIPPED{
+    background-color: orange;
+}
+.title-top-link {
+    position: relative;
+    left: 30px;bottom: 2px;
+    font-size: 15px;
+    color: #3a456c;
+}
+.searchInput
+{
+    width:100%;
+    background-color:#efefef;
+    padding: 2px;
+    border: none;
+    border-radius: 2px;
+    font-size:11px;
+    box-sizing: border-box;
+    margin-bottom:2px;
+}
+.detailsTable
+{
+    width:100%;
+}
+.detailsTable tr
+{
+    border-bottom: 1px solid black !important;
+    border-top: 1px solid black !important;
+    border-collapse: collapse;
+    font-size:13px;
+}
+.detailsTableActions
+{
+    padding-bottom: 5px;
+}
+.informationRow
+{
+    height: 27px;
+}
+.step
+{
+    cursor:hand;
+}
+a
+{
+    text-decoration: none !important;
+    cursor:pointer;
+    font-weight: bold;
+    color:#4C3FAB;
+}
+a:visited
+{
+    color: purple;
+}
+hr
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.body
+{
+    font-family: tahoma;
+}
+#divContent
+{
+    margin: 25px;
+    padding: 10px;
+    margin-top: 95px;
+    border-radius: 2px;
+}
+.mockupUrlIcon
+{
+    width:40px;
+    height:40px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.mockupCompareIcon
+{
+    width:15px;
+    height:15px;
+    padding-left:5px;
+    padding-bottom:17px;
+}
+.imageModalContent .imageContainer
+{
+    float:left;
+    background-color:black;
+    padding:1px;
+}
+.imageModalContent .backNextContainer
+{
+    position:relative;
+    top:200px;
+    width:inherit;
+    background-color:transparent;
+    z-index:1000;
+    height:50px;
+}
+.imageModalContent .imageSubContainer
+{
+    cursor:hand;
+}
+.imageModalContent .backDiv
+{
+    float:left;
+}
+.imageModalContent .nextDiv
+{
+    float:right;
+}
+.imageModalContent .backNextActive
+{
+    font-size: 80px;
+    text-shadow: -1px 0 3px black, 0 1px 3px black, 1px 0 3px black, 0 -1px 3px black;
+    color:#ddd;
+    cursor:hand;
+}
+.imageModalContent .backNextInactive
+{
+    font-size: 80px;
+    text-shadow: -1px 0 3px black, 0 1px 3px black, 1px 0 3px black, 0 -1px 3px black;
+    color:#aaa;
+    cursor:default;
+}
+.imageModalContent .mainImage
+{
+    width:1000px;
+    cursor:hand;
+}
+.imageModalContent .subImage
+{
+    width:650px;
+    cursor:hand;
+}
+.imageModalContent .topBar
+{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    text-shadow: -1px 0 1px black, 0 1px 1px black, 1px 0 1px black, 0 -1px 1px #777;
+    height: 50px;
+    font-size: 30px;
+    position: relative;
+    z-index: 100;
+    padding: 0px;
+    font-weight: bold;
+    top:0px;
+    overflow: hidden;
+}
+
+.imageModalContent .dots
+{
+    float:left;
+    padding-bottom:10px;
+    padding-left:20px;
+    padding-right:20px;
+}
+.imageModalContent .dotActive
+{
+    color: #eee;
+    cursor: hand;
+}
+.imageModalContent .dotInactive
+{
+    color: #777;
+    cursor: hand;
+}
+.imageModalContent .compare
+{
+    float: left;
+    border-left: rgba(255, 255, 255, .2) 1px solid;
+    border-right: rgba(255, 255, 255, .2) 1px solid;
+    padding-left:10px;
+    padding-right:20px;
+}
+.imageModalContent .right
+{
+    float:right;
+    margin-top:10px;
+}
+.passRateCol
+{
+    width:80px;
+    font-weight:bold;
+    font-size: 11px;
+}
+.passRateTotal
+{
+    position: relative;
+    width:100%;
+    height:20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #bbb;
+    background-color: #D4D4D4;
+}
+.passRatePassed
+{
+    position: absolute;
+    height: 100%;
+    background-color: #56F300;
+}
+.passRateFailed
+{
+    position: absolute;
+    height: 100%;
+    background-color: #FFA69E;
+}
+.colTotalTitle
+{
+    width:120px;
+    font-size:15px;
+    color: #666;
+    font-weight:normal;
+}
+.colTotalTotal
+{
+    width:120px;
+    font-size:15px;
+    font-weight:bold;
+}
+.colTotalCube
+{
+    border-style: solid;
+    border-color: #C5C5C5;
+    border-width: 1px;
+    margin-bottom:6px;
+    width: 60px;
+    height:26px;
+    font-size:15px;
+    font-weight:bold;
+    padding-top:5px;
+    color:white;
+    cursor:hand;
+}
+.colTotalTime
+{
+    font-size:10px;
+    font-weight:bold;
+}
+.tableTotalTop
+{
+    background-color: #e5e5e5;
+}
+.totalDetails
+{
+    background-color: #ddd;
+}
+.totalDetails div
+{
+    padding: 10px;
+}
+.totalCube
+{
+    background-color: black;
+    color:white;
+}
+.warningCube
+{
+    background-color: #F1974D !important;
+}
+.skippedCube
+{
+    background-color: #999999;
+}
+.failedCube
+{
+    background-color: #f00;
+}
+.passedCube
+{
+    background-color: #0c0;
+}
+.totalsContainer table
+{
+    border-collapse:collapse;
+}
+.totalsContainer.totalsContainer td {
+    border:none;
+}
+.testTotal table
+{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #C1C1C1;
+}
+.testTotal td
+{
+    border-color: #ccc !important;
+    border-style: solid !important;
+    border-left: none  !important;
+    border-right: none  !important;
+    border-width: 1px  !important;
+}
+#pieContainer
+{
+    margin-right: 30px;
+}
+.messageContainer
+{
+    text-overflow: clip;
+}
+.mockScreenshot
+{
+    height:15px;
+    width:15px;
+    position:relative;
+    top:2px;
+    cursor:pointer;
+}
+.brand
+{
+    padding: 11px;
+}
+.brandLeft
+{
+    background-color: black;
+    padding-left: 5px;
+}
+.brandRight
+{
+    background-color: #23751E;
+    padding-right: 5px;
+    margin-left:-6px;
+}
+.currentPage
+{
+    font-size: 17px;
+    font-weight: bold;
+    padding-top: 7px;
+}
+button
+{
+    color: white;
+    text-decoration: none;
+    background-color: #f4f9fc;
+    padding: 2px;
+    border-radius: 2px;
+    background: #CADEEA;
+    color: #08596D;
+    border: #65bed5 solid 1px;
+}
+.pageTitle
+{
+    top: 0px;
+    position: fixed;
+    width: 100%;
+    height: 85px;
+    background-color: #119cbf;
+    box-shadow: 2px 3px 5px rgba(66, 110, 117, 0.87);
+    color: white;
+    z-index:50;
+}
+.pageTitleMain
+{
+    width: 100%;
+    height: 35px;
+    background-color: #1C5473;
+    padding-top: 15px;
+}
+.pageTitleMainRight
+{
+    float: right;
+    padding-right:10px;
+}
+.pageTitleMainLeft
+{
+    float:left;
+    padding-left:10px;
+}
+.pageTitleMainMiddle
+{
+    margin:0 auto;
+    text-align:center;
+    width:700px;
+    font-weight:bold;
+}
+.menuItem
+{
+    cursor: hand;
+    padding:15px 10px 16px 10px;
+}
+.menuItem:hover
+{
+    background-color: #00B6C7;
+}
+.pageTitle md-icon
+{
+    font-size:16px !important;
+    cursor: hand;
+}
+.sectionName
+{
+    background-color: #06B1AF;
+    font-size:12px;
+    color:white;
+    padding:2px;
+    margin:5px;
+    border-weight:5px;
+}
+.sort
+{
+    font-size:9px;
+    cursor: pointer;
+    color:#8BAFAF;
+}
+.classTitle
+{
+    cursor:hand;
+    height:25px;
+    width:990px;
+    padding:5px;
+    font-size:20px;
+    font-weight:bold;
+    background: #ddd;
+    background: -webkit-linear-gradient(#ddd, #aaa);
+    background: -moz-linear-gradient(#ddd, #aaa);
+    background: linear-gradient(#ddd, #aaa);
+}
+.classInfo
+{
+    height:30px;
+    background-color:#ccc;
+    width:990px;
+    padding:5px;
+    font-size:11px;
+    color: #444;
+}
+.type
+{
+    background-color:#bbb;
+}
+.info td
+{
+    text-align:left;
+}
+.suite
+{
+    font-size:11px;
+    color:#444;
+    text-align: left;
+    background-color:#DDDCE2;
+    white-space: pre;
+}
+.divMessage
+{
+    color: #777;
+    font-style: italic;
+    font-size:11px;
+}
+.image img
+{
+    box-shadow: 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -khtml-box-shadow: 5px 5px 5px #ccc;
+    margin:10px;
+    width:300px;
+    height:300px;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px;
+    cursor:hand;
+}
+.mockup img
+{
+    box-shadow: 5px 5px 5px #ccc;
+    -moz-box-shadow: 5px 5px 5px #ccc;
+    -webkit-box-shadow: 5px 5px 5px #ccc;
+    -khtml-box-shadow: 5px 5px 5px #ccc;
+    margin:10px;
+    width:80px;
+    height:80px;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px;
+    cursor:hand;
+}
+.center
+{
+    text-align: center;
+}
+.collapseError
+{
+    cursor:hand;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+    width:1000px;
+    background: #466368;
+    background:-webkit-linear-gradient(#b88, #a33);
+    background:-moz-linear-gradient(#b88, #a33);
+    background:linear-gradient(#b88, #a33);
+}
+.collapseData
+{
+    cursor: hand;
+    font-weight: bold;
+    font-size: 12px;
+    color: #444;
+    width: 1000px;
+    background-color: #C1BFBF;
+    padding: 5px;
+    height: 12px;
+}
+.collapseTitle
+{
+    font-weight: bold;
+    font-size: 12px;
+    color: #444;
+    background-color: #b7e1ec;
+    padding: 10px;
+    height: 10px;
+    text-align:center;
+}
+.collapsePlusMinusButton
+{
+    float:right;
+    color:black;
+    background-color:#ddd;
+    width:15px;
+    height:15px;
+    margin-top:-2px;
+}
+.messages
+{
+    color:#557 !important;
+    text-align:left !important;
+    border-color:#ccc !important;
+    width: 100%;
+    background-color: #ddd;
+    font-weight: normal;
+    font-size:9px !important;
+}
+.messagesCol
+{
+    padding: 0px;
+}
+.testSummaryTable
+{
+    color:#002;
+}
+.testSummaryTable a
+{
+    color:#9A139A;
+}
+.testFirst
+{
+    min-width: 300px;
+    text-align:left !important;
+    padding-right:20px;
+}
+.testFirst:hover
+{
+    text-decoration:underline;
+}
+.technicalFirst
+{
+    font-weight:bold;
+    background-color:#dedede;
+    text-align:left !important;
+}
+.technicalSecond
+{
+    min-width: 200px;
+}
+.warning
+{
+    background-color: #BBF7BB;
+}
+.dataContainer
+{
+    margin-left:20px;
+    margin-right:20px;
+}
+.dataContainer table
+{
+    font-weight:normal !important;
+    background-color: #f1f1f1;
+}
+.remarkSection
+{
+    font-style:italic;
+    text-align:left;
+    color:#557;
+    font-size: 12px;
+    margin-left:10px;
+}
+.classsesFirst
+{
+    text-align:left !important;
+}
+.warningsContainer
+{
+    background-color: #E4C8A1;
+    color: #805B2D;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+}
+.warningsContainerUL
+{
+    padding-left:30px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.remark
+{
+    padding:1px;
+}
+.warn
+{
+    background-color:#f90;
+}
+.header
+{
+    background-color:#11b;
+    color:#fff;
+}
+.passrate
+{
+    background-color: yellow;
+    color: black;
+    font-weight:bold;
+}
+.failure
+{
+    background-color: #D00000;
+    color: white;
+    font-weight:bold;
+}
+.failureStep
+{
+    font-weight:bold;
+}
+.failureTotal
+{
+    background-color: #B00;
+    font-weight:bold;
+    color: white;
+}
+.warning
+{
+    background-color:#88693B;
+    font-weight:bold;
+    color:white;
+}
+.failed
+{
+    background-color:#F00;
+    font-weight:bold;
+    color:white;
+}
+.passed
+{
+    background-color:#0a0;
+    font-weight:bold;
+    color:white;
+}
+.skipped
+{
+    background-color:#BBB;
+    font-weight:bold;
+    color:black;
+}
+.failureLight
+{
+    background-color:#F78787;
+}
+.warningLight
+{
+    background-color:#E6AF3A;
+}
+.passedLight
+{
+    background-color:#52EA52;
+}
+.skippedLight
+{
+    background-color:#ff7;
+}
+.information
+{
+    font-size: 10px !important;
+    word-wrap: break-word;
+    width: 1000px;
+    padding: 5px;
+    border-color: #9E9E9E !important;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #DADEE0;
+}
+.tableTitle
+{
+    background-color: #2A849A;
+    color:white;
+    height: 30px;
+}
+.tableFilter
+{
+    background-color: #CECECE;
+    border-style: solid;
+    border-left:none;
+    border-right:none;
+    border-bottom-width:3px;
+}
+.tableColOdd
+{
+    background-color:#f2f2f2;
+}
+table td, table th
+{
+    border-color:#aaa;
+    border-style:solid;
+    border-width:1px;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    min-height: 22px;
+}
+table
+{
+    font-size:11px !important;
+    text-align:center;
+    border-collapse:collapse;
+    margin-bottom:0px !important;
+    margin-bottom:10px;
+    empty-cells:show;
+    background-color:white;
+    color: #555;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #eee;
+}
+th,td
+{
+    border:1px solid #009;
+    padding: 3px;
+}
+th
+{
+    vertical-align:bottom;
+    font-weight: normal;
+}
+table a
+{
+    font-weight:bold;
+}
+.stripe td
+{
+    background-color: #E6EBF9;
+}
+.num
+{
+    text-align:right;
+}
+.passedodd td
+{
+    background-color: #6F6;
+}
+.passedeven td
+{
+    background-color: #0A0;
+}
+.skippedodd td
+{
+    background-color: #DDD;
+}
+.skippedodd td
+{
+    background-color: #CCC;
+}
+.failedodd td,.attn
+{
+    background-color: #F66;
+}
+.failedeven td,.stripe .attn
+{
+    background-color: #D00;
+}
+.stacktrace
+{
+    font-size:10px !important;
+    background-color: #FFB8B8;
+    width: 1000px;
+    white-space:pre;
+    font-family:monospace;
+}
+.totop
+{
+    font-size: 12px;
+    text-align:center;
+    margin-top:10px;
+    margin-bottom:10px;
+    font-weight:normal !important;
+}

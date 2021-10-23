@@ -1,0 +1,15 @@
+TITLE VIEW NOTIFICATIONS
+2021-10-23 22:03:31 | click button with id viewTransactionsBtn
+2021-10-23 22:03:31 | IMAGE 2e61eef4-232b-4de1-a5a1-a9f7a48667ea
+2021-10-23 22:03:31 | populate input with id emailSearchInput, text t@gmail.com
+2021-10-23 22:03:31 | IMAGE 97ddbe53-efd5-4a01-83a8-38ea82b54e7b
+2021-10-23 22:03:31 | click button with id searchNotificationAdminBtn
+2021-10-23 22:03:31 | IMAGE 81930b2e-9ac8-4cbe-98b1-be2d285f6e9a
+2021-10-23 22:03:31 | verify txt of notificationMessage0Lbl matches /User with id [0-9]+ created/
+2021-10-23 22:03:32 | IMAGE 2a02ee33-5310-42c4-b06d-e70ab24b2971
+2021-10-23 22:03:32 | verify txt of notificationMessage1Lbl matches /Order [0-9]+ associated with user/
+2021-10-23 22:03:32 | IMAGE 089d4331-e557-4585-b103-2fbdc2b682ae
+2021-10-23 22:03:32 | verify txt of notificationMessage2Lbl matches /Order [0-9]+ cancelled/
+2021-10-23 22:03:33 | IMAGE 377aea7c-1681-46bb-b6a6-cce93e786925
+2021-10-23 22:03:33 | verify txt of notificationMessage3Lbl matches /Order [0-9]+ created/
+2021-10-23 22:03:33 | IMAGE 5c853dc2-1b2c-4eb6-9cff-9165dea7bfb2

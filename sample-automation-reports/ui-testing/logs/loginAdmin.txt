@@ -1,0 +1,11 @@
+TITLE LOGIN AS ADMIN
+2021-10-23 22:03:29 | click button with id loginBtn
+2021-10-23 22:03:29 | IMAGE 2577a52a-2f46-435d-a7ba-39f05c849c3b
+2021-10-23 22:03:29 | populate input with id emailInput, text admin1@gmail.com
+2021-10-23 22:03:29 | IMAGE 1e81749d-63e3-4433-b98d-9b04865ede80
+2021-10-23 22:03:29 | populate input with id passwordInput, text abcdFH
+2021-10-23 22:03:30 | IMAGE 4b18710d-61f0-443c-8c39-aa8e7cc7d80e
+2021-10-23 22:03:30 | click button with id submitLoginBtn
+2021-10-23 22:03:30 | IMAGE f010a162-ce90-4750-8e1d-c181c5317dc9
+2021-10-23 22:03:30 | verify txt of adminNameLbl equals Admin Admin
+2021-10-23 22:03:31 | IMAGE fee0dc4c-3060-4998-93a9-e7a1dffe4235

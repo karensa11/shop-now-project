@@ -1,0 +1,30 @@
+TITLE LOGIN AGAIN TO THE SYSTEM
+2021-10-23 22:03:34 | click button with id loginBtn
+2021-10-23 22:03:35 | IMAGE 44855aea-93a8-432f-84e9-c32ee1b8475d
+2021-10-23 22:03:35 | populate input with id emailInput, text t@gmail.com
+2021-10-23 22:03:35 | IMAGE fd127d05-6053-47ce-b140-4b4f732d20c3
+2021-10-23 22:03:35 | populate input with id passwordInput, text abcdBF
+2021-10-23 22:03:35 | IMAGE 6a23b3de-7183-4d87-81cd-3f929a9bc08c
+2021-10-23 22:03:35 | click button with id submitLoginBtn
+2021-10-23 22:03:36 | IMAGE dcf54d22-75b7-4f7b-865b-1fbbf698233b
+2021-10-23 22:03:36 | verify txt of nameLbl equals Tom Cruise
+2021-10-23 22:03:38 | IMAGE 888e0ab2-f989-41b3-9cda-fba787e11db4
+TITLE GO TO ACCOUNT
+2021-10-23 22:03:38 | click button with id accountBtn
+2021-10-23 22:03:38 | IMAGE b7f7bb71-50bc-4d50-98da-8d5e4ab90943
+TITLE CHECK ACCOUNT DETAILS
+2021-10-23 22:03:38 | verify txt of nameLbl equals Tom Cruise
+2021-10-23 22:03:38 | IMAGE 80231a27-56e7-4af5-adea-009bd10ddeec
+2021-10-23 22:03:38 | verify txt of emailLbl equals t@gmail.com
+2021-10-23 22:03:38 | IMAGE e27cec7a-8949-4227-a530-20c35c90faab
+TITLE CHECK ORDER HISTORY
+2021-10-23 22:03:38 | verify txt of itemName00Lbl equals iPhone 11
+2021-10-23 22:03:40 | IMAGE e556b862-8a0d-4b0c-8561-73f89024506c
+2021-10-23 22:03:40 | verify txt of itemName10Lbl equals iPhone 11
+2021-10-23 22:03:40 | IMAGE bd45fc92-a703-465a-b239-23494aac0c82
+2021-10-23 22:03:40 | verify txt of orderStatus0Lbl equals CANCELLED
+2021-10-23 22:03:40 | IMAGE 9fcc677e-ce9e-4ada-8b54-6ee4fb1518ee
+2021-10-23 22:03:40 | verify txt of orderStatus1Lbl equals CANCELLED
+2021-10-23 22:03:40 | IMAGE 15b3dd09-9206-483c-83e5-0c482aac8d19
+2021-10-23 22:03:40 | verify txt of orderStatus2Lbl equals CLOSED
+2021-10-23 22:03:41 | IMAGE 91c25208-4481-40b1-bc5c-b82e8e4a5d27

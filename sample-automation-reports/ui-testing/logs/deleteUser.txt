@@ -1,0 +1,8 @@
+TITLE DELETE ACCOUNT
+2021-10-23 22:03:41 | click button with id deleteAccountBtn
+2021-10-23 22:03:41 | IMAGE 44687ab2-ebe5-40c6-962d-d165882c8295
+2021-10-23 22:03:41 | verify alert opens
+2021-10-23 22:03:41 | verify txt of alert equals please confirm deletion
+2021-10-23 22:03:41 | sleep for 1000
+2021-10-23 22:03:42 | verify txt of nameLbl equals guest
+2021-10-23 22:03:42 | IMAGE b3b3df2e-b1e7-4136-842e-f981cddf014a

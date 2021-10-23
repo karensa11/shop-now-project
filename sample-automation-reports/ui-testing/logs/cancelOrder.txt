@@ -1,0 +1,23 @@
+TITLE NAVIGATE TO CATALOG
+2021-10-23 22:03:20 | click button with id logoBtn
+2021-10-23 22:03:20 | IMAGE 19f2d655-a487-40d9-95c9-018b9872e2a8
+TITLE ADD ITEMS TO CART
+2021-10-23 22:03:20 | verify txt of cartItemsNumber equals 0
+2021-10-23 22:03:20 | IMAGE 64e79192-797e-4ec9-bab8-d6f622644c42
+2021-10-23 22:03:20 | verify txt of category1Btn equals phones
+2021-10-23 22:03:20 | IMAGE f1e8c91b-038a-40ef-878c-15ce93e76a35
+2021-10-23 22:03:20 | click button with id category1Btn
+2021-10-23 22:03:21 | IMAGE b7548a78-92a0-446c-af7e-154e22d399be
+2021-10-23 22:03:21 | click button with id addToCart1Btn
+2021-10-23 22:03:21 | IMAGE 755f3094-643b-4d02-9647-70d101c6732f
+2021-10-23 22:03:21 | sleep for 1000
+2021-10-23 22:03:22 | verify txt of cartItemsNumber equals 1
+2021-10-23 22:03:22 | IMAGE 0948faf2-d196-4d9b-a0be-9727eb7a24d3
+TITLE VIEW CART AND CANCEL ORDER
+2021-10-23 22:03:22 | click button with id viewShoppingCartBtn
+2021-10-23 22:03:23 | IMAGE 4acb4497-a539-4b8a-9f4d-57258de478a3
+2021-10-23 22:03:23 | click button with id cancelOrderBtn
+2021-10-23 22:03:23 | IMAGE 5ac39d5c-14a9-43cc-bf11-3fa3920094cb
+2021-10-23 22:03:23 | sleep for 1000
+2021-10-23 22:03:24 | verify txt of noItemsLbl equals No items in cart
+2021-10-23 22:03:24 | IMAGE 2974ff4b-8c89-489d-93d8-bf039120f5b9

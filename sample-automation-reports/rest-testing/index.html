@@ -1,0 +1,301 @@
+<html>
+<title>Rests Testing</title>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="resources/styles.css" rel="stylesheet" type="text/css">
+<script src="resources/scripts.js"></script><script src="resources/jquery.min.js"></script>
+</head>
+<body>
+<div class="pageTitle">
+<div align="center" class="pageTitleMain">RESTS TEST REPORT</div>
+</div>
+<div align="center" class="main-content">
+<div>
+<button id="showContent" onclick="$('#showContent').hide();$('#hideContent').show();showAllElementStartsWith('log-entries-cell')" style="">+ expand all</button><button id="hideContent" onclick="$('#hideContent').hide();$('#showContent').show();hideAllElementStartsWith('log-entries-cell')" style="display: none;">+ collapse all</button>
+</div>
+<br>
+<div align="center">
+<table>
+<tr>
+<td class="suite-name">Orders Tests (6 tests , 1 failed)</td>
+</tr>
+<tr>
+<td colspan="1">
+<table>
+<tr onclick="toggleElement('createOrder');">
+<td class="test-name">Create Order</td><td class="test-status test-status-FAILURE">FAILURE</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="createOrder">
+<div>23-10-2021 21:56:25 | Checking API POST http://localhost:8666/orders-service/msp/orders/v1/</div>
+<div>23-10-2021 21:56:25 | Expected status 200</div>
+<div>23-10-2021 21:56:25 | Request body {"catalogId":1,"quantity": 1}</div>
+<div class="error-message">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;409&gt;.
+</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveOrderDetailsNegative');">
+<td class="test-name">Retrieve Order Details Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveOrderDetailsNegative">
+<div>23-10-2021 21:56:26 | Checking API GET http://localhost:8666/orders-service/msp/orders/v1/100</div>
+<div>23-10-2021 21:56:26 | Expected status 404</div>
+<div>23-10-2021 21:56:26 | response {"timestamp":1635015386314,"message":"order with id 100 not found","details":"uri=/msp/orders/v1/100"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('createOrderNegative');">
+<td class="test-name">Create Order Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="createOrderNegative">
+<div>23-10-2021 21:56:25 | Checking API POST http://localhost:8666/orders-service/msp/orders/v1/</div>
+<div>23-10-2021 21:56:25 | Expected status 409</div>
+<div>23-10-2021 21:56:25 | Request body {"catalogId":1,"quantity": 1}</div>
+<div>23-10-2021 21:56:25 | response {"timestamp":1635015385628,"message":"There is alerady an open order for given user","details":"uri=/msp/orders/v1/"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveNotOpenOrderForUser');">
+<td class="test-name">Retrieve Not Open Order For User</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveNotOpenOrderForUser">
+<div>23-10-2021 21:56:25 | Checking API GET http://localhost:8666/orders-service/msp/orders/v1/user/not-open</div>
+<div>23-10-2021 21:56:25 | Expected status 200</div>
+<div>23-10-2021 21:56:25 | response []</div>
+<div>23-10-2021 21:56:25 | Checking response size. Expected size 0</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveOrderDetails');">
+<td class="test-name">Retrieve Order Details</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveOrderDetails">
+<div>23-10-2021 21:56:26 | Checking API GET http://localhost:8666/orders-service/msp/orders/v1/10001</div>
+<div>23-10-2021 21:56:26 | Expected status 200</div>
+<div>23-10-2021 21:56:26 | response {"id":10001,"creationDate":[2021,10,23,0,0],"userId":10001,"status":"OPEN","deliveredOn":null,"totalPrice":500.0,"totalItemsNumber":5,"orderItems":[{"id":10003,"creationDate":[2021,10,23,0,0],"updateDate":[2021,10,23,0,0],"orderId":10001,"catalogId":1,"quantity":3,"itemPrice":300.00,"catalogItem":{"id":1,"categoryId":1,"name":"iPhone 11","description":"best iphone","price":100.00,"imageUrl":"https://www.phoneplay.co.il/images/itempics/1637_11072021122600.jpg","port":"8000"}},{"id":10004,"creationDate":[2021,10,23,0,0],"updateDate":[2021,10,23,0,0],"orderId":10001,"catalogId":2,"quantity":2,"itemPrice":200.00,"catalogItem":{"id":2,"categoryId":1,"name":"iPhone 12","description":"best iphone","price":100.00,"imageUrl":"https://ksp.co.il/shop/items/512/124953.jpg","port":"8000"}}]}</div>
+<div>23-10-2021 21:56:26 | Checking status value. Expected value OPEN</div>
+<div>23-10-2021 21:56:26 | Checking user id value. Expected value 10001</div>
+<div>23-10-2021 21:56:26 | Checking order items size. Expected size 2</div>
+<div>23-10-2021 21:56:26 | Checking order items [0].catalog item not null</div>
+<div>23-10-2021 21:56:26 | Checking order items [0].catalog item.name value. Expected value iPhone 11</div>
+<div>23-10-2021 21:56:26 | Checking order items [0].catalog item.description not null</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveOpenOrderForUser');">
+<td class="test-name">Retrieve Open Order For User</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveOpenOrderForUser">
+<div>23-10-2021 21:56:25 | Checking API GET http://localhost:8666/orders-service/msp/orders/v1/user/open</div>
+<div>23-10-2021 21:56:25 | Expected status 200</div>
+<div>23-10-2021 21:56:26 | response {"id":10001,"creationDate":[2021,10,23,0,0],"userId":10001,"status":"OPEN","deliveredOn":null,"totalPrice":null,"totalItemsNumber":0,"orderItems":[{"id":10003,"creationDate":[2021,10,23,0,0],"updateDate":[2021,10,23,0,0],"orderId":10001,"catalogId":1,"quantity":3,"itemPrice":null,"catalogItem":null},{"id":10004,"creationDate":[2021,10,23,0,0],"updateDate":[2021,10,23,0,0],"orderId":10001,"catalogId":2,"quantity":2,"itemPrice":null,"catalogItem":null}]}</div>
+<div>23-10-2021 21:56:26 | Checking Response not null</div>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="suite-name">Users Tests (6 tests , 1 failed)</td>
+</tr>
+<tr>
+<td colspan="1">
+<table>
+<tr onclick="toggleElement('userAdminSearchByEmailNegative');">
+<td class="test-name">User Admin Search By Email Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userAdminSearchByEmailNegative">
+<div>23-10-2021 21:56:24 | Checking API GET http://localhost:8666/users-service/msp/users/admin/v1/search-by-email</div>
+<div>23-10-2021 21:56:24 | Expected status 404</div>
+<div>23-10-2021 21:56:24 | response {"timestamp":1635015384928,"message":"No user found for email sdfsdfsf@ssdfsf.com","details":"uri=/msp/users/admin/v1/search-by-email"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('userCreation');">
+<td class="test-name">User Creation</td><td class="test-status test-status-FAILURE">FAILURE</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userCreation">
+<div>23-10-2021 21:56:25 | Checking API POST http://localhost:8666/users-service/msp/users/guest/v1/</div>
+<div>23-10-2021 21:56:25 | Expected status 200</div>
+<div>23-10-2021 21:56:25 | Request body {"name":"aaaa aaaa","email":"a@gmail.com","passwordPartial":"abcdBF"}</div>
+<div class="error-message">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;409&gt;.
+</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('userAdminSearchByEmail');">
+<td class="test-name">User Admin Search By Email</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userAdminSearchByEmail">
+<div>23-10-2021 21:56:24 | Checking API GET http://localhost:8666/users-service/msp/users/admin/v1/search-by-email</div>
+<div>23-10-2021 21:56:24 | Expected status 200</div>
+<div>23-10-2021 21:56:24 | response {"id":10001,"creationDate":[2021,10,23,0,0],"name":"Bob Dilan","email":"bobd@gmail.com","isAdmin":false,"isGuest":false,"passwordPartial":"abcdBF","orderDetails":null}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('userAuthenticationNegative');">
+<td class="test-name">User Authentication Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userAuthenticationNegative">
+<div>23-10-2021 21:56:25 | Checking API POST http://localhost:8666/users-service/msp/users/guest/v1/authenticate</div>
+<div>23-10-2021 21:56:25 | Expected status 404</div>
+<div>23-10-2021 21:56:25 | Request body {"email":"k@k.com","passwordPartial":"afadad"}</div>
+<div>23-10-2021 21:56:25 | response {"timestamp":1635015385219,"message":"User with email k@k.com not found","details":"uri=/msp/users/guest/v1/authenticate"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('userCreationNegative');">
+<td class="test-name">User Creation Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userCreationNegative">
+<div>23-10-2021 21:56:25 | Checking API POST http://localhost:8666/users-service/msp/users/guest/v1/</div>
+<div>23-10-2021 21:56:25 | Expected status 409</div>
+<div>23-10-2021 21:56:25 | Request body {"name":"aaaa aaaa","email":"bobd@gmail.com","passwordPartial":"abcdBF"}</div>
+<div>23-10-2021 21:56:25 | response {"timestamp":1635015385427,"message":"Email already exists","details":"uri=/msp/users/guest/v1/"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('userAuthentication');">
+<td class="test-name">User Authentication</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="userAuthentication">
+<div>23-10-2021 21:56:24 | Checking API POST http://localhost:8666/users-service/msp/users/guest/v1/authenticate</div>
+<div>23-10-2021 21:56:24 | Expected status 200</div>
+<div>23-10-2021 21:56:24 | Request body {"email":"bobd@gmail.com","passwordPartial":"abcdBF"}</div>
+<div>23-10-2021 21:56:25 | response {"id":10001,"creationDate":[2021,10,23,0,0],"name":"Bob Dilan","email":"bobd@gmail.com","isAdmin":false,"isGuest":false,"passwordPartial":"abcdBF","orderDetails":{"id":10001,"creationDate":[2021,10,23,0,0],"userId":10001,"status":"OPEN","orderItems":[{"id":10003,"orderId":10001,"catalogId":1,"quantity":3},{"id":10004,"orderId":10001,"catalogId":2,"quantity":2}]}}</div>
+<div>23-10-2021 21:56:25 | Checking name value. Expected value Bob Dilan</div>
+<div>23-10-2021 21:56:25 | Checking email value. Expected value bobd@gmail.com</div>
+<div>23-10-2021 21:56:25 | Checking isAdmin value. Expected value false</div>
+<div>23-10-2021 21:56:25 | Checking isGuest value. Expected value false</div>
+<div>23-10-2021 21:56:25 | Checking order details not null</div>
+<div>23-10-2021 21:56:25 | Checking order items not null</div>
+<div>23-10-2021 21:56:25 | Checking order items size. Expected size 2</div>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="suite-name">Tracking Tests (1 tests )</td>
+</tr>
+<tr>
+<td colspan="1">
+<table>
+<tr onclick="toggleElement('getNotificationsForUser');">
+<td class="test-name">Get Notifications For User</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="getNotificationsForUser">
+<div>23-10-2021 21:56:26 | Checking API GET http://localhost:8666/tracking-service/msp/tracking/admin/v1/userId/10001</div>
+<div>23-10-2021 21:56:26 | Expected status 200</div>
+<div>23-10-2021 21:56:26 | response [{"id":10001,"creationDate":1634947200000,"userId":10001,"message":"Order 1L created"}]</div>
+<div>23-10-2021 21:56:26 | Checking response size. Expected size 1</div>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td class="suite-name">Catalog Tests (4 tests )</td>
+</tr>
+<tr>
+<td colspan="1">
+<table>
+<tr onclick="toggleElement('retrieveCategories');">
+<td class="test-name">Retrieve Categories</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveCategories">
+<div>23-10-2021 21:56:24 | Checking API GET http://localhost:8666/catalog-service/msp/catalog/v1/categories</div>
+<div>23-10-2021 21:56:24 | Expected status 200</div>
+<div>23-10-2021 21:56:24 | response [{"id":1,"name":"phones","description":"newest phones in the market","imageUrl":"https://fdn.gsmarena.com/imgroot/news/19/12/top-phones-of-2019/-727/gsmarena_001.jpg"},{"id":2,"name":"accessories","description":"find all the accessories you need here","imageUrl":"https://techengage.com/wp-content/uploads/2019/07/promotional-accessories.jpg"}]</div>
+<div>23-10-2021 21:56:24 | Checking response size. Expected size 2</div>
+<div>23-10-2021 21:56:24 | Checking response[0].name value. Expected value phones</div>
+<div>23-10-2021 21:56:24 | Checking response[0].description not null</div>
+<div>23-10-2021 21:56:24 | Checking response[0].image url not null</div>
+<div>23-10-2021 21:56:24 | Checking response[1].name value. Expected value accessories</div>
+<div>23-10-2021 21:56:24 | Checking response[1].description not null</div>
+<div>23-10-2021 21:56:24 | Checking response[1].image url not null</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveCatalogItem');">
+<td class="test-name">Retrieve Catalog Item</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveCatalogItem">
+<div>23-10-2021 21:56:21 | Checking API GET http://localhost:8666/catalog-service/msp/catalog/v1/items/1</div>
+<div>23-10-2021 21:56:21 | Expected status 200</div>
+<div>23-10-2021 21:56:24 | response {"id":1,"categoryId":1,"name":"iPhone 11","description":"best iphone","price":100.00,"imageUrl":"https://www.phoneplay.co.il/images/itempics/1637_11072021122600.jpg","port":"8000"}</div>
+<div>23-10-2021 21:56:24 | Checking name value. Expected value iPhone 11</div>
+<div>23-10-2021 21:56:24 | Checking description not null</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveCatalogItemNegative');">
+<td class="test-name">Retrieve Catalog Item Negative</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveCatalogItemNegative">
+<div>23-10-2021 21:56:24 | Checking API GET http://localhost:8666/catalog-service/msp/catalog/v1/items/100</div>
+<div>23-10-2021 21:56:24 | Expected status 404</div>
+<div>23-10-2021 21:56:24 | response {"timestamp":1635015384382,"message":"item with id 100 not exists","details":"uri=/msp/catalog/v1/items/100"}</div>
+</div>
+</td>
+</tr>
+<tr onclick="toggleElement('retrieveCatalogItemsPhones');">
+<td class="test-name">Retrieve Catalog Items Phones</td><td class="test-status test-status-SUCCESS">SUCCESS</td>
+</tr>
+<tr>
+<td colspan="2">
+<div class="log-entries-cell" id="retrieveCatalogItemsPhones">
+<div>23-10-2021 21:56:24 | Checking API GET http://localhost:8666/catalog-service/msp/catalog/v1/categories/1/items</div>
+<div>23-10-2021 21:56:24 | Expected status 200</div>
+<div>23-10-2021 21:56:24 | response [{"id":1,"categoryId":1,"name":"iPhone 11","description":"best iphone","price":100.00,"imageUrl":"https://www.phoneplay.co.il/images/itempics/1637_11072021122600.jpg","port":null},{"id":2,"categoryId":1,"name":"iPhone 12","description":"best iphone","price":100.00,"imageUrl":"https://ksp.co.il/shop/items/512/124953.jpg","port":null},{"id":3,"categoryId":1,"name":"Samsung s10","description":"cool phone with 3 cameras","price":200.00,"imageUrl":"https://img.zap.co.il/3/4/2/4/49354243c.gif","port":null},{"id":4,"categoryId":1,"name":"Samsung s21","description":"cool phone with 4 cameras","price":400.00,"imageUrl":"https://cdn.dxomark.com/wp-content/uploads/medias/post-74826/SamsungGalaxys215g.jpg","port":null},{"id":5,"categoryId":1,"name":"Sivo Y95","description":"cheap and advanced phone","price":150.00,"imageUrl":"https://mobilenmore.com/wp-content/uploads/2020/02/vivo-y95-400x400.jpg","port":null},{"id":6,"categoryId":1,"name":"Huawei honor 9","description":"flagship smartphone made by Honor","price":100.00,"imageUrl":"https://www.notebookcheck.net/typo3temp/_processed_/1/f/csm_4_zu_3_teaser_Honor_9_Lite_c5294a711b.jpg","port":null},{"id":7,"categoryId":1,"name":"Xiaomi Mi 11","description":"exceptional hardware with cutting edge cinematic software","price":120.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/6vk3YPptCzJBwGaMrssT-970-80.jpg.webp","port":null},{"id":8,"categoryId":1,"name":"Oppo Find X3 Pro","description":"A fantastic flagship alternative","price":100.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/2U9CKtejNQzA3isqjSjNWU-970-80.jpg.webp","port":null},{"id":9,"categoryId":1,"name":"OnePlus 9 Pro","description":"Irresistible harmony of creativity, exclusive materials, and premium unibody","price":100.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/Yf3nuSLq9AyqGC3heGC4Ma-970-80.jpg.webp","port":null},{"id":10,"categoryId":1,"name":"OnePlus Nord 2","description":"Powerful processor, dual rear cameras, 5G connectivity and speedy charging all for a reasonable price","price":80.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/jz2JeakCU7sv3qjyJJjkQ8-970-80.jpg.webp","port":null},{"id":11,"categoryId":1,"name":"Redmi Note 10 Pro","description":"A budget phone with minimal compromise","price":70.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/62EA5qCTEB9TRu8eWpVS8j-970-80.jpg.webp","port":null},{"id":12,"categoryId":1,"name":"Google Pixel 4a","description":"Get incredible photos without paying a ridiculous price","price":120.00,"imageUrl":"https://cdn.mos.cms.futurecdn.net/44mxhvT42nBfp77T3m567D-970-80.jpg.webp","port":null}]</div>
+<div>23-10-2021 21:56:24 | Checking catalog items size. Expected size 12</div>
+<div>23-10-2021 21:56:24 | Checking response[0].name value. Expected value iPhone 11</div>
+<div>23-10-2021 21:56:24 | Checking response[0].description not null</div>
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</html>

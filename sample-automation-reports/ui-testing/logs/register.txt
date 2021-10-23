@@ -1,0 +1,15 @@
+TITLE REGISTER
+2021-10-23 22:03:01 | click button with id registerBtn
+2021-10-23 22:03:01 | IMAGE 709b4bd1-f211-4d9c-ae11-0ea0734d3fe2
+2021-10-23 22:03:01 | populate input with id emailInput, text t@gmail.com
+2021-10-23 22:03:01 | IMAGE ea168910-94fb-4a4c-adc0-e19b4e9b8013
+2021-10-23 22:03:01 | populate input with id nameInput, text Tom Cruise
+2021-10-23 22:03:02 | IMAGE 71eca76b-7a02-46bf-8cc8-6b0a2546c434
+2021-10-23 22:03:02 | populate input with id passwordInput, text abcdBF
+2021-10-23 22:03:02 | IMAGE f2f0880e-d824-4721-a4c3-0cd9ae686a51
+2021-10-23 22:03:02 | populate input with id confirmPasswordInput, text abcdBF
+2021-10-23 22:03:02 | IMAGE d667bf1e-9328-4fb1-85ad-eb5157dd96f6
+2021-10-23 22:03:02 | click button with id submitRegisterBtn
+2021-10-23 22:03:02 | IMAGE dac9ef6b-569a-4dd7-a6b9-084f463ea47e
+2021-10-23 22:03:03 | verify txt of nameLbl equals Tom Cruise
+2021-10-23 22:03:03 | IMAGE cfed09a2-bcb1-4a62-a62c-02eff5a9cd5e
