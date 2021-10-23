@@ -1,5 +1,0 @@
-TITLE LOGOUT
-2021-10-23 22:03:03 | click button with id logoutBtn
-2021-10-23 22:03:04 | IMAGE 4875b067-c859-4d01-8642-55fd9913601c
-2021-10-23 22:03:04 | verify txt of nameLbl equals guest
-2021-10-23 22:03:04 | IMAGE 1a731d63-fd3d-47ab-938f-ec8f19139029

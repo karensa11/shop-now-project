@@ -1,8 +1,0 @@
-TITLE NAVIGATE TO SHOPPING CART
-2021-10-23 22:03:11 | click button with id viewShoppingCartBtn
-2021-10-23 22:03:11 | IMAGE b34c48c0-8bd6-4972-8b3a-3cacde700b86
-TITLE CHECK SHOPPING CART CONTENT
-2021-10-23 22:03:11 | verify txt of shoppingCartLbl equals Your cart
-2021-10-23 22:03:11 | IMAGE b83f65d8-42cb-48d2-bd73-ab9044d0815d
-2021-10-23 22:03:11 | verify txt of shoppingCartItemsNumberLbl equals 3
-2021-10-23 22:03:12 | IMAGE 2ac393a5-ea78-40d6-b7d7-78ce0b859c50
