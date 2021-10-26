@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class HealthCheckApplication {
+	private static String[] addresses = new String[] {
+			"http://localhost:8000/", "http://localhost:8100/", "http://localhost:8200/", "http://localhost:8300/"
+	};
 	static class Status {
 		private String status;
 
@@ -21,13 +24,14 @@ public class HealthCheckApplication {
 	}
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) throws Exception{
+		/*
 		Properties props = new Properties();
 		props.load(HealthCheckApplication.class.getClassLoader().getSystemResourceAsStream("application.properties"));
 		String addresses = props.getProperty("addresses.list");
-		List<String> addressSplit = Arrays.asList(addresses.split(","));
+		*/
 		boolean allUp = false;
 		while (!allUp) {
-			allUp = checkStatus(addressSplit);
+			allUp = checkStatus();
 			System.out.println("\n\n\n\n");
 			if (!allUp) {
 				Thread.sleep(10000);
@@ -39,9 +43,9 @@ public class HealthCheckApplication {
 		System.out.println("======================");
 	}
 
-	private static boolean checkStatus(List<String> addressSplit) {
+	private static boolean checkStatus() {
 		boolean allUp = true;
-		for (String address:addressSplit) {
+		for (String address:addresses) {
 			try {
 				ResponseEntity<Status> currencyExchangeData = new RestTemplate().getForEntity(address + "/actuator/health", Status.class);
 				Status data = currencyExchangeData.getBody();
