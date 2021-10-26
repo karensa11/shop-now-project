@@ -122,7 +122,7 @@ Detailed report will be generated reports/ui-testing (view report in chrome brow
 
 ## Links
 
--	**UI URL
+-	**UI URL**
 Best to run in chrome browser
 http://localhost:7000/
 
