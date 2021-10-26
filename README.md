@@ -20,7 +20,7 @@ The file explorer is accessible using the button in left corner of the navigatio
 ```
 |   |  | 
 | :---: | :---: |
-|![Screenshot](./documentation/images/spring-boot.png=50x50)| Spring boot |
+|<img src="./documentation/images/spring-boot.png" width="50" height="50">| Spring boot |
 |![Screenshot](./documentation/images/openfeign.png)| Open feign (calling between ms) |
 |![Screenshot](./documentation/images/h2.png)| H2 in memory database (with JPA) |
 |![Screenshot](./documentation/images/OpenAPI.png)| OpenAPI (swagger automatic documentation) |
