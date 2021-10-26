@@ -37,7 +37,7 @@ To run it, download the code using “git clone” and follow the installation a
 |<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
 |<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
-## Components Architecture
+## Components
 
 <img src="./documentation/architecture.png">
 
@@ -46,7 +46,9 @@ To run it, download the code using “git clone” and follow the installation a
 - **users-service** - responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
 - **tracking service** - responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
 - **API gateway** - gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
-- **naming-service** - eureka service
+- **naming-service** - eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
+- **UI** - simple GUI built and react and covers all system functionality. 2 types of systems, redirected after login based on user roles: 1) regular user - can view catalog, create orders, view and manage his account 2) admin - can close order and view user notifications (major actions)
+- there are 2 types of sanity tests 1) rest automation - check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response 2) UI automation - using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
 
 ## Installation on local PC
 
