@@ -37,9 +37,16 @@ To run it, download the code using “git clone” and follow the installation a
 |<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
 |<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
-## Components Architecture Diagram
+## Components Architecture
 
 <img src="./documentation/architecture.png">
+
+- **catalog-service** - responsible for the catalog domain - categories, items in category (phones, accessories)
+- **orders-service** - responsible for the order managemant domain - create order, add items to order, place / close / cancel order. Communicates with catalog-service via feign to get catalog details. Sends events to kafka for major items - order creation or cancellation
+- **users-service** - responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
+- **tracking service** - responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
+- **API gateway** - gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
+- **naming-service** - eureka service
 
 ## Installation on local PC
 
