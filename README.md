@@ -78,20 +78,20 @@ docker-compose rm
 
 ## Run on local PC
 
-1.	**Run micro services
+1.	**Run micro services**
 ```
 Root folder
 startDocker.cmd
 tailDocker.cmd
 ```
 
-2.	**Verify all ms are up
+2.	**Verify all ms are up**
 ```
 run health-check/startHealthCheck.cmd
 once you see message "UP!!!!!!!!!!!!!!!!!!!!" all ms in the project are up
 ```
 
-3.	**Run rest automation (basic sanity)
+3.	**Run rest automation (basic sanity)**
 ```
 run rest-automation/startRestAutomation.cmd
 If you see in the CMD: "[INFO] Tests run: XX, Failures: 0, Errors: 0, Skipped: 0" all passed with success.
@@ -99,20 +99,20 @@ If not, you can check the report to get which test failed.
 Detailed report will be generated under reports/rest-testing (view  report in chrome browser)
 ```
 
-4.	**Start UI
+4.	**Start UI**
 ```
 run user-ui/startClient.cmd
 Once UI is up, it will open in IE
 ```
 
-5.	**Verify UI homepage opens
+5.	**Verify UI homepage opens**
 ```
 http://localhost:7000/
 For now application supports chrome only
 Run with -disable-web-security
 ```
 
-6.	**Perform full automation
+6.	**Perform full automation**
 ```
 run user-ui-automation/startUIAutomation.cmd
 If you see in CMD: "TEST Login Failure PASSED" "SUITE Basic Sanity FINISHED" "SUITE  FINISHED" "RUN FINISHED" all passed with success.
