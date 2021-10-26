@@ -71,7 +71,8 @@ docker-compose rm
 1.	Run micro services
 ```
 Root folder
-docker-compose up
+startDocker.cmd
+tailDocker.cmd
 ```
 
 2.	Verify ms are up
