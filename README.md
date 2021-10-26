@@ -37,7 +37,7 @@ To run it, download the code using “git clone” and follow the installation a
 |<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
 |<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
-## Components
+## Architecture and components
 
 <img src="./documentation/architecture.png">
 
@@ -78,20 +78,20 @@ docker-compose rm
 
 ## Run on local PC
 
-1.	Run micro services
+1.	**Run micro services
 ```
 Root folder
 startDocker.cmd
 tailDocker.cmd
 ```
 
-2.	Verify ms are up
+2.	**Verify all ms are up
 ```
 run health-check/startHealthCheck.cmd
 once you see message "UP!!!!!!!!!!!!!!!!!!!!" all ms in the project are up
 ```
 
-3.	Run rest automation (basic sanity)
+3.	**Run rest automation (basic sanity)
 ```
 run rest-automation/startRestAutomation.cmd
 If you see in the CMD: "[INFO] Tests run: XX, Failures: 0, Errors: 0, Skipped: 0" all passed with success.
@@ -99,22 +99,22 @@ If not, you can check the report to get which test failed.
 Detailed report will be generated under reports/rest-testing (view  report in chrome browser)
 ```
 
-4.	Start UI
+4.	**Start UI
 ```
 run user-ui/startClient.cmd
 Once UI is up, it will open in IE
 ```
 
-5.	Verify UI homepage opens
+5.	**Verify UI homepage opens
 ```
 http://localhost:7000/
 For now application supports chrome only
 Run with -disable-web-security
 ```
 
-6.	Perform full automation
+6.	**Perform full automation
 ```
-user-ui-automation/startUIAutomation.cmd
+run user-ui-automation/startUIAutomation.cmd
 If you see in CMD: "TEST Login Failure PASSED" "SUITE Basic Sanity FINISHED" "SUITE  FINISHED" "RUN FINISHED" all passed with success.
 If not, you can check the report to get which test failed.
 Detailed report will be generated reports/ui-testing (view report in chrome browser)
@@ -122,41 +122,41 @@ Detailed report will be generated reports/ui-testing (view report in chrome brow
 
 ## Links
 
--	UI URL
+-	**UI URL
 Best to run in chrome browser
 http://localhost:7000/
 
--	Rest addresses
+-	**Rest addresses
     - Catalog service                       http://localhost:8000
     - Order management service http://localhost:8100
     - Users service                          http://localhost:8200
     - Tracking service                     http://localhost:8300
 
--	Rest API Gateway URLs
+-	**Rest API Gateway URLs
     - Catalog service                       http://localhost:8666/catalog-service/msp/catalog/...
     - Order management service http://localhost:8666/orders-service/msp/orders/...
     - Users service                          http://localhost:8666/users-service/msp/users/...
     - Tracking service                     http://localhost:8666/tracking-service/msp/tracking/...
 
--	Actuator URL (links to all actuator fields)
+-	**Actuator URL (links to all actuator fields)
     - http://<service_address>/actuator
 
--	HAL browser (explore the system links)
+-	**HAL browser (explore the system links)
     - http://<service_address>/browser/index.html
 
--	Swagger UI  (Put /v3/api-docs in the explore)
+-	**Swagger UI  (Put /v3/api-docs in the explore)
     - http://<service_address>/swagger-ui/index.html
 
--	H2 console  (in memory DB console - view and update if required)
+-	**H2 console  (in memory DB console - view and update if required)
     - http://<service_address>/h2-console/
 
--	Eureka console
+-	**Eureka console
     - http://localhost:8888/
 
--	Zipkin console (server calls tracing)
+-	**Zipkin console (server calls tracing)
     - http://localhost:9411/
-    
-## TODO
+
+### TODO
 
 -	multiple instances of ms
 -	config server
