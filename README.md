@@ -31,5 +31,12 @@ To run it, download the code using “git clone” and follow the installation a
 || customized spring annotations (enable) |
 || customized exception handling |
 || roles validation (in the api gateway) |
+|<img src="./documentation/images/react-redux.png" width="50" height="30">| react UI with redux and functional components (hooks) |
+|<img src="./documentation/images/ESLint.png" width="50" height="30">| ESlint (UI code standards validation) |
+|| session id and transaction id sent on every transaction to the BE |
+|<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
+|<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
+**Components Architecture Diagram**
 
+<img src="./documentation/architecture.png">
