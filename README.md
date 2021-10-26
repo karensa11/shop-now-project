@@ -1,6 +1,6 @@
 # Shop Now
 
-**Overview**
+## Overview
 Simple shopping management system, built for learning proposes.
 
 User can browse for catalog, add items to cart, edit his cart and then place order.
@@ -13,7 +13,7 @@ For now the system is capable only to run on local computer.
 
 To run it, download the code using “git clone” and follow the installation and run instructions as below.
 
-**Technologies and key features**
+## Technologies and key features
 
 |   |  | 
 | :---: | :---: |
@@ -37,11 +37,11 @@ To run it, download the code using “git clone” and follow the installation a
 |<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
 |<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
-**Components Architecture Diagram**
+## Components Architecture Diagram
 
 <img src="./documentation/architecture.png">
 
-**Installation on local PC**
+## Installation on local PC
 
 1.	Install UI libraries
 ```
@@ -66,7 +66,7 @@ docker-compose ps
 docker-compose rm
 ```
 
-**Run on local PC**
+## Run on local PC
 
 1.	Run micro services
 ```
@@ -106,7 +106,7 @@ mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
 Report under reports/ui-testing (view report in chrome browser)
 ```
 
-**Links**
+## Links
 
 -	UI URL
 Best to run in chrome browser
@@ -142,7 +142,7 @@ http://localhost:7000/
 -	Zipkin console (server calls tracing)
     - http://localhost:9411/
     
-**TODO**
+## TODO
 
 -	multiple instances of ms
 -	config server
