@@ -15,13 +15,28 @@ To run it, download the code using “git clone” and follow the installation a
 
 **Technologies and key features**
 
-The file explorer is accessible using the button in left corner of the navigation bar. You can create a new file by clicking the **New file** button in the file explorer. You can also create folders by clicking the **New folder** button.
-```
-```
 |   |  | 
 | :---: | :---: |
-|![Screenshot](./documentation/images/spring-boot.png)| Spring boot |
-|![Screenshot](./documentation/images/openfeign.png)| Open feign (calling between ms) |
-|![Screenshot](./documentation/images/h2.png)| H2 in memory database (with JPA) |
-|![Screenshot](./documentation/images/OpenAPI.png)| OpenAPI (swagger automatic documentation) |
+|<img src="./documentation/images/spring-boot.png" width="50" height="30">| Spring boot |
+|<img src="./documentation/images/openfeign.png" width="50" height="30">| Open feign (calling between ms) |
+|<img src="./documentation/images/h2.png" width="50" height="30">| H2 in memory database (with JPA) |
+|<img src="./documentation/images/OpenAPI.png" width="50" height="30">| OpenAPI (swagger automatic documentation) |
+|<img src="./documentation/images/docker.png" width="50" height="30">| docker (with compose) |
+|<img src="./documentation/images/zipkin-logo.png" width="50" height="30">| Zipkin (tracing between ms calls) via rabbitMQ |
+|<img src="./documentation/images/kafka.png" width="50" height="30">| Kafka (messages between ms) |
+|<img src="./documentation/images/swagger-ui.png" width="50" height="30">| Swagger-ui (view all the rest definitions – e.g. URL, request/response) |
+|| Actuator (system status and details) |
+|| HAL browser (system links) |
+|| XSS validation (when parsing the UI input + data types validation) |
+|| customized spring annotations (enable) |
+|| customized exception handling |
+|| roles validation (in the api gateway) |
+|<img src="./documentation/images/react-redux.png" width="50" height="30">| react UI with redux and functional components (hooks) |
+|<img src="./documentation/images/ESLint.png" width="50" height="30">| ESlint (UI code standards validation) |
+|| session id and transaction id sent on every transaction to the BE |
+|<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing (incl negative tests) using selenium, moca, chai, nodeJs |
+|<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
+**Components Architecture Diagram**
+
+<img src="./documentation/architecture.png">
