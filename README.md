@@ -76,34 +76,37 @@ docker-compose up
 
 2.	Verify ms are up
 ```
-e.g. open actuator link on all the rests
+run health-check/startHealthCheck.cmd
+once you see message "UP!!!!!!!!!!!!!!!!!!!!" all ms in the project are up
 ```
 
 3.	Run rest automation (basic sanity)
 ```
-[rest-automation]
-mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
-Report under reports/rest-testing (view  report in chrome browser)
+run rest-automation/startRestAutomation.cmd
+If you see in the CMD: "[INFO] Tests run: XX, Failures: 0, Errors: 0, Skipped: 0" all passed with success.
+If not, you can check the report to get which test failed.
+Detailed report will be generated under reports/rest-testing (view  report in chrome browser)
 ```
 
 4.	Start UI
 ```
-[user-ui]
-npm start
+run user-ui/startClient.cmd
+Once UI is up, it will open in IE
 ```
 
 5.	Verify UI homepage opens
 ```
 http://localhost:7000/
+For now application supports chrome only
 Run with -disable-web-security
 ```
 
 6.	Perform full automation
 ```
-Once rest-automation is ok and browser home page is ok
-[user-ui-automation]
-mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
-Report under reports/ui-testing (view report in chrome browser)
+user-ui-automation/startUIAutomation.cmd
+If you see in CMD: "TEST Login Failure PASSED" "SUITE Basic Sanity FINISHED" "SUITE  FINISHED" "RUN FINISHED" all passed with success.
+If not, you can check the report to get which test failed.
+Detailed report will be generated reports/ui-testing (view report in chrome browser)
 ```
 
 ## Links
