@@ -105,3 +105,52 @@ Once rest-automation is ok and browser home page is ok
 mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
 Report under reports/ui-testing (view report in chrome browser)
 ```
+
+**Links**
+
+-	UI URL
+Best to run in chrome browser
+http://localhost:7000/
+
+-	Rest addresses
+    - Catalog service                       http://localhost:8000
+    - Order management service http://localhost:8100
+    - Users service                          http://localhost:8200
+    - Tracking service                     http://localhost:8300
+
+-	Rest API Gateway URLs
+    - Catalog service                       http://localhost:8666/catalog-service/msp/catalog/...
+    - Order management service http://localhost:8666/orders-service/msp/orders/...
+    - Users service                          http://localhost:8666/users-service/msp/users/...
+    - Tracking service                     http://localhost:8666/tracking-service/msp/tracking/...
+
+-	Actuator URL (links to all actuator fields)
+    - http://<service_address>/actuator
+
+-	HAL browser (explore the system links)
+    - http://<service_address>/browser/index.html
+
+-	Swagger UI  (Put /v3/api-docs in the explore)
+    - http://<service_address>/swagger-ui/index.html
+
+-	H2 console  (in memory DB console - view and update if required)
+    - http://<service_address>/h2-console/
+
+-	Eureka console
+    - http://localhost:8888/
+
+-	Zipkin console (server calls tracing)
+    - http://localhost:9411/
+    
+**TODO**
+
+-	multiple instances of ms
+-	config server
+-	retry for service
+-	Kubernetes
+-	user token (send in ms header, and to all sub ms)
+-	data fencing
+-	add more catalog items - more phones and accessories
+-	elastic search on logs (put logs in FS) by session and transaction id
+-	config catalog view admin (can save  to json once closing the ms, and load json on ms startup)
+-	create repository of images (don't use arbitrary images)
