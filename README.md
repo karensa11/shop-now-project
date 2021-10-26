@@ -40,3 +40,68 @@ To run it, download the code using “git clone” and follow the installation a
 **Components Architecture Diagram**
 
 <img src="./documentation/architecture.png">
+
+**Installation on local PC**
+
+1.	Install UI libraries
+```
+[user-ui] [user-ui-automation]
+npm install
+```
+2.	Install docker (if not already have)
+
+3.	Install micro services images on docker
+```
+[catalog-service] [api-gateway] [naming-service] [orders-service] [tracking-service] [users-service]
+spring-boot:build-image -DskipTests
+
+Make sure eslint report is ok (you can run via “npm run eslint” to get updated report)
+
+If need to re-build container on same machine, run 
+docker-compose -f docker-compose-filename.yml down
+docker-compose -f docker-compose-filename.yml up
+
+or get the problematic image and delete
+docker-compose ps
+docker-compose rm
+```
+
+**Run on local PC**
+
+1.	Run micro services
+```
+Root folder
+docker-compose up
+```
+
+2.	Verify ms are up
+```
+e.g. open actuator link on all the rests
+```
+
+3.	Run rest automation (basic sanity)
+```
+[rest-automation]
+mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
+Report under reports/rest-testing (view  report in chrome browser)
+```
+
+4.	Start UI
+```
+[user-ui]
+npm start
+```
+
+5.	Verify UI homepage opens
+```
+http://localhost:7000/
+Run with -disable-web-security
+```
+
+6.	Perform full automation
+```
+Once rest-automation is ok and browser home page is ok
+[user-ui-automation]
+mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
+Report under reports/ui-testing (view report in chrome browser)
+```
