@@ -49,6 +49,7 @@ To run it, download the code using “git clone” and follow the installation a
 - **naming-service** - eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
 - **UI** - simple GUI built and react and covers all system functionality. 2 types of systems, redirected after login based on user roles: 1) regular user - can view catalog, create orders, view and manage his account 2) admin - can close order and view user notifications (major actions)
 - there are 2 types of sanity tests 1) rest automation - check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response 2) UI automation - using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
+- the micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
 
 ## Installation on local PC
 
