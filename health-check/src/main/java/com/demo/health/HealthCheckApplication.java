@@ -1,9 +1,5 @@
 package com.demo.health;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 

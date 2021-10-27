@@ -41,15 +41,22 @@ To run it, download the code using “git clone” and follow the installation a
 
 <img src="./documentation/architecture.png">
 
-- **catalog-service** - responsible for the catalog domain - categories, items in category (phones, accessories)
-- **orders-service** - responsible for the order managemant domain - create order, add items to order, place / close / cancel order. Communicates with catalog-service via feign to get catalog details. Sends events to kafka for major items - order creation or cancellation
-- **users-service** - responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
-- **tracking service** - responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
-- **API gateway** - gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
-- **naming-service** - eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
-- **UI** - simple GUI built and react and covers all system functionality. 2 types of systems, redirected after login based on user roles: 1) regular user - can view catalog, create orders, view and manage his account 2) admin - can close order and view user notifications (major actions)
-- there are 2 types of sanity tests 1) rest automation - check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response 2) UI automation - using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
-- the micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
+#### Micro Services
+- **catalog-service** <br/>responsible for the catalog domain - categories, items in category (phones, accessories)
+- **orders-service** <br/>responsible for the order managemant domain - create order, add items to order, place / close / cancel order. Communicates with catalog-service via feign to get catalog details. Sends events to kafka for major items - order creation or cancellation
+- **users-service** <br/>responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
+- **tracking service** <br/>responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
+- **API gateway** <br/>gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
+- **naming-service** <br/>eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
+#### Other elements
+- **UI** <br/>simple GUI built and react and covers all system functionality. 2 types of systems, redirected after login based on user roles: 1) regular user - can view catalog, create orders, view and manage his account 2) admin - can close order and view user notifications (major actions)
+- **rest automation** <br/>check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response
+- **UI automation** <br/>using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
+- **ms-utility** <br/>common utility methods and annotations for the micro services, such as custom annotation for enable custom exception handling
+- **health-check** <br/>simple module to check if all ms are up
+####  Logic and procedures
+- **Logging and tracability** <br/> the micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
+- **API gateway** <br/>All external calls must go thru API gateway.<br/>Calls are filtered with the  sequence of filters in the gateway, and if everything is ok the call is proceeding to the requested ms. <br/>Current filters are: 1) Logging filter - add log entry that associated between the retrieved session id / transaction id and the zipkin id 2) Roles filter - checks if the user (authenticationId) is allowed to inoke the requested rest on the ms 3) XSS filter - check requested URL, parameters and headers (request body will be validated during JSON de-serialization)
 
 ## Installation on local PC
 

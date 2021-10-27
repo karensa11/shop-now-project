@@ -8,11 +8,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
   <groupId>com.demo</groupId>
-  <artifactId>utility</artifactId>
+  <artifactId>ms-utility</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>utility</name>
+  <name>ms-utility</name>
   <url>http://maven.apache.org</url>
 
   <properties>

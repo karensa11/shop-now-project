@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 		   	<groupId>com.demo</groupId>
-  			<artifactId>utility</artifactId>
+  			<artifactId>ms-utility</artifactId>
   			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
