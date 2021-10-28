@@ -136,7 +136,7 @@ http://localhost:7000/
     - http://localhost:9411/
 ## Architecture and components
 
-<img src="./documentation/architecture.png">
+<table><tr><td><img src="./documentation/architecture.png"></td></tr></table>
 
 #### Micro Services
 - **catalog-service**<br/>
@@ -237,30 +237,30 @@ The testing sequence composed of a steps of one big flow. E.g. user creates and 
 The main page will show all the tests with their status. Press on the test to get the details such as operations on the page and screenshots. 
 Generally each operation captures one screenshot.
 <br/><br/>
-<img src="./documentation/report_ui.png">
+<table><tr><td><img src="./documentation/report_ui.png"></td></tr></table>
 ### Rest testing and report
 The rest testing checks the rest status and response with dummy data loaded during the ms startup using rest assure and testNg.
 The rests tests are indipendent and there is no significance the tests order. 
 **Report sructure**
 The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
 <br/><br/>
-<img src="./documentation/report_rest.png">
+<table><tr><td><img src="./documentation/report_rest.png"></td></tr></table>
 ## UI Overview
 User can browse for phones, and add to cart <br/><br/>
 <table><tr><td><img src="./documentation/ui-screenshots/browse-phones.png"></td></tr></table>
 <br/><br/>
 In the cart, user can see its items, total and do do operations on cart such as change items quantity, cancel order and place order<br/><br/>
-<img src="./documentation/ui-screenshots/shopping-cart.png"><br/><br/>
+<table><tr><td><img src="./documentation/ui-screenshots/shopping-cart.png"></td></tr></table><br/><br/>
 User can choose register to the system for easier order maintenance (creation and tracking), or login if account already created.
 <br/><br/>
-<img src="./documentation/ui-screenshots/register.png"><br/><br/>
-<img src="./documentation/ui-screenshots/login.png"><br/><br/>
+<table><tr><td><img src="./documentation/ui-screenshots/register.png"></td></tr></table><br/><br/>
+<table><tr><td><img src="./documentation/ui-screenshots/login.png"></td></tr></table><br/><br/>
 System contains also admin functionality. The admin can track and close order
 <br/><br/>
-<img src="./documentation/ui-screenshots/admin-search-order.png"><br/><br/>
+<table><tr><td><img src="./documentation/ui-screenshots/admin-search-order.png"></td></tr></table><br/><br/>
 Also, the user can view user transactions
 <br/><br/>
-<img src="./documentation/ui-screenshots/admin-transactions.png"><br/><br/>
+<table><tr><td><img src="./documentation/ui-screenshots/admin-transactions.png"></td></tr></table><br/><br/>
 ## TODO
 
 -	multiple instances of ms
