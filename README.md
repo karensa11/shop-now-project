@@ -175,7 +175,7 @@ Several security elements:<br/>1) Restrict access to rest based on user role via
 - **Database**<br/>
 Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
 ## DEEPER VIEW
-### MS structure
+### Micro services elements
 - **Main class - running <em>SpringApplication</em>**<br/>
 The main class must be annonated with <em>@SpringBootApplication</em> (to initiate spring mechanism e.g. beans scanning), <em>@EnableSecurityValidation</em> (security validations e.g. XSS checks on the request body), <em>@EnableCustomizedExceptionHandling</em> (custom annotation to enable custom clea exception handling), <em>@EnableKafkaConsumer</em> (listen to kafka messages)
 
@@ -188,15 +188,46 @@ Each DB table will have its own repository class.
 JPA know how to do basic queries by itself (e.g. find by id). However if more complex queries required (e.g. find by name), there are custom methods to support it
 
 - **Feign interfaces for calling other micro services**<br/>
+Annonated with @FeignClient along with the target service logical name.
 The interface should contain exactly the method signature as in the called service (URL, method, data types).
-The interface can contain only the require methods, and not all the methods on the called service.
+The interface can contain only the require methods, and not all the methods on the 
+called service.
 - **Data types**<br/>
   - Entity - retrieved from the database
   - Rest - request (for post/put) / response of the rest
   - Feign - request / response of the services called in feign
-- Kafka support
+- **Kafka support**<br/>
   - Kafka consumer
   - Kafka publisher
+### UI Structure and elements
+- **Components**
+Each JSX component has its own scss file attached to it. That ensures uniqueness in styles (no collision between components). 
+```
+import "./catalog-item.scss";
+export default function CatalogItem({item}) {
+    return (  
+        <div className="catalog-item-component">
+```
+Components are splitted to regular and admin components.
+There are pages components, which represent the main page of the application.
+All components are functional (no use of React.Component). Connectivity to the redux, dispatching of data and state managemant is done using hooks - useDispatch, useSelector, useState
+- **Routing**
+Routing is splitted between admin and regular user. Once it is detected the logged in user is admin, the user is navigated to admin system.
+For regular user, the system checks if the user is logged in / not and redirects him in case he tries to approach irellevant URL.
+```
+<Route path={`${match.path}signIn`}  render={(props) => (  
+    currentUser && !currentUser.isGuest ?  
+        <Redirect to="/" /> : <LoginPage {...props} />  
+)} />
+```
+- **Redux**
+There are several namespaces. Each with its reducer, actions and selectors.
+The state is updated via actions dispatched using Redux-Thunk.
+The state is saved to the session, and is persistent even after browser refresh F5, but not if opening new TAB or new window.
+
+- **Server**
+Server calls done in common framework. This framework is sending the request to the BE, and checking its status. In case its 200, it will executes the callbacks / session dispatch, in case its invalid status (e.g. 404 - not found) and this is valid scenario (e.g. search for data), it will execute callback for this status
+
 ## REPORTS OVERVIEW
 ### UI testing and report
 The UI testing automates user operations on the system (pres a button, fill text, etc) using selenium. 
