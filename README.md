@@ -262,6 +262,7 @@ System contains also admin functionality. The admin can track and close order
 Also, the user can view user transactions
 <br/><br/>
 <table><tr><td><img src="./documentation/ui-screenshots/admin-transactions.png"></td></tr></table><br/><br/>
+
 ## TODO
 
 -	multiple instances of ms
