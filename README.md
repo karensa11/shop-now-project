@@ -176,8 +176,8 @@ Several security elements:<br/>1) Restrict access to rest based on user role via
 Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
 ## DEEPER VIEW
 ### MS structure
-- Main class - running <em>SpringApplication</em>.
-The main class must be annonated with <em>@SpringBootApplication</em> (to initiate spring mechanism e.g. beans scanning), <em>@EnableSecurityValidation</em> (security validations e.g. XSS checks on the request body), <em>@EnableCustomizedExceptionHandling</em> (custom annotation to enable custom clea exception handling),
+- **Main class - running <em>SpringApplication</em>**<br/>
+The main class must be annonated with <em>@SpringBootApplication</em> (to initiate spring mechanism e.g. beans scanning), <em>@EnableSecurityValidation</em> (security validations e.g. XSS checks on the request body), <em>@EnableCustomizedExceptionHandling</em> (custom annotation to enable custom clea exception handling), <em>@EnableKafkaConsumer</em> (listen to kafka messages)
 
 - **Controller class for exposing rest services**<br/>
 Annonated with <em>@RestController</em>
@@ -190,10 +190,13 @@ JPA know how to do basic queries by itself (e.g. find by id). However if more co
 - **Feign interfaces for calling other micro services**<br/>
 The interface should contain exactly the method signature as in the called service (URL, method, data types).
 The interface can contain only the require methods, and not all the methods on the called service.
-- Data types
+- **Data types**<br/>
   - Entity - retrieved from the database
   - Rest - request (for post/put) / response of the rest
   - Feign - request / response of the services called in feign
+- Kafka support
+  - Kafka consumer
+  - Kafka publisher
 ## REPORTS OVERVIEW
 ### UI testing and report
 The UI testing automates user operations on the system (pres a button, fill text, etc) using selenium. 
@@ -201,12 +204,14 @@ The testing sequence composed of a steps of one big flow. E.g. user creates and 
 **Report sructure**
 The main page will show all the tests with their status. Press on the test to get the details such as operations on the page and screenshots. 
 Generally each operation captures one screenshot.
+<br/>
 <img src="./documentation/report_ui.png">
 ### Rest testing and report
 The rest testing checks the rest status and response with dummy data loaded during the ms startup using rest assure and testNg.
 The rests tests are indipendent and there is no significance the tests order. 
 **Report sructure**
 The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
+<br/>
 <img src="./documentation/report_rest.png">
 ## TODO
 
