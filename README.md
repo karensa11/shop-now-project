@@ -247,19 +247,19 @@ The report will show the tests results, divided by ms and its rest (some rests w
 <img src="./documentation/report_rest.png">
 ## UI Overview
 User can browse for phones, and add to cart <br/><br/>
-<img src="./documentation/ui-screenshots/browse-phones.png">
+<img src="./documentation/ui-screenshots/browse-phones.png"><br/>
 In the cart, user can see its items, total and do do operations on cart such as change items quantity, cancel order and place order<br/><br/>
-<img src="./documentation/ui-screenshots/shopping-cart.png">
+<img src="./documentation/ui-screenshots/shopping-cart.png"><br/>
 User can choose register to the system for easier order maintenance (creation and tracking), or login if account already created.
 <br/><br/>
-<img src="./documentation/ui-screenshots/register.png">
-<img src="./documentation/ui-screenshots/login.png">
+<img src="./documentation/ui-screenshots/register.png"><br/>
+<img src="./documentation/ui-screenshots/login.png"><br/>
 System contains also admin functionality. The admin can track and close order
 <br/><br/>
-<img src="./documentation/ui-screenshots/admin-search-order.png">
+<img src="./documentation/ui-screenshots/admin-search-order.png"><br/>
 Also, the user can view user transactions
 <br/><br/>
-<img src="./documentation/ui-screenshots/admin-transactions">
+<img src="./documentation/ui-screenshots/admin-transactions"><br/>
 ## TODO
 
 -	multiple instances of ms
