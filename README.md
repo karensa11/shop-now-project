@@ -174,7 +174,7 @@ Several security elements:<br/>1) Restrict access to rest based on user role via
 
 - **Database**<br/>
 Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
-## DEEPER VIEW
+## Deeper View
 ### Micro services elements
 - **Main class - running <em>SpringApplication</em>**<br/>
 The main class must be annonated with <em>@SpringBootApplication</em> (to initiate spring mechanism e.g. beans scanning), <em>@EnableSecurityValidation</em> (security validations e.g. XSS checks on the request body), <em>@EnableCustomizedExceptionHandling</em> (custom annotation to enable custom clea exception handling), <em>@EnableKafkaConsumer</em> (listen to kafka messages)
@@ -227,7 +227,7 @@ The state is saved to the session, and is persistent even after browser refresh 
 
 - **Server**<br/>Server calls done in common framework. This framework is sending the request to the BE, and checking its status. In case its 200, it will executes the callbacks / session dispatch, in case its invalid status (e.g. 404 - not found) and this is valid scenario (e.g. search for data), it will execute callback for this status
 
-## REPORTS OVERVIEW
+## Reports Overview
 ### UI testing and report
 The UI testing automates user operations on the system (pres a button, fill text, etc) using selenium. 
 The testing sequence composed of a steps of one big flow. E.g. user creates and placing order, and few steps later Admin login and closes the order. Then the user login again and checks the order is actually closed.
