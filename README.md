@@ -200,7 +200,7 @@ called service.
   - Kafka consumer
   - Kafka publisher
 ### UI Structure and elements
-- **Components**
+- **Components**<br/>
 Each JSX component has its own scss file attached to it. That ensures uniqueness in styles (no collision between components). 
 ```
 import "./catalog-item.scss";
@@ -211,7 +211,7 @@ export default function CatalogItem({item}) {
 Components are splitted to regular and admin components.
 There are pages components, which represent the main page of the application.
 All components are functional (no use of React.Component). Connectivity to the redux, dispatching of data and state managemant is done using hooks - useDispatch, useSelector, useState
-- **Routing**
+- **Routing**<br/>
 Routing is splitted between admin and regular user. Once it is detected the logged in user is admin, the user is navigated to admin system.
 For regular user, the system checks if the user is logged in / not and redirects him in case he tries to approach irellevant URL.
 ```
@@ -220,13 +220,12 @@ For regular user, the system checks if the user is logged in / not and redirects
         <Redirect to="/" /> : <LoginPage {...props} />  
 )} />
 ```
-- **Redux**
+- **Redux**<br/>
 There are several namespaces. Each with its reducer, actions and selectors.
 The state is updated via actions dispatched using Redux-Thunk.
 The state is saved to the session, and is persistent even after browser refresh F5, but not if opening new TAB or new window.
 
-- **Server**
-Server calls done in common framework. This framework is sending the request to the BE, and checking its status. In case its 200, it will executes the callbacks / session dispatch, in case its invalid status (e.g. 404 - not found) and this is valid scenario (e.g. search for data), it will execute callback for this status
+- **Server**<br/>Server calls done in common framework. This framework is sending the request to the BE, and checking its status. In case its 200, it will executes the callbacks / session dispatch, in case its invalid status (e.g. 404 - not found) and this is valid scenario (e.g. search for data), it will execute callback for this status
 
 ## REPORTS OVERVIEW
 ### UI testing and report
@@ -235,14 +234,14 @@ The testing sequence composed of a steps of one big flow. E.g. user creates and 
 **Report sructure**
 The main page will show all the tests with their status. Press on the test to get the details such as operations on the page and screenshots. 
 Generally each operation captures one screenshot.
-<br/>
+<br/><br/>
 <img src="./documentation/report_ui.png">
 ### Rest testing and report
 The rest testing checks the rest status and response with dummy data loaded during the ms startup using rest assure and testNg.
 The rests tests are indipendent and there is no significance the tests order. 
 **Report sructure**
 The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
-<br/>
+<br/><br/>
 <img src="./documentation/report_rest.png">
 ## TODO
 
