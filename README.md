@@ -41,20 +41,23 @@ To run it, download the code using “git clone” and follow the installation a
 
 ## Installation on local PC
 1.	**Install docker (if not already have)**
-2.	**Install npm (if not already have)**
-3.	**Install UI libraries**<br/>
+2.	**Install maven (if not already have)**
+3.	**Install npm (if not already have)**
+4.	**Install UI libraries**<br/>
 ~/user-ui    ~/user-ui-automation
+Run in cmd:
 ```
 npm install
 ```
 
-4.	**Install micro services images on docker**<br/>
-~/catalog-service    ~/api-gateway    ~/naming-service    ~/orders-service    ~/tracking-service    ~/users-service
+5.	**Install micro services images on docker**<br/>
+./catalog-service    ./api-gateway    ./naming-service    ./orders-service    ./tracking-service    ~/users-service
+Run in cmd:
 ```
 mvn spring-boot:build-image -DskipTests
 ```
 Make sure eslint report is ok (you can run via “npm run eslint” to get updated report)<BR/>
-If need to re-build container on same machine, run 
+If need to re-build container on same machine, run in cmd:
 ```
 docker-compose -f docker-compose-filename.yml down
 docker-compose -f docker-compose-filename.yml up
@@ -173,8 +176,24 @@ Several security elements:<br/>1) Restrict access to rest based on user role via
 Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
 ## DEEPER VIEW
 ### MS structure
-- Main class running <em>SpringApplication</em>.
+- Main class - running <em>SpringApplication</em>.
 The main class must be annonated with <em>@SpringBootApplication</em> (to initiate spring mechanism e.g. beans scanning), <em>@EnableSecurityValidation</em> (security validations e.g. XSS checks on the request body), <em>@EnableCustomizedExceptionHandling</em> (custom annotation to enable custom clea exception handling),
+
+- **Controller class for exposing rest services**<br/>
+Annonated with <em>@RestController</em>
+There can be several controller classes (e.g. one for regular user, one for admin).
+
+- **Repository interfaces for calling the database**<br/>
+Each DB table will have its own repository class.
+JPA know how to do basic queries by itself (e.g. find by id). However if more complex queries required (e.g. find by name), there are custom methods to support it
+
+- **Feign interfaces for calling other micro services**<br/>
+The interface should contain exactly the method signature as in the called service (URL, method, data types).
+The interface can contain only the require methods, and not all the methods on the called service.
+- Data types
+  - Entity - retrieved from the database
+  - Rest - request (for post/put) / response of the rest
+  - Feign - request / response of the services called in feign
 ## REPORTS OVERVIEW
 ### UI testing and report
 The UI testing automates user operations on the system (pres a button, fill text, etc) using selenium. 

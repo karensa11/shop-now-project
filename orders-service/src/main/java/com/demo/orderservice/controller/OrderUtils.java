@@ -28,7 +28,7 @@ public class OrderUtils {
 	private OrderItemRepository orderItemRepository;
 
 	@Autowired
-	private CatalogFeign catalogService;
+	private CatalogFeign catalogFeign;
 
 	@Autowired
 	private NotificationMessagePublisher messagePublisher;
@@ -83,7 +83,7 @@ public class OrderUtils {
 	public void getCatalogItemsAndCalculateTotal(OrderDetails orderDetails) {
 		int totalItemsNumber = 0;
 		for (OrderItem orderItem:orderDetails.getOrderItems()) {
-			CatalogItem catalogItem = catalogService.getCatalogItem(orderItem.getCatalogId());
+			CatalogItem catalogItem = catalogFeign.getCatalogItem(orderItem.getCatalogId());
 			orderItem.setCatalogItem(catalogItem);
 			totalItemsNumber += orderItem.getQuantity();
 			orderItem.setItemPrice(catalogItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity())));
