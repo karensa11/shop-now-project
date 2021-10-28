@@ -6,11 +6,12 @@ Simple shopping management system, built for learning proposes.
 User can browse for catalog, add items to cart, edit his cart and then place order.
 In addition, there is admin capability. The admin can manage orders, and view major user transactions.
 
-Back end (BE) done using micro services (along with Eureka, API gateway and others) and run as docker containers (via docker compose).
+Back end (BE) done using list of micro services built with spring boot, along with Eureka, API gateway and others and run as docker containers (via docker compose).
 User interface done using react with redux.
 
-For now the system is capable only to run on local computer.
+To certify system integrity after code changes 2 types of automation testing done - rest testing and ui testing. The testing produces clear and informaive report.
 
+For now the system is capable only to run on local computer.
 To run it, download the code using “git clone” and follow the installation and run instructions as below.
 
 ## Technologies and key features
@@ -42,23 +43,37 @@ To run it, download the code using “git clone” and follow the installation a
 <img src="./documentation/architecture.png">
 
 #### Micro Services
-- **catalog-service** <br/>responsible for the catalog domain - categories, items in category (phones, accessories)
-- **orders-service** <br/>responsible for the order managemant domain - create order, add items to order, place / close / cancel order. Communicates with catalog-service via feign to get catalog details. Sends events to kafka for major items - order creation or cancellation
-- **users-service** <br/>responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
-- **tracking service** <br/>responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
-- **API gateway** <br/>gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
-- **naming-service** <br/>eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
+- **catalog-service**
+responsible for the catalog domain - categories, items in category (phones, accessories)
+- **orders-service**
+responsible for the order managemant domain - create order, add items to order, place / close / cancel order. Communicates with catalog-service via feign to get catalog details. Sends events to kafka for major items - order creation or cancellation
+- **users-service**
+responsible for the users domain - create user, authenticate, search by email. Communicates with orders-service via feign to get order details for user. Sends events to kafka for major items - user creation or deletion.
+- **tracking service** 
+responsible for the notifications domain - read notification from kafka and store in DB, retrieve user notifications
+- **API gateway** 
+gateway between external source requests to the micro services. Provides filters of logging and security (such as roles and XSS)
+- **naming-service** 
+eureka service. Responsible for find the ms by name (e.g. catalog-service) instead of exact host and port
 #### Other elements
-- **UI** <br/>simple GUI built and react and covers all system functionality. 2 types of systems, redirected after login based on user roles: 1) regular user - can view catalog, create orders, view and manage his account 2) admin - can close order and view user notifications (major actions)
-- **rest automation** <br/>check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response
-- **UI automation** <br/>using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
-- **ms-utility** <br/>common utility methods and annotations for the micro services, such as custom annotation for enable custom exception handling
-- **health-check** <br/>simple module to check if all ms are up
+- **UI** 
+simple GUI built and react and covers all system functionality.<br/> 2 types of systems, redirected after login based on user roles: <br/>1) regular user - can view catalog, create orders, view and manage his account <br/>2) admin - can close order and view user notifications (major actions)
+- **rest automation** 
+check all rests return correct response code (e.g. 200 for success and 404 if sending invalid data) and their response
+- **UI automation** 
+using selenium, simulate user operations on the UI (button clicks, etc) and check result (e.g. notification message) are as expected
+- **ms-utility** 
+common utility methods and annotations for the micro services, such as custom annotation for enable custom exception handling
+- **health-check** 
+simple module to check if all ms are up
 ####  Logic and procedures
 - **Logging and tracability** <br/> the micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
-- **API gateway** <br/>All external calls must go thru API gateway.<br/>Calls are filtered with the  sequence of filters in the gateway, and if everything is ok the call is proceeding to the requested ms. <br/>Current filters are: 1) Logging filter - add log entry that associated between the retrieved session id / transaction id and the zipkin id 2) Roles filter - checks if the user (authenticationId) is allowed to inoke the requested rest on the ms 3) XSS filter - check requested URL, parameters and headers
-- **Security** <br/>Several security techniques:<br/>1) Restrict access to rest based on user role via gateway filter. In the API gateway there is configuration file security.properties which defines what rest pattern each user type is allowed to activate (guest, user or admin)<br/>2) XSS validation - done in 2 places - request body during the JSon serialization (in the MS itself), requested URL, parameters and headers in the API gateway<br/>3) Input datatypes restrictions and validations using javax.validation.constraints.* annotations
-- **Database**<br/>Fow now, each ms has its own database with 1-2 tables. Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). The tables each having initial data for testing proposes, which is loaded from file data.sql 
+- **API gateway**
+All external calls must go thru API gateway.<br/>Calls are filtered with the  sequence of filters in the gateway, and if everything is ok the call is proceeding to the requested ms. <br/>Current filters are: <br/>1) Logging filter - add log entry that associated between the retrieved session id / transaction id and the zipkin id <br/>2) Roles filter - checks if the user (authenticationId) is allowed to inoke the requested rest on the ms <br/>3) XSS filter - check requested URL, parameters and headers
+- **Security**
+Several security elements:<br/>1) Restrict access to rest based on user role via gateway filter. In the API gateway there is configuration file security.properties which defines what rest pattern each user type is allowed to activate (guest, user or admin)<br/>2) XSS validation - done in 2 places - request body during the JSon serialization (in the MS itself), requested URL, parameters and headers in the API gateway<br/>3) Input datatypes restrictions and validations using javax.validation.constraints.* annotations
+- **Database**
+Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql 
 ## Installation on local PC
 
 1.	**Install UI libraries**
@@ -163,8 +178,21 @@ http://localhost:7000/
 
 -	**Zipkin console (server calls tracing)**
     - http://localhost:9411/
-
-### TODO
+## REPORTS OVERVIEW
+### UI testing and report
+The UI testing automates user operations on the system (pres a button, fill text, etc) using selenium. 
+The testing sequence composed of a steps of one big flow. E.g. user creates and placing order, and few steps later Admin login and closes the order. Then the user login again and checks the order is actually closed.
+**Report sructure**
+The main page will show all the tests with their status. Press on the test to get the details such as operations on the page and screenshots. 
+Generally each operation captures one screenshot.
+<img src="./documentation/report_ui.png">
+### Rest testing and report
+The rest testing checks the rest status and response with dummy data loaded during the ms startup using rest assure and testNg.
+The rests tests are indipendent and there is no significance the tests order. 
+**Report sructure**
+The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
+<img src="./documentation/report_rest.png">
+## TODO
 
 -	multiple instances of ms
 -	config server
