@@ -162,18 +162,7 @@ using selenium, simulate user operations on the UI (button clicks, etc) and chec
 common utility methods and annotations for the micro services, such as custom annotation for enable custom exception handling
 - **health-check** <br/>
 simple module to check if all ms are up
-####  Logic and procedures
-- **Logging and tracability** <br/>
-The micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
 
-- **API gateway**<br/>
-All external calls must go thru API gateway.<br/>Calls are filtered with the  sequence of filters in the gateway, and if everything is ok the call is proceeding to the requested ms. <br/>Current filters are: <br/>1) Logging filter - add log entry that associated between the retrieved session id / transaction id and the zipkin id <br/>2) Roles filter - checks if the user (authenticationId) is allowed to inoke the requested rest on the ms <br/>3) XSS filter - check requested URL, parameters and headers
-
-- **Security**<br/>
-Several security elements:<br/>1) Restrict access to rest based on user role via gateway filter. In the API gateway there is configuration file security.properties which defines what rest pattern each user type is allowed to activate (guest, user or admin)<br/>2) XSS validation - done in 2 places - request body during the JSon serialization (in the MS itself), requested URL, parameters and headers in the API gateway<br/>3) Input datatypes restrictions and validations using javax.validation.constraints.* annotations
-
-- **Database**<br/>
-Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
 ## Deeper View
 ### Micro services elements
 - **Main class - running <em>SpringApplication</em>**<br/>
@@ -226,6 +215,19 @@ The state is updated via actions dispatched using Redux-Thunk.
 The state is saved to the session, and is persistent even after browser refresh F5, but not if opening new TAB or new window.
 
 - **Server**<br/>Server calls done in common framework. This framework is sending the request to the BE, and checking its status. In case its 200, it will executes the callbacks / session dispatch, in case its invalid status (e.g. 404 - not found) and this is valid scenario (e.g. search for data), it will execute callback for this status
+
+####  Logic and procedures
+- **Logging and tracability** <br/>
+The micro services are traced using zipkin (via rabbitMQ notification system). All the transactions get's unique id from zipkin. All log entries from docker log are saved into a file in the file system
+
+- **API gateway**<br/>
+All external calls must go thru API gateway.<br/>Calls are filtered with the  sequence of filters in the gateway, and if everything is ok the call is proceeding to the requested ms. <br/>Current filters are: <br/>1) Logging filter - add log entry that associated between the retrieved session id / transaction id and the zipkin id <br/>2) Roles filter - checks if the user (authenticationId) is allowed to inoke the requested rest on the ms <br/>3) XSS filter - check requested URL, parameters and headers
+
+- **Security**<br/>
+Several security elements:<br/>1) Restrict access to rest based on user role via gateway filter. In the API gateway there is configuration file security.properties which defines what rest pattern each user type is allowed to activate (guest, user or admin)<br/>2) XSS validation - done in 2 places - request body during the JSon serialization (in the MS itself), requested URL, parameters and headers in the API gateway<br/>3) Input datatypes restrictions and validations using javax.validation.constraints.* annotations
+
+- **Database**<br/>
+Fow now, each ms has its own database with 1-2 tables. <br/>Database implemented using H2 database, and its using in-memory database (once the server restarted, database changes vanished). <br/>The tables each having initial data for testing proposes, which is loaded from file data.sql
 
 ## Reports Overview
 ### UI testing and report
