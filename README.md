@@ -18,25 +18,25 @@ To run it, download the code using “git clone” and follow the installation a
 
 |   |  | 
 | :---: | :---: |
-|<img src="./documentation/images/spring-boot.png" width="50" height="30">| Spring boot |
-|<img src="./documentation/images/openfeign.png" width="50" height="30">| Open feign (calling between ms) |
-|<img src="./documentation/images/h2.png" width="50" height="30">| H2 in memory database (with JPA) |
-|<img src="./documentation/images/OpenAPI.png" width="50" height="30">| OpenAPI (swagger automatic documentation) |
-|<img src="./documentation/images/docker.png" width="50" height="30">| docker (with compose) |
-|<img src="./documentation/images/zipkin-logo.png" width="50" height="30">| Zipkin (tracing between ms calls) via rabbitMQ |
-|<img src="./documentation/images/kafka.png" width="50" height="30">| Kafka (messages between ms) |
-|<img src="./documentation/images/swagger-ui.png" width="50" height="30">| Swagger-ui (view all the rest definitions – e.g. URL, request/response) |
+|<img src="./documentation/tech-icons/spring-boot.png" width="50" height="30">| Spring boot |
+|<img src="./documentation/tech-icons/openfeign.png" width="50" height="30">| Open feign (calling between ms) |
+|<img src="./documentation/tech-icons/h2.png" width="50" height="30">| H2 in memory database (with JPA) |
+|<img src="./documentation/tech-icons/OpenAPI.png" width="50" height="30">| OpenAPI (swagger automatic documentation) |
+|<img src="./documentation/tech-icons/docker.png" width="50" height="30">| docker (with compose) |
+|<img src="./documentation/tech-icons/zipkin-logo.png" width="50" height="30">| Zipkin (tracing between ms calls) via rabbitMQ |
+|<img src="./documentation/tech-icons/kafka.png" width="50" height="30">| Kafka (messages between ms) |
+|<img src="./documentation/tech-icons/swagger-ui.png" width="50" height="30">| Swagger-ui (view all the rest definitions – e.g. URL, request/response) |
 || Actuator (system status and details) |
 || HAL browser (system links) |
 || XSS validation (when parsing the UI input + data types validation) |
 || customized spring annotations (enable) |
 || customized exception handling |
 || roles validation (in the api gateway) |
-|<img src="./documentation/images/react-redux.png" width="50" height="30">| react UI with redux and functional components (hooks) |
-|<img src="./documentation/images/ESLint.png" width="50" height="30">| ESlint (UI code standards validation) |
+|<img src="./documentation/tech-icons/react-redux.png" width="50" height="30">| react UI with redux, redux-thunk and functional components (hooks) |
+|<img src="./documentation/tech-icons/ESLint.png" width="50" height="30">| ESlint (UI code standards validation) |
 || session id and transaction id sent on every transaction to the BE |
-|<img src="./documentation/images/selenium.png" width="50" height="30">| UI automation testing using selenium, moca, chai, npm|
-|<img src="./documentation/images/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
+|<img src="./documentation/tech-icons/selenium.png" width="50" height="30">| UI automation testing using selenium, moca, chai, npm|
+|<img src="./documentation/tech-icons/TestNG.png" width="50" height="30">| Rest automation testing using rest assure, testng |
 
 
 ## Installation on local PC
@@ -245,6 +245,9 @@ The rests tests are indipendent and there is no significance the tests order.
 The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
 <br/><br/>
 <img src="./documentation/report_rest.png">
+## UI Overview
+User can browse for phones, and add to cart 
+<img src="./documentation/ui-screenshots/browse-phones.png">
 ## TODO
 
 -	multiple instances of ms
