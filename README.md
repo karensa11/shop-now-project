@@ -245,6 +245,7 @@ The rests tests are indipendent and there is no significance the tests order.
 The report will show the tests results, divided by ms and its rest (some rests will have both regular and negative tests. Press on the test name to view its steps
 <br/><br/>
 <table><tr><td><img src="./documentation/report_rest.png"></td></tr></table>
+
 ## UI Overview
 User can browse for phones, and add to cart <br/><br/>
 <table><tr><td><img src="./documentation/ui-screenshots/browse-phones.png"></td></tr></table>
