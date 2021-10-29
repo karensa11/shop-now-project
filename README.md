@@ -128,6 +128,8 @@ http://localhost:7000/
 
 -	**H2 console  (in memory DB console - view and update if required)**
     - http://<service_address>/h2-console/
+    User name - sa
+    JDBC URL - jdbc:h2:mem:testdb
 
 -	**Eureka console**
     - http://localhost:8888/
@@ -262,6 +264,20 @@ System contains also admin functionality. The admin can track and close order
 Also, the user can view user transactions
 <br/><br/>
 <table><tr><td><img src="./documentation/ui-screenshots/admin-transactions.png"></td></tr></table><br/><br/>
+
+## Enhancement procedure
+### Add new micro service
+1. Create the ms with its definitions and rests
+2. Verify its working in postman (get with dummy data, create). For this can run the ms along with naming-service in the STS itself (Application -> run a java application. spring boot will initialize tomcat  to run the server)
+3. Add security definitions in API gateway
+4. Add to docker-compose
+5. Add to health-check
+6. Add to rest-automation
+7. Make GUI to call it
+8. Add to and run user-ui-automation
+9. Add to architecture diagram
+10. Add to documentation description
+11. Check in
 
 ## TODO
 
