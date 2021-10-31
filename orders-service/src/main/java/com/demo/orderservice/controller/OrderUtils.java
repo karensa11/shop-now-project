@@ -73,21 +73,25 @@ public class OrderUtils {
 	}
 
 	private BigDecimal calculateTotal(OrderDetails orderDetails) {
-		BigDecimal result = new BigDecimal(0);
-		for(OrderItem item:orderDetails.getOrderItems()){
-			result = result.add(BigDecimal.valueOf(item.getQuantity() * item.getCatalogItem().getPrice().doubleValue()));
-		};
-		return result;
+		double result2 = orderDetails.getOrderItems().stream()
+				.reduce(0.0, 
+						(partialResult, orderItem) -> partialResult + orderItem.getQuantity() * orderItem.getCatalogItem().getPrice().doubleValue(), 
+						Double::sum);
+		return BigDecimal.valueOf(result2);
 	}
 
 	public void getCatalogItemsAndCalculateTotal(OrderDetails orderDetails) {
-		int totalItemsNumber = 0;
-		for (OrderItem orderItem:orderDetails.getOrderItems()) {
+		int totalItemsNumber = orderDetails.getOrderItems()
+				.stream()
+				.map(OrderItem::getQuantity)
+				.reduce(0, ArithmeticUtils::addInt)
+				.intValue();
+		orderDetails.getOrderItems().stream()
+		.forEach(orderItem -> {
 			CatalogItem catalogItem = catalogFeign.getCatalogItem(orderItem.getCatalogId());
 			orderItem.setCatalogItem(catalogItem);
-			totalItemsNumber += orderItem.getQuantity();
 			orderItem.setItemPrice(catalogItem.getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity())));
-		}
+		});
 		orderDetails.setTotalPrice(calculateTotal(orderDetails));
 		orderDetails.setTotalItemsNumber(totalItemsNumber);
 	}
@@ -98,4 +102,12 @@ public class OrderUtils {
 		notificationMessage.setUserId(authenticationId);
 		messagePublisher.sendMessage(notificationMessage);
 	}
+}
+class ArithmeticUtils { 
+	public static int addInt(int a, int b) {
+		return a + b;
+	} 
+	public static double addDouble(double a, double b) {
+		return a + b;
+	} 
 }

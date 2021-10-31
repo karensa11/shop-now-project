@@ -58,28 +58,12 @@ public class SharedTestData {
 			this.testsData.put(testData.getTestCode(), testData);
 		}
 		public int getFailedTestsCount() {
-			int result = 0;
-			for (TestData testData:testsData.values()) {
-				if (testData.getTestResult() == null) {
-					throw new IllegalStateException("Please set test result");
-				}
-				if (testData.getTestResult().getStatus() == ITestResult.FAILURE) {
-					result++;
-				}
-			}
-			return result;
+			return testsData.values().stream()
+					.reduce(0, (partialResult, testData) -> partialResult + (testData.getTestResult().getStatus() == ITestResult.FAILURE ? 0 : 1), Integer::sum);
 		}
 		public int getSkippedTestsCount() {
-			int result = 0;
-			for (TestData testData:testsData.values()) {
-				if (testData.getTestResult() == null) {
-					throw new IllegalStateException("Please set test result");
-				}
-				if (testData.getTestResult().getStatus() == ITestResult.SKIP) {
-					result++;
-				}
-			}
-			return result;
+			return testsData.values().stream()
+					.reduce(0, (partialResult, testData) -> partialResult + (testData.getTestResult().getStatus() == ITestResult.SKIP ? 0 : 1), Integer::sum);
 		}
 		public Collection<TestData> getAllTests() {
 			return testsData.values();

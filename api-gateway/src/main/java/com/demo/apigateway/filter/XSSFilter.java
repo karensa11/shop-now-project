@@ -18,18 +18,20 @@ public class XSSFilter implements GlobalFilter {
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		ServerHttpRequest request = ((ServerWebExchangeDecorator)exchange).getDelegate().getRequest();
 		checkIfElementContainsBadCharacters(request.getURI().toString(), "URI");
-		for (String key : request.getQueryParams().keySet()) {
+		request.getQueryParams().keySet().stream()
+		.forEach(key -> {
 			checkIfElementContainsBadCharacters(key, "param name " + key);
 			String param = request.getQueryParams().getFirst(key);
 			if (param !=null) {
 				checkIfElementContainsBadCharacters(param, "param value " + key);
 			}
-		}
-		for (String key : request.getHeaders().keySet()) {
+		});
+		request.getHeaders().keySet().stream()
+		.forEach(key -> {
 			checkIfElementContainsBadCharacters(key, "header name" + key);
 			String header = request.getHeaders().get(key).get(0);
 			checkIfElementContainsBadCharacters(header, "header value " + key);
-		}
+		});
 		return chain.filter(exchange);
 	}
 

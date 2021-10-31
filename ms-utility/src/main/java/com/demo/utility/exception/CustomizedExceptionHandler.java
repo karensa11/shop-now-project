@@ -59,9 +59,9 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 	private String getFieldsMessages(MethodArgumentNotValidException ex) {
 		List<FieldError> errors = ex.getBindingResult().getFieldErrors();
 		StringBuilder builder = new StringBuilder();
-		for (FieldError error:errors) {
+		errors.stream().forEach(error -> {
 			builder.append(error.getDefaultMessage()).append(", ");
-		}
+		});
 		builder.delete(builder.length()-2, builder.length());
 		return builder.toString();
 	}

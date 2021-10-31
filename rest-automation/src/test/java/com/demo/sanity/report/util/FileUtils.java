@@ -63,7 +63,6 @@ public class FileUtils
 		try {
 			is = new FileInputStream(source);
 			os = new FileOutputStream(target);
-			System.out.println("copyFile" + os);
 			byte[] buffer = new byte[1024];
 			int length;
 			while ((length = is.read(buffer)) > 0) {
@@ -71,7 +70,6 @@ public class FileUtils
 			}
 		} 
 		finally {
-			System.out.println("copyFile" + os);
 			is.close();
 			os.close();
 		}

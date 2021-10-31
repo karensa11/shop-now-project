@@ -43,7 +43,7 @@ services:
   
   kafka:
     image: confluentinc/cp-kafka:latest
-    mem_limit: 700m
+    mem_limit: 1000m
     depends_on:
       - zookeeper
     networks:
@@ -134,7 +134,7 @@ services:
 
   tracking-service:
     image: karensa11/tracking-service:0.0.1-SNAPSHOT
-    mem_limit: 1000m
+    mem_limit: 700m
     ports:
       - "8300:8300"
     networks:

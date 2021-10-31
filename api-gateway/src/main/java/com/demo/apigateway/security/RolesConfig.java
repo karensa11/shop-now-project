@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -34,7 +35,7 @@ public class RolesConfig {
 			} else {
 				throw new FileNotFoundException("property file '" + PORPERTIES_FILE_NAME + "' not found in the classpath");
 			}
-			for (Object key : propertiesFromConfiguration.keySet()) {
+			propertiesFromConfiguration.keySet().stream().forEach(key -> {
 				String value = (String) propertiesFromConfiguration.get(key);
 				String[] roles = value.split(";");
 				for (String role:roles) {
@@ -43,7 +44,7 @@ public class RolesConfig {
 					}
 				}
 				properties.put(((String)key).replace("*", ".*"), Arrays.asList(roles));
-			}
+			});
 			logger.info("security config {}", properties);
 		}
 		catch (Exception e) {
@@ -61,11 +62,12 @@ public class RolesConfig {
 	}
 
 	public List<String> getSecurityRole(String serviceName) {
-		for (String key : properties.keySet()) {
-			if (serviceName.matches(key)) {
-				logger.info("found match {} , {}", key, serviceName);
-				return properties.get(key);
-			}
+		String rolesKey = properties.keySet().stream()
+				.filter(key -> serviceName.matches(key))
+				.findFirst()
+				.orElse(null);
+		if (rolesKey != null ) {
+			return properties.get(rolesKey);
 		}
 		return null;
 	}

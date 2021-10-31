@@ -5,7 +5,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class HealthCheckApplication {
 	private static String[] addresses = new String[] {
-			"http://localhost:8000/", "http://localhost:8100/", "http://localhost:8200/", "http://localhost:8300/"
+			"http://localhost:8000/", 
+			"http://localhost:8100/", 
+			"http://localhost:8200/", 
+			"http://localhost:8300/"
 	};
 	static class Status {
 		private String status;

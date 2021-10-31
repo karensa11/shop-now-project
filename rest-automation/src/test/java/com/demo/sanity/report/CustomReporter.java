@@ -17,7 +17,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.testng.IReporter;
 import org.testng.ISuite;
-import org.testng.ISuiteResult;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
@@ -37,12 +36,11 @@ import com.demo.sanity.util.SharedTestData.TestData;
 
 public class CustomReporter implements IReporter{
 	private static final DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm-ss");
-	
+
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 
 		try {
 			String reportDateStr = LocalDateTime.now().format(myFormatObj);
-			System.out.println("report date " + reportDateStr);
 			copyResources(reportDateStr);
 			collectTestResults(suites);
 			Document htmlDoc = generateReportHTML();
@@ -51,59 +49,63 @@ public class CustomReporter implements IReporter{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void collectTestResults(List<ISuite> suites) {
-		for (ISuite suite : suites) {
-			for (ISuiteResult sr : suite.getResults().values()) {
+		suites.stream()
+		.forEach(suite -> {
+			suite.getResults().values().stream()
+			.forEach(sr -> {
 				ITestContext tc = sr.getTestContext();
 				Set<ITestResult> allTests = new HashSet<ITestResult>();
 				allTests.addAll(tc.getPassedTests().getAllResults());
 				allTests.addAll(tc.getFailedTests().getAllResults());
 				allTests.addAll(tc.getSkippedTests().getAllResults());
-				for (ITestResult result:allTests){
+				allTests.stream()
+				.forEach(result -> {
 					SharedTestData.instance.setTestResult(result.getName(), result);
-				}
-			}
-		}
+				});
+			});
+		});
 	}
-	
+
 	private Document generateReportHTML() throws Exception {
-		
+
 		Map<String, SuiteData> suitesData = SharedTestData.instance.getTestsData();
 		Document htmlDoc = XMLUtils.createNewDocument();
-		
+
 		Node html = HTMLUtils.createHTML(htmlDoc);
 		HTMLUtils.setTitle(htmlDoc, html, "Rests Testing");
-		
+
 		Node head = HTMLUtils.createHead(htmlDoc, html);
 		HTMLUtils.addCSS(htmlDoc, head, "resources/styles.css");
 		HTMLUtils.addScript(htmlDoc, head, "resources/scripts.js");
 		HTMLUtils.addScript(htmlDoc, head, "resources/jquery.min.js");
-		
+
 		Node body = HTMLUtils.createBody(htmlDoc, html);
-		
+
 		Node titleDiv = HTMLUtils.createDiv(htmlDoc, body, "pageTitle", null, null);
 		HTMLUtils.createCenteredDiv(htmlDoc, titleDiv, "pageTitleMain", null, "RESTS TEST REPORT");
-		
+
 		Node mainContent = HTMLUtils.createCenteredDiv(htmlDoc, body, "main-content", null, null);
-		
+
 		Node optionsDiv = HTMLUtils.createDiv(htmlDoc, mainContent, null, null, null);
 		HTMLUtils.addButton(htmlDoc, optionsDiv, null, "showContent", 
 				"$('#showContent').hide();$('#hideContent').show();showAllElementStartsWith('log-entries-cell')", "+ expand all", "");
 		HTMLUtils.addButton(htmlDoc, optionsDiv, null, "hideContent", 
 				"$('#hideContent').hide();$('#showContent').show();hideAllElementStartsWith('log-entries-cell')", "+ collapse all", "display: none;");
-		
+
 		HTMLUtils.addBR(htmlDoc, mainContent);
-		
+
 		Node tableContent = HTMLUtils.createCenteredDiv(htmlDoc, mainContent, null, null, null);
 		Node table = HTMLUtils.createTable(htmlDoc, tableContent, null);
-		for (String key: suitesData.keySet()) {
+		suitesData.keySet().stream()
+		.forEach(key ->{
 			generateReportSוuite(htmlDoc, key, table, suitesData);
-		}
+		});
 		return htmlDoc;
 	}
 
-	private void generateReportSוuite(Document htmlDoc, String key, Node table, Map<String, SuiteData> suitesData) throws Exception {
+	private void generateReportSוuite(Document htmlDoc, String key, Node table, Map<String, SuiteData> suitesData) {
 		String suiteFriendlyName = getTestName(key);
 		SuiteData testsData = suitesData.get(key);
 		int failedTests = testsData.getFailedTestsCount();
@@ -112,12 +114,13 @@ public class CustomReporter implements IReporter{
 		HTMLUtils.createTableRowWithStyles(htmlDoc, table, new String[] {suiteText}, new String[] {"suite-name"});
 		Node testsTD = HTMLUtils.createEmptyRowAndCell(htmlDoc, table, null, 1);
 		Node testsTable = HTMLUtils.createTable(htmlDoc, testsTD, null);
-		for (TestData testData: testsData.getAllTests()) {
+		testsData.getAllTests().stream()
+		.forEach(testData -> {
 			generateReportTest(htmlDoc, key, testsTable, testData);
-		}
+		});
 	}
 
-	private void generateReportTest(Document htmlDoc, String key, Node testsTable, TestData testData) throws Exception {
+	private void generateReportTest(Document htmlDoc, String key, Node testsTable, TestData testData) {
 		ITestResult testResult = testData.getTestResult();
 		String statusStr = testResult.getStatus() == ITestResult.SUCCESS ? 
 				"SUCCESS" : testResult.getStatus() == ITestResult.SKIP ?
@@ -129,9 +132,10 @@ public class CustomReporter implements IReporter{
 		HTMLUtils.setOnClick(testRowHeader, "toggleElement('" + testData.getTestCode() + "');");
 		Node logEntriesTD = HTMLUtils.createEmptyRowAndCell(htmlDoc, testsTable, null, 2);
 		Node logEntriesDiv = HTMLUtils.createDiv(htmlDoc, logEntriesTD, "log-entries-cell", testData.getTestCode(), null);
-		for (String logEntry : testData.getLogEntries()) {
+		testData.getLogEntries().stream()
+		.forEach(logEntry -> {
 			HTMLUtils.createDiv(htmlDoc, logEntriesDiv, null, null, logEntry);
-		}
+		});
 		if (testResult.getThrowable() != null) {
 			HTMLUtils.createDiv(htmlDoc, logEntriesDiv, "error-message", null, testResult.getThrowable().toString());
 		}
@@ -146,7 +150,7 @@ public class CustomReporter implements IReporter{
 		DOMSource domSource = new DOMSource(htmlDoc);
 		transformer.transform(domSource, new StreamResult(new File(reportFolder + "/index.html")));
 	}
-	
+
 	private void copyResources(String reportDateStr) throws IOException {
 		String reportFolder = System.getProperty("reports.folder") + reportDateStr;
 		String targetResourcesFolder = reportFolder + "/resources/";
@@ -160,7 +164,7 @@ public class CustomReporter implements IReporter{
 		FileUtils.copyFile(new File(System.getProperty("resources.folder") + "jquery.min.js")
 				, new File(targetResourcesFolder + "jquery.min.js"));
 	}
-	
+
 	private String getTestName(String testName) {
 		StringBuilder testNameCammel = new StringBuilder();
 		char first = testName.charAt(0);

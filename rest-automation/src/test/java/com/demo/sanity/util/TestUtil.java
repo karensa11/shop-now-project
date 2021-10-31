@@ -18,6 +18,11 @@ public class TestUtil {
 		Assert.assertEquals(fieldValue, expectedValue);
 	}
 
+	public static void verifyFieldValue(TestData testData, int expectedValue, int fieldValue, String name) {
+		CustomLogger.message(testData, "Checking " + name + " value. Expected value " + expectedValue);
+		Assert.assertEquals(fieldValue, expectedValue);
+	}
+
 	public static void verifyFieldValue(TestData testData, boolean expectedValue, boolean fieldValue, String name) {
 		CustomLogger.message(testData, "Checking " + name + " value. Expected value " + expectedValue);
 		Assert.assertEquals(fieldValue, expectedValue);
